@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=INBOUND_INSURANCE;encrypt=true;trustServerCertificate=true;
+    username: sa
+    password: root
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
