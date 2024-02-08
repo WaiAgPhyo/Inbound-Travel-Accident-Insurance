@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=INBOUND_INSURANCE;encrypt=true;trustServerCertificate=true;
     username: sa
-    password: root
+    password: ynozha2112004
   jpa:
     show-sql: false
     hibernate:
