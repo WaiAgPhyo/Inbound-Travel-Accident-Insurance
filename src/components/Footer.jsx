@@ -2,24 +2,22 @@ import React from "react";
 import logoImg from "../images/MiLogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
-import { Link } from "react-router-dom";
-
 
 const Footer = () => {
-  function scrollToTop(){
+  function scrollToTop() {
     window.scrollTo({
-      top:0,
-      behavior:'smooth'
-    })
+      top: 0,
+      behavior: "smooth",
+    });
   }
   return (
-    <div className="h-[100vh]">
-      <div className="flex text-center w-5/6 mx-auto">
-        <h3 className="text-[#074DA1] font-bold mb-5 text-[24px] uppercase size-full">
+    <div className="h-[100vh] bg-white">
+      <div className="flex text-center w-[90%] mx-auto">
+        <h3 className="text-[#074DA1] font-bold mb-5 text-[24px] uppercase size-full mt-[15px]">
           Contact Phone Number
         </h3>
       </div>
-      
+
       <div className="flex justify-center flex-wrap">
         <div className="xl:w-[21%] md:w-[40%] sm:w-[40%] border border-[#074DA1] text-center p-4 rounded mb-3 mx-2 md:mx-4">
           <h4 className="text-[14px] text-[#074DA1] font-bold mb-2 w-full">
@@ -72,7 +70,6 @@ const Footer = () => {
           <p className="text-[13px] font-bold mb-2">384864, 384873</p>
         </div>
       </div>
-
 
       <footer className="bg-[#074DA1]">
         <div className="py-2 flex justify-between xl:flex-row flex-col-reverse w-[90%] mx-auto xl:text-left text-center ">
