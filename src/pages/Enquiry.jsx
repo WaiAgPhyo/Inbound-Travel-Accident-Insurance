@@ -6,7 +6,7 @@ const Enquiry = () => {
       <div>
         <div className="items-center w-[90%] mx-auto">
           <h3 className="text-[#074DA1] font-semibold mb-5 text-[24px] uppercase size-full text-center">
-            Contact Phone Number
+            Inbound Travel Accidence Insurance
           </h3>
 
           <div className="bg-[#FFFFFF] shadow-lg px-10 py-10 mb-20">

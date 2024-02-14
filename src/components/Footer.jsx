@@ -72,25 +72,15 @@ const Footer = () => {
       </div>
 
       <footer className="bg-[#074DA1]">
-        <div className="py-2 flex justify-between xl:flex-row flex-col-reverse w-[90%] mx-auto xl:text-left text-center ">
+        <div className="py-2 flex xl:flex-row flex-col-reverse w-[90%] mx-auto xl:text-left">
           <div>
             <p className="text-white my-2 py-2 md:text-[13px] sm:text-[11px]">
               © 2024 Myanma Insurance. <br />
               All Rights Reserved by Myanma Insurance
             </p>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center aling-center text-center ml-[350px]">
             <img src={logoImg} alt="LogoImage" />
-          </div>
-          <div className="mt-4">
-            <FontAwesomeIcon
-              icon={faSquareFacebook}
-              style={{
-                color: "#ffffff",
-                fontSize: "30px",
-                marginBottom: "20px",
-              }}
-            />
           </div>
         </div>
       </footer>
