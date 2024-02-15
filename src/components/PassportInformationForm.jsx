@@ -1025,8 +1025,7 @@ export const PassportInformationForm = () => {
                           </label>
                           <input
                             type="text"
-                            name="agentLicNum"
-                        
+                            name="agentLicNum"                       
                             className="form-control col-6"
                             placeholder="ENTER YOUR PASSPORT NO."
                           />

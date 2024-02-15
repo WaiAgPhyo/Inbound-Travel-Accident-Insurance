@@ -30,125 +30,123 @@ export const ConfirmForm = () => {
               </h5>
                    {/* payment information */}
               <div className="mt-4">
-                <div class="row p-2 mb-1 payment">
-                  <div class="col fw-semibold">Payment Channel</div>
-                  <div class="col-sm-7">VISA</div>
+                <div className="row p-2 mb-1 payment">
+                  <div className="col fw-semibold">Payment Channel</div>
+                  <div className="col-sm-7">VISA</div>
                 </div>
-                <div class="row payment p-2 mb-1">
-                  <div class="col fw-semibold">Premium Amount</div>
-                  <div class="col-sm-7">VISA</div>
+                <div className="row payment p-2 mb-1">
+                  <div className="col fw-semibold">Premium Amount</div>
+                  <div className="col-sm-7">VISA</div>
                 </div>
-                <div class="row payment p-2 mb-1">
-                  <div class="col fw-semibold">Service Charge ( Visa )</div>
-                  <div class="col-sm-7">VISA</div>
+                <div className="row payment p-2 mb-1">
+                  <div className="col fw-semibold">Service Charge ( Visa )</div>
+                  <div className="col-sm-7">VISA</div>
                 </div>
-                <div class="row payment p-2 mb-1">
-                  <div class="col fw-semibold">Total Amount (Including Service Charges)</div>
-                  <div class="col-sm-7">VISA</div>
+                <div className="row payment p-2 mb-1">
+                  <div className="col fw-semibold">Total Amount (Including Service Charges)</div>
+                  <div className="col-sm-7">VISA</div>
                 </div>
-                <div class="row payment p-2 mb-1">
-                  <div class="col fw-semibold">Net Amount (Including Service Charges)</div>
-                  <div class="col-sm-7">VISA</div>
+                <div className="row payment p-2 mb-1">
+                  <div className="col fw-semibold">Net Amount (Including Service Charges)</div>
+                  <div className="col-sm-7">VISA</div>
                 </div>
                 {/* payment information */}
 
-
                 {/* INSURED PERSON'S PASSPORT INFORMATION */}
-                <h5 className="mt-5 text_color">
+                <h5 classNameName="mt-5 text_color">
                   <u>INSURED PERSON'S PASSPORT INFORMATION</u>        
                 </h5>
 
-                <div class="row p-2 mt-4 border-bottom">
-                  <div class="col fw-semibold">Passport Number</div>
-                  <div class="col-sm-7">{items.passportNumber}</div>
+                <div className="row p-2 mt-4 border-bottom">
+                  <div className="col fw-semibold">Passport Number</div>
+                  <div className="col-sm-7">{items.passportNumber}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Passport Issued Date</div>
-                  <div class="col-sm-7">{items.passportIssuedDate}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Passport Issued Date</div>
+                  <div className="col-sm-7">{items.passportIssuedDate}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Passport Issued Country</div>
-                  <div class="col-sm-7">{items.passportIssuedCountry}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Passport Issued Country</div>
+                  <div className="col-sm-7">{items.passportIssuedCountry}</div>
                 </div>
                  {/* INSURED PERSON'S PASSPORT INFORMATION */}
 
-               
                  {/* INSURED PERSON INFORMATION */}
-                <h5 className="mt-5 text_color">
+                <h5 classNameName="mt-5 text_color">
                   <u>INSURED PERSON INFORMATION</u>        
                 </h5>
 
-                <div class="row p-2 mt-4 border-bottom">
-                  <div class="col fw-semibold">Insured For</div>
-                  <div class="col-sm-7">{items.insureName}</div>
+                <div className="row p-2 mt-4 border-bottom">
+                  <div className="col fw-semibold">Insured For</div>
+                  <div className="col-sm-7">{items.insureName}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Name (as per passport)</div>
-                  <div class="col-sm-7">{items.insureBirthDate}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Name (as per passport)</div>
+                  <div className="col-sm-7">{items.insureBirthDate}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Date of Birth (as per passport)</div>
-                  <div class="col-sm-7">{items.insureBirthDate}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Date of Birth (as per passport)</div>
+                  <div className="col-sm-7">{items.insureBirthDate}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Gender (as per passport)</div>
-                  <div class="col-sm-7">{items.insureGender}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Gender (as per passport)</div>
+                  <div className="col-sm-7">{items.insureGender}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Estimated Arrival Date</div>
-                  <div class="col-sm-7">{items.ArrivalDate}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Estimated Arrival Date</div>
+                  <div className="col-sm-7">{items.ArrivalDate}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Child Name</div>
-                  <div class="col-sm-7">{items.childName}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Child Name</div>
+                  <div className="col-sm-7">{items.childName}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Date of Birth (Child)</div>
-                  <div class="col-sm-7">{items.childBirth}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Date of Birth (Child)</div>
+                  <div className="col-sm-7">{items.childBirth}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Gender (Child)</div>
-                  <div class="col-sm-7">{items.childGender}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Gender (Child)</div>
+                  <div className="col-sm-7">{items.childGender}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Guardiance Name (Child)</div>
-                  <div class="col-sm-7">{items.childGuardianceName}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Guardiance Name (Child)</div>
+                  <div className="col-sm-7">{items.childGuardianceName}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Relationship (Child)</div>
-                  <div class="col-sm-7">{items.childRelationship}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Relationship (Child)</div>
+                  <div className="col-sm-7">{items.childRelationship}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Journey From</div>
-                  <div class="col-sm-7">{items.journeyFrom}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Journey From</div>
+                  <div className="col-sm-7">{items.journeyFrom}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Journey To</div>
-                  <div class="col-sm-7">Myanmar</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Journey To</div>
+                  <div className="col-sm-7">Myanmar</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Coverage Plan</div>
-                  <div class="col-sm-7">{items.coveragePlan}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Coverage Plan</div>
+                  <div className="col-sm-7">{items.coveragePlan}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Contact Phone Number</div>
-                  <div class="col-sm-7">{items.insurePhoneNumber}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Contact Phone Number</div>
+                  <div className="col-sm-7">{items.insurePhoneNumber}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Email Address</div>
-                  <div class="col-sm-7">{items.insureEmail}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Email Address</div>
+                  <div className="col-sm-7">{items.insureEmail}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Resident Address</div>
-                  <div class="col-sm-7">{items.insureResidentAddress}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Resident Address</div>
+                  <div className="col-sm-7">{items.insureResidentAddress}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Resident Country</div>
-                  <div class="col-sm-7">{items.insureResidentCountry}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Resident Country</div>
+                  <div className="col-sm-7">{items.insureResidentCountry}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Address in Myanmar</div>
-                  <div class="col-sm-7">{items.insureAddress}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Address in Myanmar</div>
+                  <div className="col-sm-7">{items.insureAddress}</div>
                 </div>
                 {/* INSURED PERSON INFORMATION */}
 
@@ -156,37 +154,37 @@ export const ConfirmForm = () => {
                   <u>BENEFICIARY INFORMATION</u>        
                 </h5>
                 {/* BENEFICIARY INFORMATION */}
-                <div class="row p-2 mt-4 border-bottom">
-                  <div class="col fw-semibold">Name</div>
-                  <div class="col-sm-7">{items.beneficiaryName}</div>
+                <div className="row p-2 mt-4 border-bottom">
+                  <div className="col fw-semibold">Name</div>
+                  <div className="col-sm-7">{items.beneficiaryName}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Date of Birth</div>
-                  <div class="col-sm-7">{items.beneficiaryBirth}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Date of Birth</div>
+                  <div className="col-sm-7">{items.beneficiaryBirth}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">National Identification Number</div>
-                  <div class="col-sm-7">{items.beneficiaryIdenNumber}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">National Identification Number</div>
+                  <div className="col-sm-7">{items.beneficiaryIdenNumber}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Relationship</div>
-                  <div class="col-sm-7">{items.beneficiaryRelationship}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Relationship</div>
+                  <div className="col-sm-7">{items.beneficiaryRelationship}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Contact Number</div>
-                  <div class="col-sm-7">{items.beneficiaryPhone}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Contact Number</div>
+                  <div className="col-sm-7">{items.beneficiaryPhone}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Email</div>
-                  <div class="col-sm-7">{items.beneficiaryEmail}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Email</div>
+                  <div className="col-sm-7">{items.beneficiaryEmail}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Resident Address</div>
-                  <div class="col-sm-7">{items.beneficiaryResidentAddress}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Resident Address</div>
+                  <div className="col-sm-7">{items.beneficiaryResidentAddress}</div>
                 </div>
-                <div class="row p-2 border-bottom">
-                  <div class="col fw-semibold">Resident Country</div>
-                  <div class="col-sm-7">{items.beneficiaryResidentCountry}</div>
+                <div className="row p-2 border-bottom">
+                  <div className="col fw-semibold">Resident Country</div>
+                  <div className="col-sm-7">{items.beneficiaryResidentCountry}</div>
                 </div>
                  {/* BENEFICIARY INFORMATION */}
 
