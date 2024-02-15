@@ -1,4 +1,4 @@
-package org.ace.insurance.inbound_insurance.service.serviceImpl;
+package org.ace.insurance.inbound_insurance.service.impl;
 
 
 import lombok.AllArgsConstructor;

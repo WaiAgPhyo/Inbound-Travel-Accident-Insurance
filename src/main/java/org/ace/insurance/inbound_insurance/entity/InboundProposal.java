@@ -1,39 +1,49 @@
 package org.ace.insurance.inbound_insurance.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.ace.insurance.inbound_insurance.dto.PremiumRateDTO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Table(name = "PremiumRates")
-@Entity
+@Table(name = "INBOUND_PROPOSAL")
 @Data
+@Entity
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class PremiumRate {
+@NoArgsConstructor
+public class InboundProposal {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private int policyDays;
-    private int fromAge;
-    private int toAge;
-    private double rate;
+    private String journeyFrom;
+    private String journeyTo;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate estimateArrivalDate;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate policyStartDate;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate policyEndDate;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate submittedDate;
+    private int coveragePlan;
 
+    private double premiumRate;
+    @ManyToOne
+    private InsuredPerson insuredPerson;
+    @ManyToOne
+    private Agent agent;
     private UUID createdUserId;
     private LocalDateTime createdDate;
-
     private UUID updatedUserId;
     private LocalDateTime updatedDate;
-
     @Version
     private Long version;
-
 
     @PrePersist
     protected void onCreate(){
@@ -46,18 +56,4 @@ public class PremiumRate {
         updatedDate = LocalDateTime.now();
         version++;
     }
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "currencyId")
-    private Currency currency;
-
-    public static PremiumRate of (PremiumRateDTO premiumRateDTO){
-        PremiumRate premiumRate = PremiumRate.builder()
-                .policyDays(premiumRateDTO.getPolicyDays())
-                .fromAge(premiumRateDTO.getFromAge())
-                .toAge(premiumRateDTO.getToAge())
-                .rate(premiumRateDTO.getRate()).build();
-        return premiumRate;
-    }
 }
-

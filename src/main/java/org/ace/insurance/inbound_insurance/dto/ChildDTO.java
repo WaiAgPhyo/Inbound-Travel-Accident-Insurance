@@ -3,12 +3,11 @@ package org.ace.insurance.inbound_insurance.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.ace.insurance.inbound_insurance.entity.InsuredPerson;
+
 import org.ace.insurance.inbound_insurance.enumeration.Gender;
 
 import java.time.LocalDate;

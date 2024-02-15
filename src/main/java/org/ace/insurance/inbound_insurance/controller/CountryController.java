@@ -15,7 +15,7 @@ import java.util.List;
 import static org.ace.insurance.inbound_insurance.utility.HttpResponse.createResponse;
 
 @RestController
-@RequestMapping("/countries")
+@RequestMapping("/country")
 @Slf4j
 @AllArgsConstructor
 public class CountryController {

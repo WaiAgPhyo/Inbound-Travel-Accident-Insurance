@@ -2,9 +2,9 @@ package org.ace.insurance.inbound_insurance.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.ace.insurance.inbound_insurance.dto.BeneficiaryDTO;
-import org.ace.insurance.inbound_insurance.entity.Beneficiary;
-import org.ace.insurance.inbound_insurance.service.BeneficiaryService;
+import org.ace.insurance.inbound_insurance.dto.InboundProposalDTO;
+import org.ace.insurance.inbound_insurance.entity.InboundProposal;
+import org.ace.insurance.inbound_insurance.service.InboundProposalService;
 import org.ace.insurance.inbound_insurance.utility.HttpResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,20 +12,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import static org.ace.insurance.inbound_insurance.utility.HttpResponse.createResponse;
 
+
 @RestController
-@RequestMapping("/beneficiary")
+@RequestMapping("/inboundProposal")
 @Slf4j
 @AllArgsConstructor
-public class BeneficiaryController {
+public class InboundProposalController {
 
-    private final BeneficiaryService beneficiaryService;
+    private final InboundProposalService inboundProposalService;
 
     @PostMapping
-    public ResponseEntity<HttpResponse<Beneficiary>> createBeneficiary(@RequestBody BeneficiaryDTO beneficiaryDTO){
-        Beneficiary beneficiary = beneficiaryService.createBeneficiary(beneficiaryDTO);
-        return createResponse(beneficiary, HttpStatus.CREATED);
+    public ResponseEntity<HttpResponse<InboundProposal>> create(@RequestBody InboundProposalDTO inboundProposalDTO){
+        InboundProposal inboundProposal = inboundProposalService.create(inboundProposalDTO);
+        return createResponse(inboundProposal, HttpStatus.CREATED);
     }
 
 }

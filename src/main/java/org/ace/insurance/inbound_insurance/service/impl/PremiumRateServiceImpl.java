@@ -43,13 +43,5 @@ public class PremiumRateServiceImpl implements PremiumRateService {
         return premiumRateRepository.findAll();
     }
 
-    @Override
-    public double findPremiumRateByAgeAndPolicyDays(int age, int days) {
-        PremiumRate premiumRate = premiumRateRepository.findPremiumRateByFromAgeAndToAgeAndPolicyDays(age,days);
-        if (premiumRate != null) {
-            return premiumRate.getRate();
-        } else {
-            throw new RuntimeException("Premium rate not found for the given age and policy days");
-        }
-    }
+
 }

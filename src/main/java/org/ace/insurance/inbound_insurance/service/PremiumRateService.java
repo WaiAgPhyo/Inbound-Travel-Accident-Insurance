@@ -8,5 +8,4 @@ import java.util.List;
 public interface PremiumRateService {
     PremiumRate create (PremiumRateDTO premiumRateDTO);
     List<PremiumRate> findAll();
-    double findPremiumRateByAgeAndPolicyDays(int age, int days);
 }

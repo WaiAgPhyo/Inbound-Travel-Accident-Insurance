@@ -10,12 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
+
 
 import static org.ace.insurance.inbound_insurance.utility.HttpResponse.createResponse;
 
 @RestController
-@RequestMapping("/currencies")
+@RequestMapping("/currency")
 @Slf4j
 public class CurrencyController {
     private final CurrencyService currencyService;

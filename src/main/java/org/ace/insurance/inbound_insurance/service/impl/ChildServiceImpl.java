@@ -1,4 +1,4 @@
-package org.ace.insurance.inbound_insurance.service.serviceImpl;
+package org.ace.insurance.inbound_insurance.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +10,6 @@ import org.ace.insurance.inbound_insurance.repository.InsuredPersonRepository;
 import org.ace.insurance.inbound_insurance.service.ChildService;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j

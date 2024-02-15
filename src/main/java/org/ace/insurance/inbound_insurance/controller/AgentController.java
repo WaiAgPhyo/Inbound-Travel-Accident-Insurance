@@ -9,13 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.ace.insurance.inbound_insurance.utility.HttpResponse.createResponse;
 
 @RestController
-@RequestMapping("/agents")
+@RequestMapping("/agent")
 @Slf4j
 public class AgentController {
     private final AgentService agentService;
@@ -30,16 +28,11 @@ public class AgentController {
     }
 
     @GetMapping("/check")
-    public ResponseEntity<Map<String, String>> getAgentDetails(@RequestParam("agentLicenseNo") String agentLicenseNo,
+    public ResponseEntity<HttpResponse<Agent>> getAgentDetails(@RequestParam("agentLicenseNo") String agentLicenseNo,
                                                                @RequestParam("agentPassword") String agentPassword) {
         Agent agent = agentService.findAgentByAgentLicenseNoAndAgentPassword(agentLicenseNo, agentPassword);
-        if (agent != null) {
-            Map<String, String> response = new HashMap<>();
-            response.put("agentLicenseNo", agent.getAgentLicenseNo());
-            response.put("agentName", agent.getAgentName());
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        }
+
+            return createResponse(agent,HttpStatus.OK);
+
     }
 }

@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.ace.insurance.inbound_insurance.dto.AgentDTO;
 import org.ace.insurance.inbound_insurance.entity.Agent;
 import org.ace.insurance.inbound_insurance.repository.AgentRepository;
-import org.ace.insurance.inbound_insurance.repository.CurrencyRepository;
 import org.ace.insurance.inbound_insurance.service.AgentService;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;

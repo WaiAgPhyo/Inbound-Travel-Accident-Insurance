@@ -11,5 +11,5 @@ import java.util.UUID;
 @Repository
 public interface PremiumRateRepository extends JpaRepository<PremiumRate, UUID> {
     @Query("SELECT pr.rate FROM PremiumRate pr  WHERE pr.fromAge <= :age  AND pr.toAge >= :age AND pr.policyDays = :days")
-    PremiumRate findPremiumRateByFromAgeAndToAgeAndPolicyDays(@Param("age") int age, @Param("days") int days);
+    double findPremiumRateByFromAgeAndToAgeAndPolicyDays(@Param("age") int age, @Param("days") int days);
 }
