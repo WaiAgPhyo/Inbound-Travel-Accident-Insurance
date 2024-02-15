@@ -2,34 +2,191 @@ import "./Main.css";
 import agent from "./image/agent.png";
 import self from "./image/self.png";
 import React, { useState } from "react";
-// import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Validation } from "./validation";
 
 export const PassportInformationForm = () => {
   // for radio
   const [option, setOption] = useState();
   const [agentRadio, setAgentRadio] = useState();
+
   // for date
-  // const [passportDate, setPassportDate] = useState();
-  
-  // const [userclick, setUserClick] = useState(false);
-  // const navigate = useNavigate();
+  const [passportDate, setPassportDate] = useState();
+  const [insureBirth, setInsureBirth] = useState();
+  const [arrivalDate, setArrivalDate] = useState();
+  const [childBirth, setChildBirth] = useState();
+  const [beneBirth, setBeneBirth] = useState();
 
-  // const [passportNum, setPassportNum] = useState("");
-  // const [passportCountry, setPassportCountry] = useState("");
+  const [userClick, setUserClick] = useState(false);
+  const navigate = useNavigate();
 
-  // function submitHandler() {
-  //   setUserClick(true);
-  //   if (userclick &&
-  //     passportNum &&
-  //     passportDate &&
-  //     passportCountry ) {
-  //       navigate("/confirm", {
-  //         state: {
-  //           passportIssuedDate: passportDate, 
-  //           passportNumber: passportNum,
-  //           passportIssuedCountry: passportCountry
-  //         }})
-  //   } }
+  //  data store
+  const [passportNum, setPassportNum] = useState("");
+  const [passportCountry, setPassportCountry] = useState("");
+  const [insureName, setInsureName] = useState("");
+  const [insureGender, setInsureGender] = useState("");
+  const [journeyFrom, setJourneyFrom] = useState("");
+  const [coveragePlan, setCoveragePlan] = useState("");
+  const [insurePh, setInsurePh] = useState("");
+  const [insurePhCode, setInsurePhCode] = useState("");
+  const [insureEmail, setInsureEmail] = useState("");
+  const [insureAddress, setInsureAddress] = useState("");
+  const [insureResAdd, setInsureResAdd] = useState("");
+  const [insureResCountry, setInsureResCountry] = useState("");
+  // child
+  const [childName, setChildName] = useState("");
+  const [childGender, setChildGender] = useState("");
+  const [guardianceName, setGuardianceName] = useState("");
+  const [childRelationship, setChildRelationShip] = useState("");
+  // beneficary
+  const [beneName, setBeneName] = useState("");
+  const [beneIdenNum, setBeneIdenNum] = useState("");
+  const [beneRelationship, setBeneRelationship] = useState("");
+  const [benePhone, setBenePhone] = useState("");
+  const [benePhCode, setBenePhCode] = useState("");
+  const [beneEmail, setBeneEmail] = useState("");
+  const [beneResAdd, setBeneResAdd] = useState("");
+  const [beneResCountry, setBeneResCountry] = useState("");
+
+  function submitHandler(e) {
+    setUserClick(true);
+    e.preventDefault();
+    if (
+      userClick &&
+      passportNum &&
+      passportDate &&
+      passportCountry &&
+      insureName &&
+      insureBirth &&
+      insureGender &&
+      journeyFrom &&
+      arrivalDate &&
+      coveragePlan &&
+      insurePh &&
+      insurePhCode &&
+      insureEmail &&
+      insureAddress &&
+      insureResAdd &&
+      insureResCountry &&
+      beneName &&
+      beneIdenNum &&
+      beneRelationship &&
+      benePhone &&
+      benePhCode &&
+      beneEmail &&
+      beneResAdd &&
+      beneResCountry &&
+      beneBirth &&
+      !childBirth &&
+      !childName &&
+      !childGender &&
+      !childRelationship &&
+      !guardianceName
+    ) {
+      navigate("/confirm", {
+        state: {
+          passportIssuedDate: passportDate,
+          passportNumber: passportNum,
+          passportIssuedCountry: passportCountry,
+          insureName: insureName,
+          insureGender: insureGender,
+          insureBirthDate: insureBirth,
+          journeyFrom: journeyFrom,
+          coveragePlan: coveragePlan,
+          ArrivalDate: arrivalDate,
+          insurePhoneNumber: insurePh,
+          insurePhoneCode: insurePhCode,
+          insureEmail: insureEmail,
+          insureAddress: insureAddress,
+          insureResidentAddress: insureResAdd,
+          insureResidentCountry: insureResCountry,
+          // childBirth: childBirth,
+          // childName: childName,
+          // childGender: childGender,
+          // childGuardianceName: guardianceName,
+          // childRelationship: childRelationship,
+          beneficiaryName: beneName,
+          beneficiaryBirth: beneBirth,
+          beneficiaryIdenNumber: beneIdenNum,
+          beneficiaryRelationship: beneRelationship,
+          beneficiaryPhone: benePhone,
+          beneficiaryPhoneCode: benePhCode,
+          beneficiaryEmail: beneEmail,
+          beneficiaryResidentAddress: beneResAdd,
+          beneficiaryResidentCountry: beneResCountry,
+        },
+      });
+    } else if (
+      userClick &&
+      passportNum &&
+      passportDate &&
+      passportCountry &&
+      insureName &&
+      insureBirth &&
+      insureGender &&
+      journeyFrom &&
+      arrivalDate &&
+      coveragePlan &&
+      insurePh &&
+      insurePhCode &&
+      insureEmail &&
+      insureAddress &&
+      insureResAdd &&
+      insureResCountry &&
+      beneName &&
+      beneIdenNum &&
+      beneRelationship &&
+      benePhone &&
+      benePhCode &&
+      beneEmail &&
+      beneResAdd &&
+      beneResCountry &&
+      beneBirth &&
+      childBirth &&
+      childName &&
+      childGender &&
+      childRelationship &&
+      guardianceName
+    ) {
+      navigate("/confirm", {
+        state: {
+          passportIssuedDate: passportDate,
+          passportNumber: passportNum,
+          passportIssuedCountry: passportCountry,
+          insureName: insureName,
+          insureGender: insureGender,
+          insureBirthDate: insureBirth,
+          journeyFrom: journeyFrom,
+          coveragePlan: coveragePlan,
+          ArrivalDate: arrivalDate,
+          insurePhoneNumber: insurePh,
+          insurePhoneCode: insurePhCode,
+          insureEmail: insureEmail,
+          insureAddress: insureAddress,
+          insureResidentAddress: insureResAdd,
+          insureResidentCountry: insureResCountry,
+          childBirth: childBirth,
+          childName: childName,
+          childGender: childGender,
+          childGuardianceName: guardianceName,
+          childRelationship: childRelationship,
+          beneficiaryName: beneName,
+          beneficiaryBirth: beneBirth,
+          beneficiaryIdenNumber: beneIdenNum,
+          beneficiaryRelationship: beneRelationship,
+          beneficiaryPhone: benePhone,
+          beneficiaryPhoneCode: benePhCode,
+          beneficiaryEmail: beneEmail,
+          beneficiaryResidentAddress: beneResAdd,
+          beneficiaryResidentCountry: beneResCountry,
+        },
+      });
+    }
+  }
+
+  function editHandler(e){
+    e.preventDefault()
+  }
 
   // const [formData, setFormData] = useState({
   //   passportNumber: "",
@@ -47,6 +204,8 @@ export const PassportInformationForm = () => {
   //     ...formData,
   //     [name]: value,
   //   });
+
+  //   navigate();
   // };
 
   // const handleSubmit = (e) => {
@@ -108,13 +267,13 @@ export const PassportInformationForm = () => {
                     <input
                       type="text"
                       name="passportNumber"
-                      // onChange={(e) => setPassportNum(e.target.value)}
+                      onChange={(e) => setPassportNum(e.target.value)}
                       className="form-control col-6"
                       placeholder="ENTER YOUR PASSPORT NO."
                     />
-                    {/* {errors.passportValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.passportValidation}</span>
-                    )} */}
+                    {userClick && !passportNum && <Validation />}
+
+                
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -123,17 +282,13 @@ export const PassportInformationForm = () => {
                       Passport Issued Date.
                       <span className="text-danger">*</span>
                     </label>
-
                     <input
                       type="date"
                       name="passportIssuedDate"
                       className="form-control"
-                      
+                      onChange={(e) => setPassportDate(e.target.value)}
                     />
-
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !passportDate && <Validation />}
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -146,23 +301,23 @@ export const PassportInformationForm = () => {
                       name="emptyValidation"
                       className="form-select"
                       aria-label="Default select example"
-                      // onChange={(e)=> setPassportCountry(e.target.value)}
+                      onChange={(e) => setPassportCountry(e.target.value)}
                     >
                       <option value="">SELECT ONE</option>
                       <option value="1">One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !passportCountry && <Validation />}
+
+                    
                   </div>
                 </div>
               </div>
               <hr />
               {/* passport information// */}
               {/* insured information radio// */}
-                      
+
               <h2 className="text_color fs-6 text-start mt-4 mb-3 pb-3">
                 <u>INSURED INFORMATION (In English)</u>
               </h2>
@@ -213,15 +368,15 @@ export const PassportInformationForm = () => {
                     </label>
                     <input
                       type="text"
-                      name="emptyValidation"
+                      name="insureName"
                       className="form-control"
-                      id="passportno"
+                      id="insureName"
                       placeholder="ENTER INSURED NAME"
-                      // onChange={handleChange}
+                      onChange={(e) => setInsureName(e.target.value)}
                     />
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !insureName && <Validation />}
+
+               
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -232,14 +387,12 @@ export const PassportInformationForm = () => {
                     </label>
                     <input
                       type="date"
-                      name="emptyValidation"
+                      name="insureBirth"
                       className="form-control"
-                      id="passportissueddate"
-                      // onChange={handleChange}
+                      onChange={(e) => setInsureBirth(e.target.value)}
                     />
-                     {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !insureBirth && <Validation />}
+                
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -250,7 +403,7 @@ export const PassportInformationForm = () => {
                     </label>
                     <select
                       name="emptyValidation"
-                      // onChange={handleChange}
+                      onChange={(e) => setInsureGender(e.target.value)}
                       className="form-select"
                       aria-label="Default select example"
                     >
@@ -259,9 +412,8 @@ export const PassportInformationForm = () => {
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !insureGender && <Validation />}
+                 
                   </div>
                 </div>
               </div>
@@ -275,14 +427,12 @@ export const PassportInformationForm = () => {
                     </label>
                     <input
                       type="date"
-                      name="emptyValidation"
+                      name="arrivalDate"
                       className="form-control"
-                      id="passportissueddate"
-                      // onChange={handleChange}
+                      onChange={(e) => setArrivalDate(e.target.value)}
                     />
-                     {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !arrivalDate && <Validation />}
+             
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -292,8 +442,8 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <select
-                      name="emptyValidation"
-                      // onChange={handleChange}
+                      name="journeyFrom"
+                      onChange={(e) => setJourneyFrom(e.target.value)}
                       className="form-select"
                       aria-label="Default select example"
                     >
@@ -302,9 +452,8 @@ export const PassportInformationForm = () => {
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !journeyFrom && <Validation />}
+                   
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -315,6 +464,7 @@ export const PassportInformationForm = () => {
                     </label>
                     <input
                       className="form-control"
+                      name="journeyTo"
                       type="text"
                       value="Myanmar"
                       aria-label="Disabled input example"
@@ -334,7 +484,7 @@ export const PassportInformationForm = () => {
                     </label>
                     <select
                       name="emptyValidation"
-                      // onChange={handleChange}
+                      onChange={(e) => setCoveragePlan(e.target.value)}
                       className="form-select"
                       aria-label="Default select example"
                     >
@@ -343,9 +493,8 @@ export const PassportInformationForm = () => {
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !coveragePlan && <Validation />}
+                 
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -355,22 +504,23 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <div className="input-group mb-3">
-                      <select className="col-sm-3 border border-light-subtle">
+                      <select
+                        className="col-sm-3 border border-light-subtle"
+                        onChange={(e) => setInsurePhCode(e.target.value)}
+                      >
                         <option hidden>SELECT</option>
                         <option value="+95">+95</option>
-                        </select>
+                      </select>
                       <input
                         type="text"
-                        name="phNumberValidation"
-                        // onChange={handleChange}
+                        name="insurePh"
+                        onChange={(e) => setInsurePh(e.target.value)}
                         className="form-control"
                         aria-label="Text input with segmented dropdown button"
                       />
-                     
                     </div>
-                    {/* {errors.phNumberValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.phNumberValidation}</span>
-                    )} */}
+                    {userClick && !insurePh && <Validation />}
+                  
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -379,16 +529,15 @@ export const PassportInformationForm = () => {
                       Insured's Email
                     </label>
                     <input
-                      name="emailValidation"
-                      // onChange={handleChange}
+                      name="insureEmail"
                       type="text"
                       className="form-control"
                       id="passportno"
                       placeholder="Insured's Email Address"
+                      onChange={(e) => setInsureEmail(e.target.value)}
                     />
-                     {/* {errors.emailValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emailValidation}</span>
-                    )} */}
+                    {userClick && !insureEmail && <Validation />}
+                  
                   </div>
                 </div>
               </div>
@@ -400,9 +549,11 @@ export const PassportInformationForm = () => {
                       Address in Myanmar (Max: 250 Char)
                     </label>
                     <textarea
+                    name="myanmarAdd"
                       className="form-control"
                       rows="4"
                       placeholder="..."
+                      onChange={(e) => setInsureAddress(e.target.value)}
                     />
                   </div>
                 </div>
@@ -413,16 +564,15 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <textarea
-                      name="emptyValidation"
-                      // onChange={handleChange}
+                      name="residentAdd"
                       className="form-control"
                       rows="4"
                       placeholder="..."
                       maxLength="250"
+                      onChange={(e) => setInsureResAdd(e.target.value)}
                     />
-                     {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !insureResAdd && <Validation />}
+                
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -432,9 +582,9 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <select
-                      name="emptyValidation"
-                      // onChange={handleChange}
+                      name="residentCountry"
                       className="form-select"
+                      onChange={(e) => setInsureResCountry(e.target.value)}
                       aria-label="Default select example"
                     >
                       <option defaultValue="">SELECT ONE</option>
@@ -442,9 +592,8 @@ export const PassportInformationForm = () => {
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !insureResCountry && <Validation />}
+                
                   </div>
                 </div>
               </div>
@@ -466,15 +615,14 @@ export const PassportInformationForm = () => {
                             <span className="text-danger">*</span>
                           </label>
                           <input
-                            name="emptyValidation"
-                            // onChange={handleChange}
+                            name="childName"
                             type="text"
                             className="form-control col-6"
                             placeholder="ENTER CHILD NAME"
+                            onChange={(e) => setChildName(e.target.value)}
                           />
-                          {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                          {userClick && !childName && <Validation />}
+                    
                         </div>
                       </div>
                       <div className="col-6 col-md-4">
@@ -484,13 +632,14 @@ export const PassportInformationForm = () => {
                             <span className="text-danger">*</span>
                           </label>
 
-                          <input type="date" 
-                          name="emptyValidation"
-                          // onChange={handleChange}
-                          className="form-control" />
-                          {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                          <input
+                            type="date"
+                            name="childBirth"
+                            className="form-control"
+                            onChange={(e) => setChildBirth(e.target.value)}
+                          />
+                          {userClick && !childBirth && <Validation />}
+                        
                         </div>
                       </div>
                       <div className="col-6 col-md-4">
@@ -500,21 +649,18 @@ export const PassportInformationForm = () => {
                             <span className="text-danger">*</span>
                           </label>
                           <select
-                            name="emptyValidation"
-                            // onChange={handleChange}
+                            name="childGender"
+                            onChange={(e) => setChildGender(e.target.value)}
                             className="form-select"
                             aria-label="Default select example"
                           >
-                            <option defaultValue="">
-                              SELECT ONE
-                            </option>
+                            <option defaultValue="">SELECT ONE</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                           </select>
-                          {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                          {userClick && !childGender && <Validation />}
+                      
                         </div>
                       </div>
                     </div>
@@ -526,15 +672,14 @@ export const PassportInformationForm = () => {
                             <span className="text-danger">*</span>
                           </label>
                           <input
-                            name="emptyValidation"
-                            // onChange={handleChange}
+                            name="guardiance"
+                            onChange={(e) => setGuardianceName(e.target.value)}
                             type="text"
                             className="form-control col-6"
                             placeholder="ENTER GUARDIANCE NAME"
                           />
-                          {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                          {userClick && !guardianceName && <Validation />}
+                      
                         </div>
                       </div>
                       <div className="col-6 col-md-4">
@@ -545,14 +690,15 @@ export const PassportInformationForm = () => {
                           </label>
                           <input
                             type="text"
-                            name="emptyValidation"
-                            // onChange={handleChange}
+                            name="childRelation"
+                            onChange={(e) =>
+                              setChildRelationShip(e.target.value)
+                            }
                             className="form-control col-6"
                             placeholder="ENTER RELATIONSHIP"
                           />
-                          {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                          {userClick && !childRelationship && <Validation />}
+                        
                         </div>
                       </div>
                     </div>
@@ -577,15 +723,14 @@ export const PassportInformationForm = () => {
                     </label>
                     <input
                       type="text"
-                      name="emptyValidation"
-                      // onChange={handleChange}
+                      name="beneName"
+                      onChange={(e) => setBeneName(e.target.value)}
                       className="form-control"
                       id="passportno"
                       placeholder="ENTER NAME"
                     />
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !beneName && <Validation />}
+                 
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -596,14 +741,13 @@ export const PassportInformationForm = () => {
                     </label>
                     <input
                       type="date"
-                      name="emptyValidation"
-                      // onChange={handleChange}
+                      name="beneBirth"
+                      onChange={(e) => setBeneBirth(e.target.value)}
                       className="form-control"
                       id="passportissueddate"
                     />
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !beneBirth && <Validation />}
+                  
                   </div>
                 </div>
 
@@ -613,9 +757,11 @@ export const PassportInformationForm = () => {
                       National Identificaiton Number
                     </label>
                     <input
+                      name="beneIdenNum"
                       type="text"
                       className="form-control"
                       id="passportno"
+                      onChange={(e) => setBeneIdenNum(e.target.value)}
                       placeholder="ENTER NATIONAL IDENTIFICAITON NUMBER"
                     />
                   </div>
@@ -631,15 +777,14 @@ export const PassportInformationForm = () => {
                     </label>
                     <input
                       type="text"
-                      name="emptyValidation"
-                      // onChange={handleChange}
+                      name="beneRelation"
+                      onChange={(e) => setBeneRelationship(e.target.value)}
                       className="form-control"
                       id="passportno"
                       placeholder="ENTER RELATIONSHIP"
                     />
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !beneRelationship && <Validation />}
+                   
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -649,18 +794,20 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <div className="input-group mb-3">
-                      <select className="col-sm-3 border border-light-subtle">
+                      <select
+                        className="col-sm-3 border border-light-subtle"
+                        onChange={(e) => setBenePhCode(e.target.value)}
+                      >
                         <option hidden>SELECT</option>
                         <option value="+95">+95</option>
-                        </select>
+                      </select>
                       <input
                         type="text"
-                        name="phNumberValidation"
-                        // onChange={handleChange}
+                        name="benePh"
+                        onChange={(e) => setBenePhone(e.target.value)}
                         className="form-control"
                         aria-label="Text input with segmented dropdown button"
                       />
-                     
                     </div>
                   </div>
                 </div>
@@ -670,15 +817,14 @@ export const PassportInformationForm = () => {
                     <label className="form-label text_color">Email</label>
                     <input
                       type="text"
-                      name="emailValidation"
-                      // onChange={handleChange}
+                      name="beneEmail"
+                      onChange={(e) => setBeneEmail(e.target.value)}
                       className="form-control"
                       id="passportno"
                       placeholder="Enter Email"
                     />
-                     {/* {errors.emailValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emailValidation}</span>
-                    )} */}
+                    {userClick && !beneEmail && <Validation />}
+                  
                   </div>
                 </div>
               </div>
@@ -691,15 +837,14 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <textarea
-                      name="emptyValidation"
-                      // onChange={handleChange}
+                      name="beneResAdd"
+                      onChange={(e) => setBeneResAdd(e.target.value)}
                       className="form-control"
                       rows="4"
                       placeholder="..."
                     />
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !beneResAdd && <Validation />}
+                
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -709,8 +854,8 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <select
-                      name="emptyValidation"
-                      // onChange={handleChange}
+                      name="beneResCountry"
+                      onChange={(e) => setBeneResCountry(e.target.value)}
                       className="form-select"
                       aria-label="Default select example"
                     >
@@ -719,9 +864,8 @@ export const PassportInformationForm = () => {
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
-                    {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    {userClick && !beneResCountry && <Validation />}
+                   
                   </div>
                 </div>
               </div>
@@ -831,14 +975,11 @@ export const PassportInformationForm = () => {
                                   <input
                                     type="text"
                                     name="emptyValidation"
-                                    // onChange={handleChange}
                                     className="form-control"
                                     id="recipient-name"
                                     placeholder="Enter Agent License No."
                                   />
-                                  {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                                  
                                 </div>
                                 <div className="mb-3 text-start">
                                   <label className="col-form-label text_color">
@@ -849,13 +990,10 @@ export const PassportInformationForm = () => {
                                     type="text"
                                     className="form-control"
                                     name="emptyValidation"
-                                    // onChange={handleChange}
                                     id="recipient-name"
                                     placeholder="00-0000"
                                   />
-                                  {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                    
                                 </div>
                               </div>
                             </div>
@@ -887,14 +1025,12 @@ export const PassportInformationForm = () => {
                           </label>
                           <input
                             type="text"
-                            name="emptyValidation"
-                            // onChange={handleChange}
+                            name="agentLicNum"
+                        
                             className="form-control col-6"
                             placeholder="ENTER YOUR PASSPORT NO."
                           />
-                          {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                         
                         </div>
                       </div>
                       <div className="col-6 col-md-4">
@@ -905,14 +1041,11 @@ export const PassportInformationForm = () => {
                           </label>
                           <input
                             type="text"
-                            name="emptyValidation"
-                            // onChange={handleChange}
+                            name="agentName"
                             className="form-control col-6"
                             placeholder="ENTER YOUR PASSPORT NO."
                           />
-                          {/* {errors.emptyValidation && (
-                      <span className="valid_text text-danger fw-bolder">{errors.emptyValidation}</span>
-                    )} */}
+                        
                         </div>
                       </div>
                       <div className="col-6 col-md-4 mt-2">
@@ -922,7 +1055,7 @@ export const PassportInformationForm = () => {
                             data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop"
                           >
-                            <button className="final-button btn pl-1 pr-1">
+                            <button className="final-button btn pl-1 pr-1" onClick={(e)=>editHandler(e)}>
                               Edit
                             </button>
                           </div>
@@ -940,9 +1073,8 @@ export const PassportInformationForm = () => {
               <div className="row">
                 <div className="col-6 col-md-4 text-start">
                   <button
-                    type="submit"
                     className="final-button btn  pl-1 pr-1 mb-4"
-                    // onClick={submitHandler}
+                    onClick={(e) => submitHandler(e)}
                   >
                     SUBMIT AND CONTINUE
                   </button>

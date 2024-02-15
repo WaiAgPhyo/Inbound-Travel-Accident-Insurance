@@ -177,3 +177,15 @@ textarea{
 .valid_text {
   font-size: 13px;
 }
+
+/* submitForm  */
+.payment {
+  background: #fbf34b;
+}
+
+/* PaymentComplete */
+.reject_icon {
+  /* color: #fbf34b; */
+  width:300px ;
+  height: 100px;
+}
