@@ -53,7 +53,8 @@ export const ConfirmForm = () => {
                 {/* payment information */}
 
                 {/* INSURED PERSON'S PASSPORT INFORMATION */}
-                <h5 classNameName="mt-5 text_color">
+                <div className="mt-5">
+                <h5 className="text_color">
                   <u>INSURED PERSON'S PASSPORT INFORMATION</u>        
                 </h5>
 
@@ -69,6 +70,8 @@ export const ConfirmForm = () => {
                   <div className="col fw-semibold">Passport Issued Country</div>
                   <div className="col-sm-7">{items.passportIssuedCountry}</div>
                 </div>
+                </div>
+               
                  {/* INSURED PERSON'S PASSPORT INFORMATION */}
 
                  {/* INSURED PERSON INFORMATION */}
