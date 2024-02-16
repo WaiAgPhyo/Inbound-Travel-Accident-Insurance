@@ -99,26 +99,27 @@ export const ConfirmForm = () => {
                   <div className="col fw-semibold">Estimated Arrival Date</div>
                   <div className="col-sm-7">{items.ArrivalDate}</div>
                 </div>
-                <div className="row p-2 border-bottom">
+                {items.childName && <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Child Name</div>
                   <div className="col-sm-7">{items.childName}</div>
-                </div>
-                <div className="row p-2 border-bottom">
+                </div>}
+                {items.childBirth && <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Date of Birth (Child)</div>
                   <div className="col-sm-7">{items.childBirth}</div>
-                </div>
-                <div className="row p-2 border-bottom">
+                </div>}
+                {items.childGender && <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Gender (Child)</div>
                   <div className="col-sm-7">{items.childGender}</div>
-                </div>
-                <div className="row p-2 border-bottom">
+                </div>}
+                {items.childGuardianceName &&  <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Guardiance Name (Child)</div>
                   <div className="col-sm-7">{items.childGuardianceName}</div>
-                </div>
-                <div className="row p-2 border-bottom">
+                </div>}
+                {items.childRelationship && <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Relationship (Child)</div>
                   <div className="col-sm-7">{items.childRelationship}</div>
-                </div>
+                </div>}
+                
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Journey From</div>
                   <div className="col-sm-7">{items.journeyFrom}</div>
