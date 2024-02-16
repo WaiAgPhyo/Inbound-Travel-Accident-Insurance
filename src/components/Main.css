@@ -1,0 +1,186 @@
+/* In your CSS file */
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
+
+body {
+  font-family: "Arial", sans-serif;
+}
+
+/* main// */
+
+.main-container {
+  width: 90%;
+  margin: auto;
+}
+
+.container {
+  width: 80%;
+}
+
+/* agent// */
+
+.agent_radio {
+  width: 20px;
+}
+
+.agent {
+  display: flex;
+  gap: 20px;
+}
+
+.self-service input {
+  text-decoration: none;
+}
+
+.self-service {
+  display: flex;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.self-box {
+  padding: 10px;
+  background: white;
+  margin-left: 5px;
+  box-shadow: 8px;
+  cursor: pointer;
+}
+
+.self-box label img {
+  width: 25px;
+  cursor: pointer;
+}
+
+.agent-information {
+  cursor: pointer;
+}
+
+.self-service input {
+  cursor: pointer;
+}
+
+.self-box label {
+  cursor: pointer;
+}
+
+/* final button// */
+.final-button:hover {
+  background-color: white;
+  border: 1px solid #245da8;
+  color: #245da8;
+}
+
+.final-button {
+  padding: 5px 15px;
+  border-radius: 2px;
+  background-color: #245da8;
+  color: aliceblue;
+}
+
+/* search_select_box// */
+.search_select_box {
+  justify-content: space-between;
+  display: flex;
+}
+
+.search_select_list:hover {
+  background-color: blue;
+}
+
+.search_select_list {
+  cursor: pointer;
+}
+
+.select_box {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search_box {
+  display: flex;
+}
+
+/* date-picker */
+.date_picker {
+  width: 100%;
+}
+
+/* text-color */
+.text_color {
+  color: #245da8;
+  font-weight: 600;
+}
+
+/* insure information// */
+.radio {
+  width: 20px;
+  padding-left: 6px;
+}
+
+textarea {
+  resize: none;
+}
+
+/* agent testing */
+
+.agent_container {
+  display: flex;
+  gap: 30px;
+  padding-bottom: 30px;
+}
+
+.service_box {
+  display: flex;
+  background-color: #fff;
+  align-items: center;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid rgb(0, 0, 0, 0.4);
+}
+
+.agent_image {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}
+
+.service_box img {
+  width: 100%;
+}
+
+.service_box--selected {
+  border: 2px solid yellow;
+  box-shadow: 1px 1px 1px rgb(0, 0, 0, 0.5);
+}
+
+.agent_radio_box {
+  display: flex;
+  /* justify-content: space-around; */
+  /* padding: 10px; */
+  /* margin: 20px; */
+  align-items: center;
+  gap: 6px;
+}
+
+/* date picker */
+
+.date_picker {
+  width: 100%;
+}
+
+/* validation */
+
+.valid_text {
+  font-size: 13px;
+}
+
+/* submitForm  */
+.payment {
+  background: #fbf34b;
+}
+
+/* PaymentComplete */
+.reject_icon {
+  /* color: #fbf34b; */
+  width: 300px;
+  height: 100px;
+}
