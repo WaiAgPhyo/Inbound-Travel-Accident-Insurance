@@ -1,12 +1,12 @@
 import React from "react";
 import "./Main.css";
 import './ConfirmForm.css'
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export const ConfirmForm = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [items, setItem] = useState({});
 
   useEffect(() => {
@@ -193,13 +193,13 @@ export const ConfirmForm = () => {
 
                 <div className="row mt-3">
                 <div className="col-6 col-md-4 text-start">
-                  <button
+                  <Link
                     type="submit"
                     className="final-button btn  pl-1 pr-1 mb-4"
-                    // onClick={submitHandler}
+                    to="/complete"
                   >
-                    CONFIRM
-                  </button>
+                    CONFIRM                    
+                  </Link>
                 </div>
               </div>
 

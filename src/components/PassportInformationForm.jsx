@@ -188,62 +188,6 @@ export const PassportInformationForm = () => {
     e.preventDefault()
   }
 
-  // const [formData, setFormData] = useState({
-  //   passportNumber: "",
-  //   emptyValidation: "",
-  //   emailValidation: "",
-  //   phNumberValidation: "",
-  //   passportValidation: "",
-  // });
-
-  // const [errors, setErrors] = useState({});
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-
-  //   navigate();
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const validationErrors = {};
-  //   if (!formData.emptyValidation.trim()) {
-  //     validationErrors.emptyValidation = "This field is required."
-  //   }
-
-  //   if (!formData.emailValidation.trim()) {
-  //     validationErrors.emailValidation = "";
-  //   }
-  //   else if (!/\S+@\S+\.\S+/.test(formData.emailValidation)) {
-  //     validationErrors.emailValidation = "Please enter a valid email address."
-  //   }
-
-  //   if (!formData.phNumberValidation.trim()) {
-  //     validationErrors.phNumberValidation = "This field is required."
-  //   }
-  //   else if (!/^\d{10}$/.test(formData.phNumberValidation)) {
-  //     validationErrors.phNumberValidation = "Please enter a valid number."
-  //   }
-
-  //   if (!formData.passportValidation.trim()) {
-  //     validationErrors.passportValidation = ""
-  //   }
-  //   else if (!/^[A-Z]{1,2}[0-9]{6,9}$/.test(formData.passportValidation)) {
-  //     validationErrors.passportValidation = "Please input valid passport number"
-  //   }
-
-  //   setErrors(validationErrors);
-
-  //   if (Object.keys(validationErrors).length === 0) {
-  //     alert("Form submitted successfully");
-  //   }
-
-  // };
-
   return (
     <>
       <div className="bg-body-secondary">

@@ -10,9 +10,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route element={<PassportInformationForm/>} index/>
-            <Route path='form' element={<PassportInformationForm/>}/>
-            <Route path='confirm' element={<ConfirmForm/>}/>
-            <Route path='complete' element={<PaymentComplete/>}/>
+            <Route exact path='form' element={<PassportInformationForm/>}/>
+            <Route exact path='confirm' element={<ConfirmForm/>}/>
+            <Route exact path='complete' element={<PaymentComplete/>}/>
           </Routes>
         </BrowserRouter>
     </div>
