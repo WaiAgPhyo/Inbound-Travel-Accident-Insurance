@@ -5,4 +5,5 @@ import org.ace.insurance.inbound_insurance.entity.InboundProposal;
 
 public interface InboundProposalService {
     InboundProposal create(InboundProposalDTO inboundProposalDTO);
+    InboundProposal searchEnquiry(String passportNo, String issuedCountry);
 }

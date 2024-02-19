@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface InboundProposalRepository extends JpaRepository<InboundProposal, UUID> {
+    InboundProposal findByInsuredPersonPassportNumberAndInsuredPersonPassportIssuedCountry(String passportNo, String issuedCountry);
 }

@@ -102,6 +102,12 @@ public class InboundProposalServiceImpl implements InboundProposalService {
 
     }
 
+    @Override
+    public InboundProposal searchEnquiry(String passportNo, String issuedCountry) {
+        InboundProposal inboundProposal = inboundProposalRepo.findByInsuredPersonPassportNumberAndInsuredPersonPassportIssuedCountry(passportNo,issuedCountry);
+        return inboundProposal;
+    }
+
     private int calculateAge(InboundProposalDTO inboundProposalDTO){
         if(inboundProposalDTO.isChild()){
             int DOB =inboundProposalDTO.getChildDOB().getYear();

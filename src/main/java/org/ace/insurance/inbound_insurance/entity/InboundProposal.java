@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,9 +19,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InboundProposal {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+
+    @Column(nullable = false,updatable = false)
     private UUID id;
+
+    @Id
+    @GeneratedValue(generator = "certificate-id-generator")
+    @GenericGenerator(name = "certificate-id-generator",strategy = "org.ace.insurance.inbound_insurance.customIDGenerator.CertificateIDGenerator")
+    private String certificateID;
     private String journeyFrom;
     private String journeyTo;
     @JsonFormat(pattern = "dd-MM-yyyy")
@@ -49,6 +55,9 @@ public class InboundProposal {
     protected void onCreate(){
         createdDate = LocalDateTime.now();
         version = 1L;
+        if (id == null){
+            id = UUID.randomUUID();
+        }
     }
 
     @PreUpdate

@@ -6,4 +6,6 @@ import java.util.UUID;
 
 public interface InsuredPersonRepository extends JpaRepository<InsuredPerson, UUID> {
 
+
+
 }

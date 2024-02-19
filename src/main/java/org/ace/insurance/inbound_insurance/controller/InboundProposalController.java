@@ -8,10 +8,7 @@ import org.ace.insurance.inbound_insurance.service.InboundProposalService;
 import org.ace.insurance.inbound_insurance.utility.HttpResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.ace.insurance.inbound_insurance.utility.HttpResponse.createResponse;
 
@@ -28,6 +25,13 @@ public class InboundProposalController {
     public ResponseEntity<HttpResponse<InboundProposal>> create(@RequestBody InboundProposalDTO inboundProposalDTO){
         InboundProposal inboundProposal = inboundProposalService.create(inboundProposalDTO);
         return createResponse(inboundProposal, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<HttpResponse<InboundProposal>> searchEnquiry(@RequestParam String passportNo,
+                                                                       @RequestParam String issuedCountry){
+        InboundProposal inboundProposal = inboundProposalService.searchEnquiry(passportNo,issuedCountry);
+        return createResponse(inboundProposal,HttpStatus.OK);
     }
 
 }
