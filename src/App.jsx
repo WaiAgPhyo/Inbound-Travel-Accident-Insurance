@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { ConfirmForm } from "./components/ConfirmForm";
+import { ConfirmForm } from "./pages/ConfirmForm";
 import Footer from "./components/Footer";
-import { PassportInformationForm } from "./components/PassportInformationForm";
-import Success from "./components/Success";
+import { PassportInformationForm } from "./pages/PassportInformationForm";
+import Success from "./pages/Success";
 import Header from "./components/Header";
 import Enquiry from "./pages/Enquiry";
 

@@ -8,14 +8,14 @@ import {
   Image,
 } from "@react-pdf/renderer";
 
-import PdfPage1 from "../components/PdfPage1";
-import PdfPage2 from "../components/PdfPage2";
-import PdfPage3 from "../components/PdfPage3";
-import PdfPage4 from "../components/PdfPage4";
-import PdfPage5 from "../components/PdfPage5";
-import PdfPage6 from "../components/PdfPage6";
-import PdfPage7 from "../components/PdfPage7";
-import PdfPage8 from "../components/PdfPage8";
+import PdfPage1 from "./PdfPage1";
+import PdfPage2 from "./PdfPage2";
+import PdfPage3 from "./PdfPage3";
+import PdfPage4 from "./PdfPage4";
+import PdfPage5 from "./PdfPage5";
+import PdfPage6 from "./PdfPage6";
+import PdfPage7 from "./PdfPage7";
+import PdfPage8 from "./PdfPage8";
 
 // Create styles
 const styles = StyleSheet.create({
@@ -28,10 +28,11 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-const MyDocument = () => {
+const MyDocument = ({ id }) => {
+ 
   return (
     <Document style={styles.container} title="myanma_insurnace.pdf">
-      <PdfPage1 />
+      <PdfPage1 id={id}/>
       <PdfPage2 />
       <PdfPage3 />
       <PdfPage4 />

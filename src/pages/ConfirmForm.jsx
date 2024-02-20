@@ -1,18 +1,39 @@
 import React from "react";
-import "./Main.css";
+import "../components/Main.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Button } from "bootstrap";
+import axios from "axios";
 
 export const ConfirmForm = () => {
   const location = useLocation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [res, setRes] = useState();
   const [items, setItem] = useState({});
+  const [returndata , setReturnData]= useState({})
 
   useEffect(() => {
     if (location?.state) {
       setItem(location.state);
     }
   }, [location]);
+
+  function posting() {
+    axios
+      .post("http://localhost:8080/api/v1/inboundProposal", items)
+      .then((res) => {
+
+        setRes(res.status);
+        setReturnData(res.data.data)
+      })
+      .catch((err) => console.error(err));
+  }
+
+  useEffect(() => {
+    if (res === 201) {
+      navigate("/success", { state: {returndata,payment: items.payment }});
+    }
+  }, [res]);
 
   return (
     <>
@@ -30,27 +51,27 @@ export const ConfirmForm = () => {
               <div className="mt-4">
                 <div className="row p-2 mb-1 payment">
                   <div className="col fw-semibold">Payment Channel</div>
-                  <div className="col-sm-7">VISA</div>
+                  <div className="col-sm-7">{items.payment}</div>
                 </div>
                 <div className="row payment p-2 mb-1">
                   <div className="col fw-semibold">Premium Amount</div>
-                  <div className="col-sm-7">VISA</div>
+                  <div className="col-sm-7">{items.premiumrate}$</div>
                 </div>
                 <div className="row payment p-2 mb-1">
                   <div className="col fw-semibold">Service Charge ( Visa )</div>
-                  <div className="col-sm-7">VISA</div>
+                  <div className="col-sm-7">15.2$</div>
                 </div>
                 <div className="row payment p-2 mb-1">
                   <div className="col fw-semibold">
                     Total Amount (Including Service Charges)
                   </div>
-                  <div className="col-sm-7">VISA</div>
+                  <div className="col-sm-7">{items.premiumrate + 15.2}$</div>
                 </div>
                 <div className="row payment p-2 mb-1">
                   <div className="col fw-semibold">
                     Net Amount (Including Service Charges)
                   </div>
-                  <div className="col-sm-7">VISA</div>
+                  <div className="col-sm-7">{items.premiumrate + 15.2}$</div>
                 </div>
                 {/* payment information */}
 
@@ -66,7 +87,7 @@ export const ConfirmForm = () => {
                   </div>
                   <div className="row p-2 border-bottom">
                     <div className="col fw-semibold">Passport Issued Date</div>
-                    <div className="col-sm-7">{items.passportIssuedDate}</div>
+                    <div className="col-sm-7">{items.passportIssueDate}</div>
                   </div>
                   <div className="row p-2 border-bottom">
                     <div className="col fw-semibold">
@@ -87,27 +108,31 @@ export const ConfirmForm = () => {
 
                 <div className="row p-2 mt-4 border-bottom">
                   <div className="col fw-semibold">Insured For</div>
-                  <div className="col-sm-7">{items.insureName}</div>
+                  <div className="col-sm-7">
+                    {items.isChild == "true"
+                      ? "Insured For This Policy Holder's Child"
+                      : "Insured For This Poilcy Holder "}
+                  </div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Name (as per passport)</div>
-                  <div className="col-sm-7">{items.insureBirthDate}</div>
+                  <div className="col-sm-7">{items.insuredPersonName}</div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">
                     Date of Birth (as per passport)
                   </div>
-                  <div className="col-sm-7">{items.insureBirthDate}</div>
+                  <div className="col-sm-7">{items.insuredPersonDOB}</div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">
                     Gender (as per passport)
                   </div>
-                  <div className="col-sm-7">{items.insureGender}</div>
+                  <div className="col-sm-7">{items.insuredPersonGender}</div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Estimated Arrival Date</div>
-                  <div className="col-sm-7">{items.ArrivalDate}</div>
+                  <div className="col-sm-7">{items.estimateArrivalDate}</div>
                 </div>
                 {items.childName && (
                   <div className="row p-2 border-bottom">
@@ -118,7 +143,7 @@ export const ConfirmForm = () => {
                 {items.childBirth && (
                   <div className="row p-2 border-bottom">
                     <div className="col fw-semibold">Date of Birth (Child)</div>
-                    <div className="col-sm-7">{items.childBirth}</div>
+                    <div className="col-sm-7">{items.childDOB}</div>
                   </div>
                 )}
                 {items.childGender && (
@@ -132,7 +157,7 @@ export const ConfirmForm = () => {
                     <div className="col fw-semibold">
                       Guardiance Name (Child)
                     </div>
-                    <div className="col-sm-7">{items.childGuardianceName}</div>
+                    <div className="col-sm-7">{items.guardianceName}</div>
                   </div>
                 )}
                 {items.childRelationship && (
@@ -156,23 +181,31 @@ export const ConfirmForm = () => {
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Contact Phone Number</div>
-                  <div className="col-sm-7">{items.insurePhoneNumber}</div>
+                  <div className="col-sm-7">
+                    {items.insuredPersonPhoneNumber}
+                  </div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Email Address</div>
-                  <div className="col-sm-7">{items.insureEmail}</div>
+                  <div className="col-sm-7">{items.insuredPersonEmail}</div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Resident Address</div>
-                  <div className="col-sm-7">{items.insureResidentAddress}</div>
+                  <div className="col-sm-7">
+                    {items.insuredPersonResidentAddress}
+                  </div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Resident Country</div>
-                  <div className="col-sm-7">{items.insureResidentCountry}</div>
+                  <div className="col-sm-7">
+                    {items.insuredPersonResidentCountry}
+                  </div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Address in Myanmar</div>
-                  <div className="col-sm-7">{items.insureAddress}</div>
+                  <div className="col-sm-7">
+                    {items.insuredPersonAddressMyanmar}
+                  </div>
                 </div>
                 {/* INSURED PERSON INFORMATION */}
 
@@ -186,13 +219,13 @@ export const ConfirmForm = () => {
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Date of Birth</div>
-                  <div className="col-sm-7">{items.beneficiaryBirth}</div>
+                  <div className="col-sm-7">{items.beneficiaryDOB}</div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">
                     National Identification Number
                   </div>
-                  <div className="col-sm-7">{items.beneficiaryIdenNumber}</div>
+                  <div className="col-sm-7">{items.beneficiaryNRC}</div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Relationship</div>
@@ -202,7 +235,7 @@ export const ConfirmForm = () => {
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Contact Number</div>
-                  <div className="col-sm-7">{items.beneficiaryPhone}</div>
+                  <div className="col-sm-7">{items.beneficiaryPhoneNumber}</div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Email</div>
@@ -224,13 +257,12 @@ export const ConfirmForm = () => {
 
                 <div className="row mt-3">
                   <div className="col-6 col-md-4 text-start">
-                    <Link
-                      type="submit"
+                    <button
                       className="final-button btn  pl-1 pr-1 mb-4"
-                      to="/success"
+                      onClick={posting}
                     >
                       CONFIRM
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>

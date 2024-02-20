@@ -4,7 +4,7 @@ import "./enquiry.css";
 const Enquiry = () => {
   return (
     <>
-      <div>
+      <div className="enquiry">
         <div className="enquiry-header">
           <h3>Inbound Travel Accidence Insurance</h3>
 

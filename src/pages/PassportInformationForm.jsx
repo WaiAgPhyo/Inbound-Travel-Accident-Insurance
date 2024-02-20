@@ -1,14 +1,21 @@
-import "./Main.css";
+import "../components/Main.css";
 import agent from "../images/agent.png";
 import self from "../images/self.png";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Validation } from "./validation";
+import { Validation } from "../components/validation";
+import ComboBox from "../components/ComboBox";
+import Payment from "./Payment";
+import axios from "axios";
+import { error } from "jquery";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const PassportInformationForm = () => {
   // for radio
   const [option, setOption] = useState();
   const [agentRadio, setAgentRadio] = useState();
+  const [countrydata, setCountryData] = useState([]);
 
   // for date
   const [passportDate, setPassportDate] = useState();
@@ -16,7 +23,7 @@ export const PassportInformationForm = () => {
   const [arrivalDate, setArrivalDate] = useState();
   const [childBirth, setChildBirth] = useState();
   const [beneBirth, setBeneBirth] = useState();
-
+  const [showpayment, setShowPayment] = useState(null);
   const [userClick, setUserClick] = useState(false);
   const navigate = useNavigate();
 
@@ -33,11 +40,14 @@ export const PassportInformationForm = () => {
   const [insureAddress, setInsureAddress] = useState("");
   const [insureResAdd, setInsureResAdd] = useState("");
   const [insureResCountry, setInsureResCountry] = useState("");
+
   // child
   const [childName, setChildName] = useState("");
   const [childGender, setChildGender] = useState("");
   const [guardianceName, setGuardianceName] = useState("");
   const [childRelationship, setChildRelationShip] = useState("");
+  const [isChild, setIsChild] = useState(false);
+
   // beneficary
   const [beneName, setBeneName] = useState("");
   const [beneIdenNum, setBeneIdenNum] = useState("");
@@ -47,146 +57,230 @@ export const PassportInformationForm = () => {
   const [beneEmail, setBeneEmail] = useState("");
   const [beneResAdd, setBeneResAdd] = useState("");
   const [beneResCountry, setBeneResCountry] = useState("");
+  const [temp, setTemp] = useState({});
+  const [rate, setRate] = useState("");
 
-  function submitHandler(e) {
-    setUserClick(true);
-    e.preventDefault();
-    if (
-      userClick &&
-      passportNum &&
-      passportDate &&
-      passportCountry &&
-      insureName &&
-      insureBirth &&
-      insureGender &&
-      journeyFrom &&
-      arrivalDate &&
-      coveragePlan &&
-      insurePh &&
-      insurePhCode &&
-      insureEmail &&
-      insureAddress &&
-      insureResAdd &&
-      insureResCountry &&
-      beneName &&
-      beneIdenNum &&
-      beneRelationship &&
-      benePhone &&
-      benePhCode &&
-      beneEmail &&
-      beneResAdd &&
-      beneResCountry &&
-      beneBirth &&
-      !childBirth &&
-      !childName &&
-      !childGender &&
-      !childRelationship &&
-      !guardianceName
-    ) {
-      navigate("/confirm", {
-        state: {
-          passportIssuedDate: passportDate,
-          passportNumber: passportNum,
-          passportIssuedCountry: passportCountry,
-          insureName: insureName,
-          insureGender: insureGender,
-          insureBirthDate: insureBirth,
-          journeyFrom: journeyFrom,
-          coveragePlan: coveragePlan,
-          ArrivalDate: arrivalDate,
-          insurePhoneNumber: insurePh,
-          insurePhoneCode: insurePhCode,
-          insureEmail: insureEmail,
-          insureAddress: insureAddress,
-          insureResidentAddress: insureResAdd,
-          insureResidentCountry: insureResCountry,
-          // childBirth: childBirth,
-          // childName: childName,
-          // childGender: childGender,
-          // childGuardianceName: guardianceName,
-          // childRelationship: childRelationship,
-          beneficiaryName: beneName,
-          beneficiaryBirth: beneBirth,
-          beneficiaryIdenNumber: beneIdenNum,
-          beneficiaryRelationship: beneRelationship,
-          beneficiaryPhone: benePhone,
-          beneficiaryPhoneCode: benePhCode,
-          beneficiaryEmail: beneEmail,
-          beneficiaryResidentAddress: beneResAdd,
-          beneficiaryResidentCountry: beneResCountry,
-        },
-      });
-    } else if (
-      userClick &&
-      passportNum &&
-      passportDate &&
-      passportCountry &&
-      insureName &&
-      insureBirth &&
-      insureGender &&
-      journeyFrom &&
-      arrivalDate &&
-      coveragePlan &&
-      insurePh &&
-      insurePhCode &&
-      insureEmail &&
-      insureAddress &&
-      insureResAdd &&
-      insureResCountry &&
-      beneName &&
-      beneIdenNum &&
-      beneRelationship &&
-      benePhone &&
-      benePhCode &&
-      beneEmail &&
-      beneResAdd &&
-      beneResCountry &&
-      beneBirth &&
-      childBirth &&
-      childName &&
-      childGender &&
-      childRelationship &&
-      guardianceName
-    ) {
-      navigate("/confirm", {
-        state: {
-          passportIssuedDate: passportDate,
-          passportNumber: passportNum,
-          passportIssuedCountry: passportCountry,
-          insureName: insureName,
-          insureGender: insureGender,
-          insureBirthDate: insureBirth,
-          journeyFrom: journeyFrom,
-          coveragePlan: coveragePlan,
-          ArrivalDate: arrivalDate,
-          insurePhoneNumber: insurePh,
-          insurePhoneCode: insurePhCode,
-          insureEmail: insureEmail,
-          insureAddress: insureAddress,
-          insureResidentAddress: insureResAdd,
-          insureResidentCountry: insureResCountry,
-          childBirth: childBirth,
-          childName: childName,
-          childGender: childGender,
-          childGuardianceName: guardianceName,
-          childRelationship: childRelationship,
-          beneficiaryName: beneName,
-          beneficiaryBirth: beneBirth,
-          beneficiaryIdenNumber: beneIdenNum,
-          beneficiaryRelationship: beneRelationship,
-          beneficiaryPhone: benePhone,
-          beneficiaryPhoneCode: benePhCode,
-          beneficiaryEmail: beneEmail,
-          beneficiaryResidentAddress: beneResAdd,
-          beneficiaryResidentCountry: beneResCountry,
-        },
-      });
+  //Agent
+  const [agentLicenseNo, setAgentLicenseNo] = useState("");
+  const [agentPassword, setAgentPassword] = useState("");
+  const [agentName, setAgentName] = useState("");
+  const [agentres, setAgentRes] = useState({
+    agentLicenseNo: "",
+    agentName: "",
+  });
+
+  //fetching country
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/v1/country")
+      .then((res) => setCountryData(res.data.data))
+      .catch((err) => console.error("The error is" + err));
+  }, []);
+
+  //For commonbox
+  function selectedoption(V) {
+    if (V.id == "passport") {
+      setPassportCountry(V.value);
+    } else if (V.id == "journey") {
+      setJourneyFrom(V.value);
+    } else if (V.id == "resCountry") {
+      setBeneResCountry(V.value);
+    } else if (V.id == "insCountry") {
+      setInsureResCountry(V.value);
     }
   }
 
+  //Payment Screen back btn
+  function closing(v) {
+    setShowPayment(v);
+  }
+
+  //sorting country
+  useEffect(() => {
+    if (countrydata) {
+      const sortedCountries = [...countrydata].sort((a, b) =>
+        a.countryName.localeCompare(b.countryName)
+      );
+      setCountryData(sortedCountries);
+    }
+  }, []);
+
+  //final form submit
+  function submitHandler(e) {
+    e.preventDefault();
+    setUserClick(true);
+    axios
+      .get(
+        `http://localhost:8080/api/v1/premiumRate?age=${formatDate(
+          insureBirth
+        )}&days=${coveragePlan}&child=${isChild}`
+      )
+      .then((res) => {
+        setRate(res.data.data);
+       
+        if (
+          rate &&
+          passportNum &&
+          passportDate &&
+          passportCountry &&
+          insureName &&
+          insureBirth &&
+          insureGender &&
+          arrivalDate &&
+          journeyFrom &&
+          coveragePlan &&
+          insurePhCode &&
+          insurePh &&
+          insureEmail &&
+          insureAddress &&
+          insureResAdd &&
+          insureResCountry &&
+          beneName &&
+          beneIdenNum &&
+          beneRelationship &&
+          benePhone &&
+          benePhCode &&
+          beneEmail &&
+          beneResAdd &&
+          beneResCountry &&
+          beneBirth &&
+          !childBirth &&
+          !childName &&
+          !childGender &&
+          !childRelationship &&
+          !guardianceName
+        ) {
+          setShowPayment(true);
+          setTemp({
+            premiumrate: rate,
+            passportIssueDate: formatDate(passportDate),
+            passportNumber: passportNum,
+            passportIssuedCountry: passportCountry,
+            insuredPersonName: insureName,
+            insuredPersonGender: insureGender,
+            insuredPersonDOB: formatDate(insureBirth),
+            journeyFrom: journeyFrom,
+            journeyTo: "Myanmar",
+            coveragePlan: coveragePlan,
+            estimateArrivalDate: formatDate(arrivalDate),
+            insuredPersonPhoneNumber: insurePhCode + insurePh,
+            insuredPersonEmail: insureEmail,
+            insuredPersonAddressMyanmar: insureAddress,
+            insuredPersonResidentAddress: insureResAdd,
+            insuredPersonResidentCountry: insureResCountry,
+            beneficiaryName: beneName,
+            beneficiaryDOB: formatDate(beneBirth),
+            beneficiaryNRC: beneIdenNum,
+            beneficiaryRelationship: beneRelationship,
+            beneficiaryPhoneNumber: benePhCode + benePhone,
+            beneficiaryEmail: beneEmail,
+            beneficiaryResidentAddress: beneResAdd,
+            beneficiaryResidentCountry: beneResCountry,
+            child: false,
+          });
+        } else if (
+          rate &&
+          passportNum &&
+          passportDate &&
+          passportCountry &&
+          insureName &&
+          insureBirth &&
+          insureGender &&
+          journeyFrom &&
+          arrivalDate &&
+          coveragePlan &&
+          insurePh &&
+          insurePhCode &&
+          insureEmail &&
+          insureAddress &&
+          insureResAdd &&
+          insureResCountry &&
+          beneName &&
+          beneIdenNum &&
+          beneRelationship &&
+          benePhone &&
+          benePhCode &&
+          beneEmail &&
+          beneResAdd &&
+          beneResCountry &&
+          beneBirth &&
+          childBirth &&
+          childName &&
+          childGender &&
+          childRelationship &&
+          guardianceName
+        ) {
+          setTemp({
+            premiumrate: rate,
+            passportIssueDate: formatDate(passportDate),
+            passportNumber: passportNum,
+            passportIssuedCountry: passportCountry,
+            insuredPersonName: insureName,
+            insuredGender: insureGender,
+            insuredPersonDOB: formatDate(insureBirth),
+            journeyFrom: journeyFrom,
+            journeyTo: "Myanmar",
+            coveragePlan: coveragePlan,
+            estimateArrivalDate: formatDate(arrivalDate),
+            insuredPersonPhoneNumber: insurePhCode + insurePh,
+            insuredPersonEmail: insureEmail,
+            insuredPersonAddressMyanmar: insureAddress,
+            insuredPersonResidentAddress: insureResAdd,
+            insuredPersonResidentCountry: insureResCountry,
+            childDOB: formatDate(childBirth),
+            childName: childName,
+            childGender: childGender,
+            guardianceName: guardianceName,
+            childRelationship: childRelationship,
+            beneficiaryName: beneName,
+            beneficiaryDOB: formatDate(beneBirth),
+            beneficiaryNRC: beneIdenNum,
+            beneficiaryRelationship: beneRelationship,
+            beneficiaryPhoneNumber: benePhCode + benePhone,
+            beneficiaryEmail: beneEmail,
+            beneficiaryResidentAddress: beneResAdd,
+            beneficiaryResidentCountry: beneResCountry,
+            child: true,
+          });
+          setShowPayment(true);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function selectingchild(e) {
+    setOption(e.target.id);
+    if (e.target.id == "child") {
+      setIsChild(true);
+    }
+  }
   function editHandler(e) {
     e.preventDefault();
   }
+
+  //  Api Agent
+  function ApiHandler() {
+    const data = new FormData();
+    data.append("agentLicenseNo", agentLicenseNo);
+    data.append("agentPassword", agentPassword);
+    data.append("agentName", agentName);
+    axios
+      .get(
+        `http://localhost:8080/api/v1/agent/check?agentLicenseNo=${agentLicenseNo}&agentPassword=${agentPassword}`
+      )
+      .then((res) => setAgentRes(res.data))
+      .catch((error) => console.error("This is Error" + error));
+  }
+
+  const formatDate = (date) => {
+    if (!date) return ""; // Return empty string if date is null
+
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
 
   return (
     <>
@@ -213,7 +307,7 @@ export const PassportInformationForm = () => {
                       name="passportNumber"
                       onChange={(e) => setPassportNum(e.target.value)}
                       className="form-control col-6"
-                      placeholder="ENTER YOUR PASSPORT NO."
+                      placeholder="Enter Your Passport No."
                     />
                     {userClick && !passportNum && <Validation />}
                   </div>
@@ -224,12 +318,13 @@ export const PassportInformationForm = () => {
                       Passport Issued Date.
                       <span className="text-danger">*</span>
                     </label>
-                    <input
-                      type="date"
-                      name="passportIssuedDate"
-                      className="form-control"
-                      onChange={(e) => setPassportDate(e.target.value)}
+                    <DatePicker
+                      selected={passportDate}
+                      className="form-control form-control--date"
+                      placeholderText="DD-MM-YYYY"
+                      onChange={(date) => setPassportDate(date)}
                     />
+
                     {userClick && !passportDate && <Validation />}
                   </div>
                 </div>
@@ -239,7 +334,12 @@ export const PassportInformationForm = () => {
                       Passport Issued Country
                       <span className="text-danger">*</span>
                     </label>
-                    <select
+                    <ComboBox
+                      data={countrydata}
+                      option={selectedoption}
+                      selection="passport"
+                    />
+                    {/* <select
                       name="emptyValidation"
                       className="form-select"
                       aria-label="Default select example"
@@ -249,7 +349,7 @@ export const PassportInformationForm = () => {
                       <option value="1">One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
-                    </select>
+                    </select> */}
                     {userClick && !passportCountry && <Validation />}
                   </div>
                 </div>
@@ -270,7 +370,7 @@ export const PassportInformationForm = () => {
                       name="options"
                       id="self"
                       value="self"
-                      onChange={(e) => setOption(e.target.id)}
+                      onChange={(e) => selectingchild(e)}
                       className="radio form-check-input"
                     />
                     BUY FOR YOURSELF (THIS PASSPORT HOLDER)
@@ -286,7 +386,7 @@ export const PassportInformationForm = () => {
                       name="options"
                       value="child"
                       id="child"
-                      onChange={(e) => setOption(e.target.id)}
+                      onChange={(e) => selectingchild(e)}
                       className="radio form-check-input"
                     />
                     BUY FOR THE CHILD TRAVEL TOGETHER WITH THIS PASSPORT HOLDER
@@ -323,11 +423,11 @@ export const PassportInformationForm = () => {
                       Date of Birth (as per passport)
                       <span className="text-danger">*</span>
                     </label>
-                    <input
-                      type="date"
-                      name="insureBirth"
-                      className="form-control"
-                      onChange={(e) => setInsureBirth(e.target.value)}
+                    <DatePicker
+                      selected={insureBirth}
+                      className="form-control form-control--date"
+                      placeholderText="DD-MM-YYYY"
+                      onChange={(date) =>   setInsureBirth(date)}
                     />
                     {userClick && !insureBirth && <Validation />}
                   </div>
@@ -345,9 +445,8 @@ export const PassportInformationForm = () => {
                       aria-label="Default select example"
                     >
                       <option defaultValue="">SELECT ONE</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      <option value="MALE">MALE</option>
+                      <option value="FEMALE">FEMALE</option>
                     </select>
                     {userClick && !insureGender && <Validation />}
                   </div>
@@ -361,11 +460,11 @@ export const PassportInformationForm = () => {
                       Estimated Arrival Date
                       <span className="text-danger">*</span>
                     </label>
-                    <input
-                      type="date"
-                      name="arrivalDate"
-                      className="form-control"
-                      onChange={(e) => setArrivalDate(e.target.value)}
+                    <DatePicker
+                      selected={arrivalDate}
+                      className="form-control form-control--date"
+                      placeholderText="DD-MM-YYYY"
+                      onChange={(date) => setArrivalDate(date)}
                     />
                     {userClick && !arrivalDate && <Validation />}
                   </div>
@@ -376,7 +475,12 @@ export const PassportInformationForm = () => {
                       Journey From
                       <span className="text-danger">*</span>
                     </label>
-                    <select
+                    <ComboBox
+                      data={countrydata}
+                      option={selectedoption}
+                      selection="journey"
+                    />
+                    {/* <select
                       name="journeyFrom"
                       onChange={(e) => setJourneyFrom(e.target.value)}
                       className="form-select"
@@ -386,7 +490,7 @@ export const PassportInformationForm = () => {
                       <option value="1">One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
-                    </select>
+                    </select> */}
                     {userClick && !journeyFrom && <Validation />}
                   </div>
                 </div>
@@ -423,9 +527,19 @@ export const PassportInformationForm = () => {
                       aria-label="Default select example"
                     >
                       <option defaultValue="">SELECT ONE</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      <option value="15">15 DAYS</option>
+                      <option value="30">30 DAYS</option>
+                      <option value="60">60 DAYS</option>
+                      <option value="90">90 DAYS</option>
+                      <option value="120">120 DAYS</option>
+                      <option value="150">150 DAYS</option>
+                      <option value="180">180 DAYS</option>
+                      <option value="210">210 DAYS</option>
+                      <option value="240">240 DAYS</option>
+                      <option value="270">270 DAYS</option>
+                      <option value="300">300 DAYS</option>
+                      <option value="330">330 DAYS</option>
+                      <option value="360">360 DAYS</option>
                     </select>
                     {userClick && !coveragePlan && <Validation />}
                   </div>
@@ -437,12 +551,21 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <div className="input-group mb-3">
+                      {/* <ComboBox
+                        data={countrydata}
+                        option={selectedoption}
+                        selection="phNo"
+                      /> */}
                       <select
                         className="col-sm-3 border border-light-subtle"
                         onChange={(e) => setInsurePhCode(e.target.value)}
                       >
                         <option hidden>SELECT</option>
-                        <option value="+95">+95</option>
+                        {countrydata.map((item, index) => (
+                          <option value={item.countryCode}>
+                            ({item.countryCode}) {item.countryName}
+                          </option>
+                        ))}
                       </select>
                       <input
                         type="text"
@@ -486,6 +609,7 @@ export const PassportInformationForm = () => {
                       placeholder="..."
                       onChange={(e) => setInsureAddress(e.target.value)}
                     />
+                    {userClick && !insureAddress && <Validation />}
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
@@ -511,17 +635,11 @@ export const PassportInformationForm = () => {
                       Resident Country
                       <span className="text-danger">*</span>
                     </label>
-                    <select
-                      name="residentCountry"
-                      className="form-select"
-                      onChange={(e) => setInsureResCountry(e.target.value)}
-                      aria-label="Default select example"
-                    >
-                      <option defaultValue="">SELECT ONE</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
+                    <ComboBox
+                      data={countrydata}
+                      option={selectedoption}
+                      selection="insCountry"
+                    />
                     {userClick && !insureResCountry && <Validation />}
                   </div>
                 </div>
@@ -560,11 +678,11 @@ export const PassportInformationForm = () => {
                             <span className="text-danger">*</span>
                           </label>
 
-                          <input
-                            type="date"
-                            name="childBirth"
-                            className="form-control"
-                            onChange={(e) => setChildBirth(e.target.value)}
+                          <DatePicker
+                            selected={childBirth}
+                            className="form-control form-control--date"
+                            placeholderText="DD-MM-YYYY"
+                            onChange={(date) => setChildBirth(date)}
                           />
                           {userClick && !childBirth && <Validation />}
                         </div>
@@ -581,10 +699,9 @@ export const PassportInformationForm = () => {
                             className="form-select"
                             aria-label="Default select example"
                           >
-                            <option defaultValue="">SELECT ONE</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option hidden>SELECT ONE</option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
                           </select>
                           {userClick && !childGender && <Validation />}
                         </div>
@@ -662,12 +779,11 @@ export const PassportInformationForm = () => {
                       Date of Birth
                       <span className="text-danger">*</span>
                     </label>
-                    <input
-                      type="date"
-                      name="beneBirth"
-                      onChange={(e) => setBeneBirth(e.target.value)}
-                      className="form-control"
-                      id="passportissueddate"
+                    <DatePicker
+                      selected={beneBirth}
+                      className="form-control form-control--date"
+                      placeholderText="DD-MM-YYYY"
+                      onChange={(date) => setBeneBirth(date)}
                     />
                     {userClick && !beneBirth && <Validation />}
                   </div>
@@ -715,12 +831,21 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <div className="input-group mb-3">
+                      {/* <ComboBox
+                        data={countrydata}
+                        option={selectedoption}
+                        selection="phNo"
+                      /> */}
                       <select
                         className="col-sm-3 border border-light-subtle"
                         onChange={(e) => setBenePhCode(e.target.value)}
                       >
                         <option hidden>SELECT</option>
-                        <option value="+95">+95</option>
+                        {countrydata.map((item, index) => (
+                          <option value={item.countryCode}>
+                            ({item.countryCode}) {item.countryName}
+                          </option>
+                        ))}
                       </select>
                       <input
                         type="text"
@@ -772,7 +897,12 @@ export const PassportInformationForm = () => {
                       Resident Country
                       <span className="text-danger">*</span>
                     </label>
-                    <select
+                    <ComboBox
+                      data={countrydata}
+                      option={selectedoption}
+                      selection="resCountry"
+                    />
+                    {/* <select
                       name="beneResCountry"
                       onChange={(e) => setBeneResCountry(e.target.value)}
                       className="form-select"
@@ -782,7 +912,7 @@ export const PassportInformationForm = () => {
                       <option value="1">One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
-                    </select>
+                    </select> */}
                     {userClick && !beneResCountry && <Validation />}
                   </div>
                 </div>
@@ -895,6 +1025,9 @@ export const PassportInformationForm = () => {
                                     name="emptyValidation"
                                     className="form-control"
                                     id="recipient-name"
+                                    onChange={(e) =>
+                                      setAgentLicenseNo(e.target.value)
+                                    }
                                     placeholder="Enter Agent License No."
                                   />
                                 </div>
@@ -909,6 +1042,9 @@ export const PassportInformationForm = () => {
                                     name="emptyValidation"
                                     id="recipient-name"
                                     placeholder="00-0000"
+                                    onChange={(e) =>
+                                      setAgentPassword(e.target.value)
+                                    }
                                   />
                                 </div>
                               </div>
@@ -917,6 +1053,7 @@ export const PassportInformationForm = () => {
                               <div className="col-6 col-md-4 text-start">
                                 <button
                                   type="button"
+                                  onClick={ApiHandler}
                                   className="final-button btn pl-1 pr-1 mb-4"
                                 >
                                   Check Agent
@@ -941,9 +1078,10 @@ export const PassportInformationForm = () => {
                           </label>
                           <input
                             type="text"
-                            name="agentLicNum"
                             className="form-control col-6"
-                            placeholder="ENTER YOUR PASSPORT NO."
+                            readOnly
+                            placeholder="AGENT LICENSE NO."
+                            value={agentres.agentLicenseNo}
                           />
                         </div>
                       </div>
@@ -955,9 +1093,9 @@ export const PassportInformationForm = () => {
                           </label>
                           <input
                             type="text"
-                            name="agentName"
                             className="form-control col-6"
-                            placeholder="ENTER YOUR PASSPORT NO."
+                            readOnly
+                            value={agentres.agentName}
                           />
                         </div>
                       </div>
@@ -994,6 +1132,7 @@ export const PassportInformationForm = () => {
                   >
                     SUBMIT AND CONTINUE
                   </button>
+                  {showpayment && <Payment temp={temp} closing={closing} />}
                 </div>
               </div>
 

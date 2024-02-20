@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
 import logo from "../images/MI-logo2.png";
 import benefit from "../images/benefit.png";
 import qr from "../images/QR.png";
+import axios from "axios";
+import { error } from "jquery";
 // Create styles
 const styles = StyleSheet.create({
   page: {
@@ -126,7 +128,36 @@ const styles = StyleSheet.create({
   },
 });
 
-const PdfPage1 = () => {
+const PdfPage1 = ({ id }) => {
+  const [data, setData] = useState();
+  const [age, setAge] = useState();
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8080/api/v1/inboundProposal/findByCertificateId?id=${id}`
+      )
+      .then((res) => {
+        setData(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    if (data?.insuredPerson.insuredPersonDOB) {
+      const [day, month, year] = data?.insuredPerson.insuredPersonDOB
+        .split("-")
+        .map(Number);
+      const birthDateObj = new Date(year, month - 1, day);
+      const currentDate = new Date();
+      const ageDiffMs = currentDate - birthDateObj;
+      const ageDate = new Date(ageDiffMs);
+      const calculatedAge = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+      setAge(calculatedAge);
+    }
+  }, [data]);
+
   // Get current date
   const currentDate = new Date().toLocaleDateString("en-GB", {
     day: "2-digit",
@@ -160,11 +191,11 @@ const PdfPage1 = () => {
           <View style={styles.col_information}>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Insurance Period </Text>
-              <Text>: 15 Days</Text>
+              <Text>: {data?.coveragePlan} Days</Text>
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Certificate Number </Text>
-              <Text>: MI-HO/IT/PL/00000280/1-2023</Text>
+              <Text>: {data?.certificateID}</Text>
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Agent/Agency name </Text>
@@ -172,7 +203,7 @@ const PdfPage1 = () => {
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Policy Holder </Text>
-              <Text>: Tamrakar Tuladhar Bina</Text>
+              <Text>: {data?.insuredPerson.insuredPersonName}</Text>
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Covid-19 coverage </Text>
@@ -186,11 +217,14 @@ const PdfPage1 = () => {
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Journey from </Text>
-              <Text>: Thailand</Text>
+              <Text>: {data?.journeyFrom}</Text>
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>PP/Country </Text>
-              <Text>: PA0942031 Nepal</Text>
+              <Text>
+                :{data?.insuredPerson.passportNumber}{" "}
+                {data?.insuredPerson.passportIssuedCountry}
+              </Text>
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Payment Date </Text>
@@ -203,7 +237,9 @@ const PdfPage1 = () => {
           </View>
         </View>
         <Text style={styles.content}>
-          Buy for yourself (This passport holder)
+          {data?.child
+            ? "Buy for Child (This passport holder's child)"
+            : "Buy for yourself (This passport holder)"}
         </Text>
 
         {/* Insured Person Info Table */}
@@ -231,19 +267,22 @@ const PdfPage1 = () => {
 
           <View style={styles.insure_caption}>
             <View style={styles.insure_name_border_left}>
-              <Text>Tamrakar Tuladhar Bina</Text>
+              <Text>{data?.insuredPerson.insuredPersonName}</Text>
             </View>
             <View style={styles.insure_name_border}>
-              <Text>25 Apr 1958</Text>
+              <Text>{data?.insuredPerson.insuredPersonDOB}</Text>
             </View>
             <View style={styles.insure_name_border}>
-              <Text>65</Text>
+              <Text>{age}</Text>
             </View>
             <View style={styles.insure_name_border}>
-              <Text>15 Days</Text>
+              <Text>{data?.coveragePlan} Days</Text>
             </View>
             <View style={styles.insure_name_border}>
-              <Text>PA0942031 Nepal</Text>
+              <Text>
+                {data?.insuredPerson.passportNumber}{" "}
+                {data?.insuredPerson.passportIssuedCountry}
+              </Text>
             </View>
           </View>
         </View>

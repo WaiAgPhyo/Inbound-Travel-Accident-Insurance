@@ -1,0 +1,91 @@
+.overlay {
+  z-index: 200;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 0, 0, 0.7);
+}
+.payment_container {
+  background-color: #fff;
+  padding: 10px;
+  height: 90%;
+  width: 50%;
+  overflow-y: scroll;
+  border-radius: 5px;
+}
+.payment_container::-webkit-scrollbar {
+  display: none;
+}
+.payment_card {
+  background-color: #f3f3f3;
+  margin: 2px 0;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+.payment_bloc {
+  margin: 10px 0;
+}
+.payment_card p {
+  width: 50%;
+  font-size: 18px;
+  color: #000;
+}
+.payment_value {
+  font-weight: 700;
+}
+.method p {
+  font-size: 21px;
+  margin: 20px 0;
+}
+.method_bloc {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+
+  border: 1px solid black;
+}
+.method_card {
+  margin: 0 5px;
+  position: relative;
+  border: 1px solid black;
+}
+.payment_btn {
+  padding: 10px 30px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #074da1;
+  margin-top: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.payment_btn:hover {
+  background-color: #fff;
+  border: 1px solid #074da1;
+  color: #074da1;
+}
+.invisible {
+  display: none;
+}
+.check_icon {
+  position: absolute;
+  top: -10px;
+  right: -15px;
+  background-color: #fff;
+  font-size: 30px;
+}
+.payment_titles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.payment_back {
+  font-size: 30px;
+  margin-right: 10px;
+  color: #074da1;
+}

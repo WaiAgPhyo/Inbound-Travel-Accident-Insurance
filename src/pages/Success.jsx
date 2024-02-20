@@ -1,15 +1,35 @@
 import React, { useEffect, useState } from "react";
-import PdfOverlay from "./PdfOverlay";
+import PdfOverlay from "../pdf/PdfOverlay";
 import "./success.css";
 import { faCheck, faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLocation } from "react-router-dom";
 
 const Success = ({ back }) => {
+  const location = useLocation();
+  const [item, setItem] = useState();
   const [pdf, setPdf] = useState(null);
+  const [data, setData] = useState();
   const now = new Date();
   function back(value) {
     setPdf(value);
   }
+  useEffect(() => {
+    if (location) {
+      setItem(location.state);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    if (item) {
+      setData(item.returndata);
+    }
+  }, [item]);
+  function showpdf() {
+    setPdf((condition) => !condition);
+    document.body.style.overflow = pdf ? "" : "hidden";
+  }
+
   return (
     <div className="success_container">
       <div className="success_form">
@@ -27,25 +47,22 @@ const Success = ({ back }) => {
           </div>
           <div className="success_card">
             <p className="success_name">Premium Amount </p>
-            <p className="success_detail"> 21,400.00 MMK</p>
+            <p className="success_detail">{data?.premiumRate}</p>
           </div>
           <div className="success_card">
             <p className="success_name">Order Id </p>
-            <p className="success_detail">OUTMMK170721308465757U</p>
+            <p className="success_detail">{data?.certificateID}</p>
           </div>
           <div className="success_card">
             <p className="success_name">Payment Channel</p>
-            <p className="success_detail">asdfsafd</p>
+            <p className="success_detail">{item && item.payment}</p>
           </div>
         </div>
-        <button
-          onClick={() => setPdf((condition) => !condition)}
-          className="success_btn"
-        >
+        <button onClick={showpdf} className="success_btn">
           <FontAwesomeIcon icon={faDownload} className="download_btn" />
           Download Policy Certificate
         </button>
-        {pdf && <PdfOverlay back={back} />}
+        {pdf && <PdfOverlay back={back} id={data?.certificateID}/>}
       </div>
     </div>
   );

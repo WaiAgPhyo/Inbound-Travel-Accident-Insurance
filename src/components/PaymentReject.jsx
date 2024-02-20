@@ -1,7 +1,7 @@
 import React from "react";
 import { ImCross } from "react-icons/im";
 
-export const PaymentComplete = () => {
+export const PaymentReject = () => {
   return (
     <div>
       <div className="bg-body-secondary">

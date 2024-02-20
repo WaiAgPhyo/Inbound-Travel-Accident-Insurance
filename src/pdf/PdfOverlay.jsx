@@ -1,10 +1,10 @@
 import React from "react";
-import MyDocument from "../pages/MyDocument";
+import MyDocument from "./MyDocument";
 import { PDFViewer } from "@react-pdf/renderer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const PdfOverlay = ({ back }) => {
+const PdfOverlay = ({ back , id }) => {
   function backHandler() {
     back(false);
   }
@@ -26,7 +26,7 @@ const PdfOverlay = ({ back }) => {
     >
       <div style={{ width: "80%", height: "100%", display: "flex" }}>
         <PDFViewer width={"100%"} height={"100%"}>
-          <MyDocument />
+          <MyDocument id={id}/>
         </PDFViewer>
 
         <FontAwesomeIcon

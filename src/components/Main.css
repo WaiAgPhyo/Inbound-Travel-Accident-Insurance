@@ -184,3 +184,7 @@ textarea {
   width: 300px;
   height: 100px;
 }
+.form-control--date {
+  width: 370px;
+  background-color: #f3f3f3;
+}
