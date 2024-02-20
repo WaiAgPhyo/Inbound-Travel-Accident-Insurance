@@ -125,7 +125,6 @@
   display: flex;
   width: 65%;
   border-right: 1px solid rgb(0, 0, 0, 0.7);
-  padding: 0 20px;
   justify-content: space-between;
   align-items: center;
 }
