@@ -7,6 +7,9 @@ import org.ace.insurance.inbound_insurance.repository.AgentRepository;
 import org.ace.insurance.inbound_insurance.service.AgentService;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -30,7 +33,18 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public Agent findAgentByAgentLicenseNoAndAgentPassword(String agentLicenseNo, String agentPassword) {
-        return agentRepository.findAgentByAgentLicenseNoAndAgentPassword(agentLicenseNo, agentPassword);
+    public Optional<AgentDTO> checkAgentDetails(String agentLicenseNo,String agentPassword) {
+        Agent agent = agentRepository.findAgentByAgentLicenseNoAndAgentPassword(agentLicenseNo, agentPassword);
+
+        if (agent != null) {
+            AgentDTO response = new AgentDTO();
+            response.setId(agent.getId());
+            response.setAgentLicenseNo(agent.getAgentLicenseNo());
+            response.setAgentPassword(agent.getAgentPassword());
+            response.setAgentName(agent.getAgentName());
+            return Optional.of(response);
+        } else {
+            return Optional.empty();
+        }
     }
 }

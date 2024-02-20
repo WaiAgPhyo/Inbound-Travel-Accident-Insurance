@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Optional;
+
 import static org.ace.insurance.inbound_insurance.utility.HttpResponse.createResponse;
 
 @RestController
@@ -28,11 +30,10 @@ public class AgentController {
     }
 
     @GetMapping("/check")
-    public ResponseEntity<HttpResponse<Agent>> getAgentDetails(@RequestParam("agentLicenseNo") String agentLicenseNo,
-                                                               @RequestParam("agentPassword") String agentPassword) {
-        Agent agent = agentService.findAgentByAgentLicenseNoAndAgentPassword(agentLicenseNo, agentPassword);
+    public ResponseEntity<AgentDTO> getAgentDetails(@RequestParam String agentLicenseNo, @RequestParam String agentPassword) {
+        Optional<AgentDTO> agentDetails = agentService.checkAgentDetails(agentLicenseNo, agentPassword);
 
-            return createResponse(agent,HttpStatus.OK);
-
+        return agentDetails.map(agentDTO -> new ResponseEntity<>(agentDTO, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

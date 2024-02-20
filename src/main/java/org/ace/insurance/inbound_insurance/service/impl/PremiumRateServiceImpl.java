@@ -11,6 +11,7 @@ import org.ace.insurance.inbound_insurance.service.PremiumRateService;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -41,6 +42,18 @@ public class PremiumRateServiceImpl implements PremiumRateService {
     @Override
     public List<PremiumRate> findAll() {
         return premiumRateRepository.findAll();
+    }
+
+    @Override
+    public double getPremiumRate(LocalDate age, int days, boolean isChild) {
+        if (isChild == true){
+            int childAge = 18;
+            return premiumRateRepository.findPremiumRateByFromAgeAndToAgeAndPolicyDays(childAge,days);
+        }
+        int DOB = age.getYear();
+        int date = LocalDate.now().getYear();
+        int insuredPersonAge = date - DOB;
+        return premiumRateRepository.findPremiumRateByFromAgeAndToAgeAndPolicyDays(insuredPersonAge,days);
     }
 
 

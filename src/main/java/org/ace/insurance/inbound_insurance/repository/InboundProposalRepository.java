@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface InboundProposalRepository extends JpaRepository<InboundProposal, UUID> {
     InboundProposal findByInsuredPersonPassportNumberAndInsuredPersonPassportIssuedCountry(String passportNo, String issuedCountry);
+
+    InboundProposal findByCertificateID(String certificateId);
 }

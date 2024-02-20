@@ -126,4 +126,9 @@ public class InboundProposalServiceImpl implements InboundProposalService {
         LocalDate endDate = startDate.plusDays(inboundProposalDTO.getCoveragePlan());
         return endDate;
     }
+
+    @Override
+    public InboundProposal findByCertificateId(String certificateId) {
+        return inboundProposalRepo.findByCertificateID(certificateId);
+    }
 }

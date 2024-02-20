@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.ace.insurance.inbound_insurance.utility.HttpResponse.createResponse;
@@ -28,10 +30,18 @@ public class PremiumRateController {
         return createResponse(premiumRate, HttpStatus.CREATED);
     }
 
+//    @GetMapping
+//    public ResponseEntity<HttpResponse<List<PremiumRate>>> findAll() {
+//        List<PremiumRate> premiumRateList = premiumRateService.findAll();
+//        return createResponse(premiumRateList, HttpStatus.OK);
+//    }
+
     @GetMapping
-    public ResponseEntity<HttpResponse<List<PremiumRate>>> findAll() {
-        List<PremiumRate> premiumRateList = premiumRateService.findAll();
-        return createResponse(premiumRateList, HttpStatus.OK);
+    public ResponseEntity<HttpResponse<Double>> getPremiumRate(@RequestParam String age, @RequestParam int days,@RequestParam boolean child){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate ageLD = LocalDate.parse(age,formatter);
+        double rate = premiumRateService.getPremiumRate(ageLD,days,child);
+        return createResponse(rate,HttpStatus.OK);
     }
 
 }

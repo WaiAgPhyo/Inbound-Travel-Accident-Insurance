@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Repository
 public interface AgentRepository extends JpaRepository<Agent, UUID> {
-    @Query("SELECT a FROM Agent a WHERE a.agentLicenseNo = :inPutAgentLicenseNo AND a.agentPassword = :inPutAgentPassword ")
-    Agent findAgentByAgentLicenseNoAndAgentPassword(@Param("inPutAgentLicenseNo") String inPutAgentLicenseNo, @Param("inPutAgentPassword") String inPutAgentPassword);
+
+    Agent findAgentByAgentLicenseNoAndAgentPassword(String agentLicenseNo, String agentPassword);
 
 }
