@@ -3,14 +3,18 @@ package org.ace.insurance.inbound_insurance.service.impl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.ace.insurance.inbound_insurance.dto.InboundProposalDTO;
+import org.ace.insurance.inbound_insurance.dto.InboundProposalReturnDTO;
 import org.ace.insurance.inbound_insurance.entity.*;
 import org.ace.insurance.inbound_insurance.repository.*;
 import org.ace.insurance.inbound_insurance.service.InboundProposalService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -29,6 +33,7 @@ public class InboundProposalServiceImpl implements InboundProposalService {
     @Transactional
     public InboundProposal create(InboundProposalDTO inboundProposalDTO){
         try {
+
             Beneficiary beneficiary = Beneficiary.builder()
                     .beneficiaryName(inboundProposalDTO.getBeneficiaryName())
                     .beneficiaryDOB(inboundProposalDTO.getBeneficiaryDOB())
@@ -79,23 +84,30 @@ public class InboundProposalServiceImpl implements InboundProposalService {
                         .premiumRate(premiumRateRepo.findPremiumRateByFromAgeAndToAgeAndPolicyDays(calculateAge(inboundProposalDTO),inboundProposalDTO.getCoveragePlan()))
                         .insuredPerson(insuredPerson)
                         .agent(agent)
+                        .childName(inboundProposalDTO.getChildName())
+                        .childDOB(inboundProposalDTO.getChildDOB())
                         .build();
                 inboundProposalRepo.save(inboundProposal);
+                //Child Info Carry..
+
                 return inboundProposal;
             }
-                InboundProposal inboundProposal = InboundProposal.builder()
-                        .journeyFrom(inboundProposalDTO.getJourneyFrom())
-                        .journeyTo(inboundProposalDTO.getJourneyTo())
-                        .estimateArrivalDate(inboundProposalDTO.getEstimateArrivalDate())
-                        .policyStartDate(inboundProposalDTO.getEstimateArrivalDate())
-                        .policyEndDate(endDate(inboundProposalDTO))
-                        .submittedDate(LocalDate.now())
-                        .coveragePlan(inboundProposalDTO.getCoveragePlan())
-                        .premiumRate(premiumRateRepo.findPremiumRateByFromAgeAndToAgeAndPolicyDays(calculateAge(inboundProposalDTO), inboundProposalDTO.getCoveragePlan()))
-                        .insuredPerson(insuredPerson)
-                        .build();
-                inboundProposalRepo.save(inboundProposal);
-                return inboundProposal;
+            InboundProposal inboundProposal = InboundProposal.builder()
+                    .journeyFrom(inboundProposalDTO.getJourneyFrom())
+                    .journeyTo(inboundProposalDTO.getJourneyTo())
+                    .estimateArrivalDate(inboundProposalDTO.getEstimateArrivalDate())
+                    .policyStartDate(inboundProposalDTO.getEstimateArrivalDate())
+                    .policyEndDate(endDate(inboundProposalDTO))
+                    .submittedDate(LocalDate.now())
+                    .coveragePlan(inboundProposalDTO.getCoveragePlan())
+                    .premiumRate(premiumRateRepo.findPremiumRateByFromAgeAndToAgeAndPolicyDays(calculateAge(inboundProposalDTO), inboundProposalDTO.getCoveragePlan()))
+                    .insuredPerson(insuredPerson)
+                    .childName(inboundProposalDTO.getChildName())
+                    .childDOB(inboundProposalDTO.getChildDOB())
+                    .build();
+            inboundProposalRepo.save(inboundProposal);
+
+            return inboundProposal;
         }catch (OptimisticLockingFailureException e){
             throw new RuntimeException("optimistic locking conflict");
         }
@@ -103,9 +115,14 @@ public class InboundProposalServiceImpl implements InboundProposalService {
     }
 
     @Override
-    public InboundProposal searchEnquiry(String passportNo, String issuedCountry) {
-        InboundProposal inboundProposal = inboundProposalRepo.findByInsuredPersonPassportNumberAndInsuredPersonPassportIssuedCountry(passportNo,issuedCountry);
+    public List<InboundProposal> searchEnquiry(String passportNo, String issuedCountry) {
+        List<InboundProposal> inboundProposal = inboundProposalRepo.findByInsuredPersonPassportNumberAndInsuredPersonPassportIssuedCountry(passportNo,issuedCountry);
         return inboundProposal;
+    }
+
+    @Override
+    public InboundProposal findByCertificateId(String certificateId) {
+        return inboundProposalRepo.findByCertificateID(certificateId);
     }
 
     private int calculateAge(InboundProposalDTO inboundProposalDTO){
@@ -125,10 +142,5 @@ public class InboundProposalServiceImpl implements InboundProposalService {
         LocalDate startDate = inboundProposalDTO.getEstimateArrivalDate();
         LocalDate endDate = startDate.plusDays(inboundProposalDTO.getCoveragePlan());
         return endDate;
-    }
-
-    @Override
-    public InboundProposal findByCertificateId(String certificateId) {
-        return inboundProposalRepo.findByCertificateID(certificateId);
     }
 }

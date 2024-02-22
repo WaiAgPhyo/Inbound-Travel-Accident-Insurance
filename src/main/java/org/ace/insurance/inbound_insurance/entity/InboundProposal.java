@@ -44,12 +44,16 @@ public class InboundProposal {
     private InsuredPerson insuredPerson;
     @ManyToOne
     private Agent agent;
+    private String childName;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate childDOB;
     private UUID createdUserId;
     private LocalDateTime createdDate;
     private UUID updatedUserId;
     private LocalDateTime updatedDate;
     @Version
     private Long version;
+
 
     @PrePersist
     protected void onCreate(){
