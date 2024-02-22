@@ -7,7 +7,6 @@ import { Validation } from "../components/validation";
 import ComboBox from "../components/ComboBox";
 import Payment from "./Payment";
 import axios from "axios";
-import { error } from "jquery";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -16,7 +15,7 @@ export const PassportInformationForm = () => {
   const [option, setOption] = useState();
   const [agentRadio, setAgentRadio] = useState();
   const [countrydata, setCountryData] = useState([]);
-
+  const [showModal, setShowModal] = useState(false);
   // for date
   const [passportDate, setPassportDate] = useState();
   const [insureBirth, setInsureBirth] = useState();
@@ -87,6 +86,10 @@ export const PassportInformationForm = () => {
       setBeneResCountry(V.value);
     } else if (V.id == "insCountry") {
       setInsureResCountry(V.value);
+    } else if (V.id == "insurePhNo") {
+      setInsurePhCode(V.value);
+    } else if (V.id == "beneficiaryPhNo") {
+      setBenePhCode(V.value);
     }
   }
 
@@ -117,7 +120,7 @@ export const PassportInformationForm = () => {
       )
       .then((res) => {
         setRate(res.data.data);
-       
+
         if (
           rate &&
           passportNum &&
@@ -153,7 +156,7 @@ export const PassportInformationForm = () => {
           setShowPayment(true);
           setTemp({
             premiumrate: rate,
-            passportIssueDate: formatDate(passportDate),
+            passportIssuedDate: formatDate(passportDate),
             passportNumber: passportNum,
             passportIssuedCountry: passportCountry,
             insuredPersonName: insureName,
@@ -177,6 +180,7 @@ export const PassportInformationForm = () => {
             beneficiaryResidentAddress: beneResAdd,
             beneficiaryResidentCountry: beneResCountry,
             child: false,
+            agentID: agentres.id ? agentres.id : "",
           });
         } else if (
           rate &&
@@ -212,11 +216,11 @@ export const PassportInformationForm = () => {
         ) {
           setTemp({
             premiumrate: rate,
-            passportIssueDate: formatDate(passportDate),
+            passportIssuedDate: formatDate(passportDate),
             passportNumber: passportNum,
             passportIssuedCountry: passportCountry,
             insuredPersonName: insureName,
-            insuredGender: insureGender,
+            insuredPersonGender: insureGender,
             insuredPersonDOB: formatDate(insureBirth),
             journeyFrom: journeyFrom,
             journeyTo: "Myanmar",
@@ -230,7 +234,7 @@ export const PassportInformationForm = () => {
             childDOB: formatDate(childBirth),
             childName: childName,
             childGender: childGender,
-            guardianceName: guardianceName,
+            guardianName: guardianceName,
             childRelationship: childRelationship,
             beneficiaryName: beneName,
             beneficiaryDOB: formatDate(beneBirth),
@@ -241,6 +245,7 @@ export const PassportInformationForm = () => {
             beneficiaryResidentAddress: beneResAdd,
             beneficiaryResidentCountry: beneResCountry,
             child: true,
+            agentID: agentres.id ? agentres.id : "",
           });
           setShowPayment(true);
         }
@@ -260,6 +265,7 @@ export const PassportInformationForm = () => {
 
   //  Api Agent
   function ApiHandler() {
+    setShowModal(false);
     const data = new FormData();
     data.append("agentLicenseNo", agentLicenseNo);
     data.append("agentPassword", agentPassword);
@@ -271,6 +277,10 @@ export const PassportInformationForm = () => {
       .then((res) => setAgentRes(res.data))
       .catch((error) => console.error("This is Error" + error));
   }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const formatDate = (date) => {
     if (!date) return ""; // Return empty string if date is null
@@ -427,7 +437,7 @@ export const PassportInformationForm = () => {
                       selected={insureBirth}
                       className="form-control form-control--date"
                       placeholderText="DD-MM-YYYY"
-                      onChange={(date) =>   setInsureBirth(date)}
+                      onChange={(date) => setInsureBirth(date)}
                     />
                     {userClick && !insureBirth && <Validation />}
                   </div>
@@ -551,27 +561,19 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <div className="input-group mb-3">
-                      {/* <ComboBox
-                        data={countrydata}
-                        option={selectedoption}
-                        selection="phNo"
-                      /> */}
-                      <select
-                        className="col-sm-3 border border-light-subtle"
-                        onChange={(e) => setInsurePhCode(e.target.value)}
-                      >
-                        <option hidden>SELECT</option>
-                        {countrydata.map((item, index) => (
-                          <option value={item.countryCode}>
-                            ({item.countryCode}) {item.countryName}
-                          </option>
-                        ))}
-                      </select>
+                      <div style={{ width: "30%" }}>
+                        <ComboBox
+                          data={countrydata}
+                          option={selectedoption}
+                          selection="insurePhNo"
+                        />
+                      </div>
+
                       <input
                         type="text"
                         name="insurePh"
                         onChange={(e) => setInsurePh(e.target.value)}
-                        className="form-control"
+                        className="form-control form-control-phone"
                         aria-label="Text input with segmented dropdown button"
                       />
                     </div>
@@ -700,8 +702,8 @@ export const PassportInformationForm = () => {
                             aria-label="Default select example"
                           >
                             <option hidden>SELECT ONE</option>
-                            <option value="MALE">Male</option>
-                            <option value="FEMALE">Female</option>
+                            <option value="MALE">MALE</option>
+                            <option value="FEMALE">FEMALE</option>
                           </select>
                           {userClick && !childGender && <Validation />}
                         </div>
@@ -831,27 +833,19 @@ export const PassportInformationForm = () => {
                       <span className="text-danger">*</span>
                     </label>
                     <div className="input-group mb-3">
-                      {/* <ComboBox
-                        data={countrydata}
-                        option={selectedoption}
-                        selection="phNo"
-                      /> */}
-                      <select
-                        className="col-sm-3 border border-light-subtle"
-                        onChange={(e) => setBenePhCode(e.target.value)}
-                      >
-                        <option hidden>SELECT</option>
-                        {countrydata.map((item, index) => (
-                          <option value={item.countryCode}>
-                            ({item.countryCode}) {item.countryName}
-                          </option>
-                        ))}
-                      </select>
+                      <div style={{ width: "30%" }}>
+                        <ComboBox
+                          data={countrydata}
+                          option={selectedoption}
+                          selection="beneficiaryPhNo"
+                        />
+                      </div>
+
                       <input
                         type="text"
-                        name="benePh"
+                        name="insurePh"
                         onChange={(e) => setBenePhone(e.target.value)}
-                        className="form-control"
+                        className="form-control form-control-phone"
                         aria-label="Text input with segmented dropdown button"
                       />
                     </div>
@@ -977,7 +971,10 @@ export const PassportInformationForm = () => {
                             agentRadio == "agentservice" &&
                             "service_box--selected"
                           }`}
-                          onClick={() => setAgentRadio("agentservice")}
+                          onClick={() => {
+                            setAgentRadio("agentservice");
+                            setShowModal(true);
+                          }}
                         >
                           <label htmlFor="agentservice" className="text_color ">
                             <div className="agent_image ">
@@ -988,81 +985,82 @@ export const PassportInformationForm = () => {
                         </div>
                       </div>
                       {/* modal */}
-                      <div
-                        className="modal fade"
-                        id="staticBackdrop"
-                        data-bs-backdrop="static"
-                        data-bs-keyboard="false"
-                        tabIndex={"-1"}
-                        aria-labelledby="staticBackdropLabel"
-                        aria-hidden="true"
-                      >
-                        <div className="modal-dialog modal-dialog-centered">
-                          <div className="modal-content">
-                            <div className="modal-header">
-                              <h1
-                                className="modal-title fs-5 text_color"
-                                id="staticBackdropLabel"
-                              >
-                                Check Agent Information
-                              </h1>
-                              <button
-                                type="button"
-                                className="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                              ></button>
-                            </div>
-                            <div className="modal-body">
-                              <div>
-                                <div className="mb-3 text-start">
-                                  <label className="col-form-label text_color">
-                                    Agent License Number
-                                    <span className="text-danger">*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    name="emptyValidation"
-                                    className="form-control"
-                                    id="recipient-name"
-                                    onChange={(e) =>
-                                      setAgentLicenseNo(e.target.value)
-                                    }
-                                    placeholder="Enter Agent License No."
-                                  />
-                                </div>
-                                <div className="mb-3 text-start">
-                                  <label className="col-form-label text_color">
-                                    Password
-                                    <span className="text-danger">*</span>
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control"
-                                    name="emptyValidation"
-                                    id="recipient-name"
-                                    placeholder="00-0000"
-                                    onChange={(e) =>
-                                      setAgentPassword(e.target.value)
-                                    }
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                            <div className="row ms-1">
-                              <div className="col-6 col-md-4 text-start">
+                      {showModal && (
+                        <div
+                          className="modal fade show"
+                          tabIndex="-1"
+                          style={{
+                            display: "block",
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                          }}
+                        >
+                          <div className="modal-dialog modal-dialog-centered">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h1
+                                  className="modal-title fs-5 text_color"
+                                  id="staticBackdropLabel"
+                                >
+                                  Check Agent Information
+                                </h1>
                                 <button
                                   type="button"
-                                  onClick={ApiHandler}
-                                  className="final-button btn pl-1 pr-1 mb-4"
-                                >
-                                  Check Agent
-                                </button>
+                                  className="btn-close"
+                                  onClick={handleCloseModal}
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div className="modal-body">
+                                <div>
+                                  <div className="mb-3 text-start">
+                                    <label className="col-form-label text_color">
+                                      Agent License Number
+                                      <span className="text-danger">*</span>
+                                    </label>
+                                    <input
+                                      type="text"
+                                      name="emptyValidation"
+                                      className="form-control"
+                                      id="recipient-name"
+                                      onChange={(e) =>
+                                        setAgentLicenseNo(e.target.value)
+                                      }
+                                      placeholder="Enter Agent License No."
+                                    />
+                                  </div>
+                                  <div className="mb-3 text-start">
+                                    <label className="col-form-label text_color">
+                                      Password
+                                      <span className="text-danger">*</span>
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      name="emptyValidation"
+                                      id="recipient-name"
+                                      placeholder="00-0000"
+                                      onChange={(e) =>
+                                        setAgentPassword(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="row ms-1">
+                                <div className="col-6 col-md-4 text-start">
+                                  <button
+                                    type="button"
+                                    onClick={ApiHandler}
+                                    className="final-button btn pl-1 pr-1 mb-4"
+                                  >
+                                    Check Agent
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      )}
                       {/* modal/ */}
                     </div>
                   </div>

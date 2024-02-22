@@ -1,11 +1,13 @@
-.enquiry {
-  background-color: #e9ecef;
-  padding: 20px 0 10px;
+.enquiry-container {
+  background-color: #f3f3f3;
 }
 .enquiry-header {
   align-items: center;
   width: 90%;
   margin: 0 auto;
+  padding-top: 25px;
+  padding-bottom: 20px;
+  background-color: #f3f3f3;
 }
 .enquiry-header h3 {
   color: #074da1;
@@ -18,7 +20,8 @@
 .enquiry-body {
   background-color: #ffffff;
   padding: 40px;
-  margin-bottom: 80px;
+  border: 1px solid black;
+  border-radius: 15px;
 }
 
 .enquiry-body-inner {
@@ -45,7 +48,7 @@
   border-style: solid;
   border-color: #cbd5e0;
   border-radius: 0.375rem;
-  padding: 10px 5px;
+  padding: 6px;
 }
 .category-select {
   padding: 11px 5px;
@@ -64,4 +67,41 @@
   background-color: #ffffff;
   border-color: #074da1;
   transition-duration: 0.5s;
+}
+.pdf_table {
+  display: flex;
+  margin: 20px 0;
+}
+.pdf_contents {
+  width: 80%;
+  border: 1px solid black;
+  border-right: 0;
+}
+.pdf_downloadbtn {
+  width: 20%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pdf_downloadbtn button {
+  padding: 10px 20px;
+}
+.pdf_row {
+  display: flex;
+}
+.pdf_row p {
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+.pdf_row p:last-child {
+  border-right: 0;
+}
+.pdf_row--bottom p {
+  border-bottom: 0;
 }

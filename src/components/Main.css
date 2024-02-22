@@ -188,3 +188,6 @@ textarea {
   width: 343px;
   background-color: #f3f3f3;
 }
+.form-control-phone {
+  width: 70%;
+}

@@ -145,9 +145,9 @@ const PdfPage1 = ({ id }) => {
 
   useEffect(() => {
     if (data?.insuredPerson.insuredPersonDOB) {
-      const [day, month, year] = data?.insuredPerson.insuredPersonDOB
-        .split("-")
-        .map(Number);
+      const [day, month, year] = !data?.insuredPerson.child
+      ? data?.insuredPerson.insuredPersonDOB.split("-").map(Number)
+      : data?.childDOB.split("-").map(Number);
       const birthDateObj = new Date(year, month - 1, day);
       const currentDate = new Date();
       const ageDiffMs = currentDate - birthDateObj;
@@ -267,10 +267,18 @@ const PdfPage1 = ({ id }) => {
 
           <View style={styles.insure_caption}>
             <View style={styles.insure_name_border_left}>
-              <Text>{data?.insuredPerson.insuredPersonName}</Text>
+              <Text>
+                {!data?.insuredPerson.child
+                  ? data?.insuredPerson.insuredPersonName
+                  : data?.childName}
+              </Text>
             </View>
             <View style={styles.insure_name_border}>
-              <Text>{data?.insuredPerson.insuredPersonDOB}</Text>
+              <Text>
+                {!data?.insuredPerson.child
+                  ? data?.insuredPerson.insuredPersonDOB
+                  : data?.childDOB}
+              </Text>
             </View>
             <View style={styles.insure_name_border}>
               <Text>{age}</Text>

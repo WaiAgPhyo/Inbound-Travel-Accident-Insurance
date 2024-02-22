@@ -47,7 +47,7 @@ const Success = ({ back }) => {
           </div>
           <div className="success_card">
             <p className="success_name">Premium Amount </p>
-            <p className="success_detail">{data?.premiumRate}</p>
+            <p className="success_detail">{data?.premiumRate} USD</p>
           </div>
           <div className="success_card">
             <p className="success_name">Order Id </p>

@@ -10,7 +10,7 @@ export const ConfirmForm = () => {
   const navigate = useNavigate();
   const [res, setRes] = useState();
   const [items, setItem] = useState({});
-  const [returndata , setReturnData]= useState({})
+  const [returndata, setReturnData] = useState({});
 
   useEffect(() => {
     if (location?.state) {
@@ -22,16 +22,15 @@ export const ConfirmForm = () => {
     axios
       .post("http://localhost:8080/api/v1/inboundProposal", items)
       .then((res) => {
-
         setRes(res.status);
-        setReturnData(res.data.data)
+        setReturnData(res.data.data);
       })
       .catch((err) => console.error(err));
   }
 
   useEffect(() => {
     if (res === 201) {
-      navigate("/success", { state: {returndata,payment: items.payment }});
+      navigate("/success", { state: { returndata, payment: items.payment } });
     }
   }, [res]);
 
@@ -55,23 +54,23 @@ export const ConfirmForm = () => {
                 </div>
                 <div className="row payment p-2 mb-1">
                   <div className="col fw-semibold">Premium Amount</div>
-                  <div className="col-sm-7">{items.premiumrate}$</div>
+                  <div className="col-sm-7">{items.premiumrate} USD</div>
                 </div>
                 <div className="row payment p-2 mb-1">
                   <div className="col fw-semibold">Service Charge ( Visa )</div>
-                  <div className="col-sm-7">15.2$</div>
+                  <div className="col-sm-7">15.2 USD</div>
                 </div>
                 <div className="row payment p-2 mb-1">
                   <div className="col fw-semibold">
                     Total Amount (Including Service Charges)
                   </div>
-                  <div className="col-sm-7">{items.premiumrate + 15.2}$</div>
+                  <div className="col-sm-7">{items.premiumrate + 15.2} USD</div>
                 </div>
                 <div className="row payment p-2 mb-1">
                   <div className="col fw-semibold">
                     Net Amount (Including Service Charges)
                   </div>
-                  <div className="col-sm-7">{items.premiumrate + 15.2}$</div>
+                  <div className="col-sm-7">{items.premiumrate + 15.2} USD</div>
                 </div>
                 {/* payment information */}
 
@@ -87,7 +86,7 @@ export const ConfirmForm = () => {
                   </div>
                   <div className="row p-2 border-bottom">
                     <div className="col fw-semibold">Passport Issued Date</div>
-                    <div className="col-sm-7">{items.passportIssueDate}</div>
+                    <div className="col-sm-7">{items.passportIssuedDate}</div>
                   </div>
                   <div className="row p-2 border-bottom">
                     <div className="col fw-semibold">
