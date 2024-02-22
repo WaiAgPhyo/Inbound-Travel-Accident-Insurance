@@ -37,14 +37,15 @@
 }
 .success_card {
   display: flex;
-  margin: 10px 0;
+  margin: 10px auto;
+  width: 60%;
 }
 .success_card p {
   font-size: 18px;
   font-weight: bold;
 }
 .success_name {
-  width: 40%;
+  min-width: 70%;
 }
 .success_btn {
   align-self: center;

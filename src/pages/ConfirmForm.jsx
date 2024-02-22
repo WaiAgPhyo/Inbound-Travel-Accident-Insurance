@@ -57,7 +57,7 @@ export const ConfirmForm = () => {
                   <div className="col-sm-7">{items.premiumrate} USD</div>
                 </div>
                 <div className="row payment p-2 mb-1">
-                  <div className="col fw-semibold">Service Charge ( Visa )</div>
+                  <div className="col fw-semibold">Service Charge</div>
                   <div className="col-sm-7">15.2 USD</div>
                 </div>
                 <div className="row payment p-2 mb-1">

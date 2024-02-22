@@ -134,7 +134,7 @@ const PdfPage1 = ({ id }) => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/api/v1/inboundProposal/findByCertificateId?id=${id}`
+        `http://localhost:8080/api/v1/inboundProposal/findByCertificateNo?id=${id}`
       )
       .then((res) => {
         setData(res.data.data);
@@ -146,8 +146,8 @@ const PdfPage1 = ({ id }) => {
   useEffect(() => {
     if (data?.insuredPerson.insuredPersonDOB) {
       const [day, month, year] = !data?.insuredPerson.child
-      ? data?.insuredPerson.insuredPersonDOB.split("-").map(Number)
-      : data?.childDOB.split("-").map(Number);
+        ? data?.insuredPerson.insuredPersonDOB.split("-").map(Number)
+        : data?.childDOB.split("-").map(Number);
       const birthDateObj = new Date(year, month - 1, day);
       const currentDate = new Date();
       const ageDiffMs = currentDate - birthDateObj;
@@ -195,7 +195,7 @@ const PdfPage1 = ({ id }) => {
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Certificate Number </Text>
-              <Text>: {data?.certificateID}</Text>
+              <Text>: {data?.certificateNo}</Text>
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Agent/Agency name </Text>
@@ -228,11 +228,11 @@ const PdfPage1 = ({ id }) => {
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Payment Date </Text>
-              <Text>: 25 Jan 2023</Text>
+              <Text>: {currentDate}</Text>
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Payment Ref No </Text>
-              <Text>: null</Text>
+              <Text>: P-005</Text>
             </View>
           </View>
         </View>

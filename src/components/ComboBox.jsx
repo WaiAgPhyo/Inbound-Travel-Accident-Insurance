@@ -7,7 +7,6 @@ const ComboBox = ({ data, option, selection }) => {
   const [options, setOptions] = useState([]);
 
   const handleChange = (e) => {
-    console.log(e.value);
     setSelectedOption(e.value);
     option({ value: e.value, id: e.id });
   };
@@ -77,11 +76,10 @@ const ComboBox = ({ data, option, selection }) => {
   }, [data]);
   return (
     <Select
-      value={{ label: selectedOption }}
+      value={{ label: selectedOption ? selectedOption : "Search...." }}
       onChange={handleChange}
       options={options}
       isSearchable
-      placeholder="Search..."
       filterOption={customFilter}
       styles={comboSearch}
     />

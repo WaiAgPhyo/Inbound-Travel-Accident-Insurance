@@ -66,7 +66,10 @@ export const PassportInformationForm = () => {
   const [agentres, setAgentRes] = useState({
     agentLicenseNo: "",
     agentName: "",
+    agentPassword: "",
   });
+  const [editagent, setEditAgent] = useState({});
+  const [error, setError] = useState(null);
 
   //fetching country
   useEffect(() => {
@@ -259,13 +262,33 @@ export const PassportInformationForm = () => {
       setIsChild(true);
     }
   }
+
+  useEffect(() => {
+    if (option == "self") {
+      setChildName(null);
+      setChildBirth(null);
+      setChildGender(null);
+      setGuardianceName(null);
+      setChildRelationShip(null);
+    }
+  }, [option]);
+
   function editHandler(e) {
     e.preventDefault();
+
+    setShowModal(true);
+
+    setEditAgent({
+      userclick: userClick,
+      license: agentres.agentLicenseNo,
+      password: agentres.agentPassword,
+      name: agentres.agentName,
+    });
+    setAgentLicenseNo(agentres.agentLicenseNo);
   }
 
   //  Api Agent
   function ApiHandler() {
-    setShowModal(false);
     const data = new FormData();
     data.append("agentLicenseNo", agentLicenseNo);
     data.append("agentPassword", agentPassword);
@@ -274,8 +297,15 @@ export const PassportInformationForm = () => {
       .get(
         `http://localhost:8080/api/v1/agent/check?agentLicenseNo=${agentLicenseNo}&agentPassword=${agentPassword}`
       )
-      .then((res) => setAgentRes(res.data))
-      .catch((error) => console.error("This is Error" + error));
+      .then((res) => {
+        setAgentRes(res.data);
+        setShowModal(false);
+        setError(false);
+      })
+      .catch((error) => {
+        console.error("This is Error" + error);
+        setError(true);
+      });
   }
 
   const handleCloseModal = () => {
@@ -323,7 +353,7 @@ export const PassportInformationForm = () => {
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
-                  <div className="mb-3 text-start date_picker">
+                  <div className="mb-3 text-start"   style={{width:"100%"}}>
                     <label className="text_color form-label">
                       Passport Issued Date.
                       <span className="text-danger">*</span>
@@ -1022,6 +1052,7 @@ export const PassportInformationForm = () => {
                                       name="emptyValidation"
                                       className="form-control"
                                       id="recipient-name"
+                                      value={agentLicenseNo}
                                       onChange={(e) =>
                                         setAgentLicenseNo(e.target.value)
                                       }
@@ -1043,6 +1074,11 @@ export const PassportInformationForm = () => {
                                         setAgentPassword(e.target.value)
                                       }
                                     />
+                                    {error && (
+                                      <div style={{ color: "red" }}>
+                                        Wrong Password
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
