@@ -353,7 +353,7 @@ export const PassportInformationForm = () => {
                   </div>
                 </div>
                 <div className="col-6 col-md-4">
-                  <div className="mb-3 text-start"   style={{width:"100%"}}>
+                  <div className="mb-3 text-start" style={{ width: "100%" }}>
                     <label className="text_color form-label">
                       Passport Issued Date.
                       <span className="text-danger">*</span>
@@ -411,7 +411,7 @@ export const PassportInformationForm = () => {
                       id="self"
                       value="self"
                       onChange={(e) => selectingchild(e)}
-                      className="radio form-check-input"
+                      className="radio-btn"
                     />
                     BUY FOR YOURSELF (THIS PASSPORT HOLDER)
                   </label>
@@ -427,7 +427,7 @@ export const PassportInformationForm = () => {
                       value="child"
                       id="child"
                       onChange={(e) => selectingchild(e)}
-                      className="radio form-check-input"
+                      className="radio-btn"
                     />
                     BUY FOR THE CHILD TRAVEL TOGETHER WITH THIS PASSPORT HOLDER
                     (CHILD IS NOT HOLDING A VALID PASSPORT)
@@ -958,7 +958,7 @@ export const PassportInformationForm = () => {
                     <div className="agent_container ">
                       <div className="agent_radio_box">
                         <input
-                          className="form-check-input"
+                          className="radio-btn"
                           type="radio"
                           name="services"
                           id="selfservice"
@@ -989,7 +989,7 @@ export const PassportInformationForm = () => {
                         data-bs-target="#staticBackdrop"
                       >
                         <input
-                          className="form-check-input"
+                          className="radio-btn"
                           type="radio"
                           name="services"
                           id="agentservice"
