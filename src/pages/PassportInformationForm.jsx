@@ -451,7 +451,7 @@ export const PassportInformationForm = () => {
                       name="insureName"
                       className="form-control"
                       id="insureName"
-                      placeholder="ENTER INSURED NAME"
+                      placeholder="Enter Insured Name"
                       onChange={(e) => setInsureName(e.target.value)}
                     />
                     {userClick && !insureName && <Validation />}
@@ -484,9 +484,9 @@ export const PassportInformationForm = () => {
                       className="form-select"
                       aria-label="Default select example"
                     >
-                      <option defaultValue="">SELECT ONE</option>
-                      <option value="MALE">MALE</option>
-                      <option value="FEMALE">FEMALE</option>
+                      <option hidden>Select One</option>
+                      <option value="MALE">Male</option>
+                      <option value="FEMALE">Female</option>
                     </select>
                     {userClick && !insureGender && <Validation />}
                   </div>
@@ -566,20 +566,20 @@ export const PassportInformationForm = () => {
                       className="form-select"
                       aria-label="Default select example"
                     >
-                      <option defaultValue="">SELECT ONE</option>
-                      <option value="15">15 DAYS</option>
-                      <option value="30">30 DAYS</option>
-                      <option value="60">60 DAYS</option>
-                      <option value="90">90 DAYS</option>
-                      <option value="120">120 DAYS</option>
-                      <option value="150">150 DAYS</option>
-                      <option value="180">180 DAYS</option>
-                      <option value="210">210 DAYS</option>
-                      <option value="240">240 DAYS</option>
-                      <option value="270">270 DAYS</option>
-                      <option value="300">300 DAYS</option>
-                      <option value="330">330 DAYS</option>
-                      <option value="360">360 DAYS</option>
+                      <option defaultValue="">Select One</option>
+                      <option value="15">15 Days</option>
+                      <option value="30">30 Days</option>
+                      <option value="60">60 Days</option>
+                      <option value="90">90 Days</option>
+                      <option value="120">120 Days</option>
+                      <option value="150">150 Days</option>
+                      <option value="180">180 Days</option>
+                      <option value="210">210 Days</option>
+                      <option value="240">240 Days</option>
+                      <option value="270">270 Days</option>
+                      <option value="300">300 Days</option>
+                      <option value="330">330 Days</option>
+                      <option value="360">360 Days</option>
                     </select>
                     {userClick && !coveragePlan && <Validation />}
                   </div>
@@ -697,7 +697,7 @@ export const PassportInformationForm = () => {
                             name="childName"
                             type="text"
                             className="form-control col-6"
-                            placeholder="ENTER CHILD NAME"
+                            placeholder="Enter Child Name"
                             onChange={(e) => setChildName(e.target.value)}
                           />
                           {userClick && !childName && <Validation />}
@@ -731,9 +731,9 @@ export const PassportInformationForm = () => {
                             className="form-select"
                             aria-label="Default select example"
                           >
-                            <option hidden>SELECT ONE</option>
-                            <option value="MALE">MALE</option>
-                            <option value="FEMALE">FEMALE</option>
+                            <option hidden>Select One</option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
                           </select>
                           {userClick && !childGender && <Validation />}
                         </div>
@@ -751,7 +751,7 @@ export const PassportInformationForm = () => {
                             onChange={(e) => setGuardianceName(e.target.value)}
                             type="text"
                             className="form-control col-6"
-                            placeholder="ENTER GUARDIANCE NAME"
+                            placeholder="Enter Guardiance Name"
                           />
                           {userClick && !guardianceName && <Validation />}
                         </div>
@@ -769,7 +769,7 @@ export const PassportInformationForm = () => {
                               setChildRelationShip(e.target.value)
                             }
                             className="form-control col-6"
-                            placeholder="ENTER RELATIONSHIP"
+                            placeholder="Enter Relationship"
                           />
                           {userClick && !childRelationship && <Validation />}
                         </div>
@@ -800,7 +800,7 @@ export const PassportInformationForm = () => {
                       onChange={(e) => setBeneName(e.target.value)}
                       className="form-control"
                       id="passportno"
-                      placeholder="ENTER NAME"
+                      placeholder="Enter Beneficiary Name"
                     />
                     {userClick && !beneName && <Validation />}
                   </div>
@@ -832,7 +832,7 @@ export const PassportInformationForm = () => {
                       className="form-control"
                       id="passportno"
                       onChange={(e) => setBeneIdenNum(e.target.value)}
-                      placeholder="ENTER NATIONAL IDENTIFICAITON NUMBER"
+                      placeholder="Enter National Identification Number"
                     />
                   </div>
                 </div>
@@ -851,7 +851,7 @@ export const PassportInformationForm = () => {
                       onChange={(e) => setBeneRelationship(e.target.value)}
                       className="form-control"
                       id="passportno"
-                      placeholder="ENTER RELATIONSHIP"
+                      placeholder="Enter Relationship"
                     />
                     {userClick && !beneRelationship && <Validation />}
                   </div>

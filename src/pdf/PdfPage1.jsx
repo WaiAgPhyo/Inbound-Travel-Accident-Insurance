@@ -199,7 +199,7 @@ const PdfPage1 = ({ id }) => {
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Agent/Agency name </Text>
-              <Text>: [N/A]</Text>
+              <Text>: {data?.agent ? data?.agent.agentName : "[N/A]"}</Text>
             </View>
             <View style={styles.sub_info}>
               <Text style={styles.caption}>Policy Holder </Text>

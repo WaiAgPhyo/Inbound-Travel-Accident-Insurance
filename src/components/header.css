@@ -9,7 +9,7 @@
   z-index: 100;
 }
 .bold {
-  font-weight: 1000;
+  font-weight: bold;
 }
 .faint {
   opacity: 0.8;
@@ -127,6 +127,7 @@
   border-right: 1px solid rgb(0, 0, 0, 0.7);
   justify-content: space-between;
   align-items: center;
+  padding: 5px;
 }
 .phone {
   width: 35%;
@@ -138,12 +139,18 @@
   border-radius: 50%;
   color: #074da1;
 }
+.contactinfo {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
 .contactinfo a {
   text-decoration: none;
   color: #074da1;
 }
 .contactinfo p {
   color: #074da1;
+  margin-bottom: 0;
 }
 .visual {
   width: 100%;

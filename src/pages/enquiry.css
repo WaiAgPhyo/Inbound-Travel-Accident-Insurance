@@ -86,6 +86,8 @@
 }
 .pdf_downloadbtn button {
   padding: 10px 20px;
+  background-color: #074da1;
+  color: #ffffff;
 }
 .pdf_row {
   display: flex;
@@ -97,7 +99,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  padding: 20px;
+  margin-bottom: 0;
+}
+.pdf-row-color {
+  background-color: #074da1;
+  color: #ffffff;
 }
 .pdf_row p:last-child {
   border-right: 0;

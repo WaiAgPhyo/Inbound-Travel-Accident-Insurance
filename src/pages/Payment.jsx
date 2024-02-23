@@ -39,7 +39,6 @@ const Payment = ({ temp, closing }) => {
       console.log("Calculated age:", calculatedAge);
     }
   }, [temp]);
-  
 
   function back() {
     closing(false);
@@ -60,36 +59,32 @@ const Payment = ({ temp, closing }) => {
         </div>
         <div className="payment_bloc">
           <div className="payment_card">
-            <p>Insured For</p>
-            <p className="payment_value">{temp.insuredPersonName}</p>
+            <p className="category">Insured For</p>
+            <p>{temp.insuredPersonName}</p>
           </div>
           <div className="payment_card">
-            <p>Net Premium</p>
-            <p className="payment_value">{temp.premiumrate} USD</p>
+            <p className="category">Net Premium</p>
+            <p>{temp.premiumrate} USD</p>
           </div>
           <div className="payment_card">
-            <p>Age (Years)</p>
-            <p className="payment_value">{age}</p>
+            <p className="category">Age (Years)</p>
+            <p>{age}</p>
           </div>
           <div className="payment_card">
-            <p>Coverage Plan</p>
-            <p className="payment_value">{temp.coveragePlan} Days</p>
+            <p className="category">Coverage Plan</p>
+            <p>{temp.coveragePlan} Days</p>
           </div>
           <div className="payment_card">
-            <p>Passport Number</p>
-            <p className="payment_value">{temp.passportNumber}</p>
+            <p className="category">Passport Number</p>
+            <p>{temp.passportNumber}</p>
           </div>
           <div className="payment_card">
+            <p className="category">Name (as per passport)</p>
+            <p>{temp.insuredPersonName}</p>
+          </div>
+          <div className="payment_card">
+            <p className="category">Estimated Arrival Date</p>
             <p>
-              Name
-              <br />
-              (as per passport)
-            </p>
-            <p className="payment_value">{temp.insuredPersonName}</p>
-          </div>
-          <div className="payment_card">
-            <p>Estimated Arrival Date</p>
-            <p className="payment_value">
               {temp.estimateArrivalDate && temp.estimateArrivalDate.toString()}
             </p>
           </div>

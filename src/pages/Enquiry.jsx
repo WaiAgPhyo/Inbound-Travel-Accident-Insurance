@@ -104,7 +104,7 @@ const Enquiry = () => {
               {pdfdata.map((item, index) => (
                 <div className="pdf_table" key={index}>
                   <div className="pdf_contents">
-                    <div className="pdf_row">
+                    <div className="pdf_row pdf-row-color">
                       <p>Insured's Name</p>
                       <p>Date of Birth</p>
                       <p>Age</p>
@@ -132,7 +132,7 @@ const Enquiry = () => {
                     </div>
                   </div>
                   <div className="pdf_downloadbtn">
-                    <button onClick={() => showHandler(item?.certificateID)}>
+                    <button onClick={() => showHandler(item?.certificateNo)}>
                       Download Here!
                     </button>
                   </div>
