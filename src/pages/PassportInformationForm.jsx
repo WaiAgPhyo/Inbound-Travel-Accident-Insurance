@@ -330,56 +330,57 @@ export const PassportInformationForm = () => {
         </h1>
         <div className="container text-center mt-4 bg-white shadow p-3 mb-5 bg-body-tertiary rounded">
           <div className="main-container">
-            {/* passport information// */}
-            <h2 className="text_color fs-6 text-start mt-4 mb-3">
-              <u>PASSPORT INFORMATION(In English)</u>
-            </h2>
-            <form>
-              <div className="row pb-2">
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="text_color form-label">
-                      Passport Number
-                      <span className="text-danger">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="passportNumber"
-                      onChange={(e) => setPassportNum(e.target.value)}
-                      className="form-control col-6"
-                      placeholder="Enter Your Passport No."
-                    />
-                    {userClick && !passportNum && <Validation />}
+            <div className="col-lg-12" col-12>
+              {/* passport information// */}
+              <h2 className="text_color fs-6 text-start mt-4 mb-3">
+                <u>PASSPORT INFORMATION(In English)</u>
+              </h2>
+              <form>
+                <div className="row pb-2">
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="text_color form-label">
+                        Passport Number
+                        <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="passportNumber"
+                        onChange={(e) => setPassportNum(e.target.value)}
+                        className="form-control col-6"
+                        placeholder="Enter Your Passport No."
+                      />
+                      {userClick && !passportNum && <Validation />}
+                    </div>
                   </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3 text-start" style={{ width: "100%" }}>
-                    <label className="text_color form-label">
-                      Passport Issued Date.
-                      <span className="text-danger">*</span>
-                    </label>
-                    <DatePicker
-                      selected={passportDate}
-                      className="form-control form-control--date"
-                      placeholderText="DD-MM-YYYY"
-                      onChange={(date) => setPassportDate(date)}
-                    />
+                  <div className="col-lg-4">
+                    <div className="mb-3 text-start" style={{ width: "100%" }}>
+                      <label className="text_color form-label">
+                        Passport Issued Date.
+                        <span className="text-danger">*</span>
+                      </label>
+                      <DatePicker
+                        selected={passportDate}
+                        className="form-control form-control--date"
+                        placeholderText="MM/DD/YYYY"
+                        onChange={(date) => setPassportDate(date)}
+                      />
 
-                    {userClick && !passportDate && <Validation />}
+                      {userClick && !passportDate && <Validation />}
+                    </div>
                   </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="text_color form-label">
-                      Passport Issued Country
-                      <span className="text-danger">*</span>
-                    </label>
-                    <ComboBox
-                      data={countrydata}
-                      option={selectedoption}
-                      selection="passport"
-                    />
-                    {/* <select
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="text_color form-label">
+                        Passport Issued Country
+                        <span className="text-danger">*</span>
+                      </label>
+                      <ComboBox
+                        data={countrydata}
+                        option={selectedoption}
+                        selection="passport"
+                      />
+                      {/* <select
                       name="emptyValidation"
                       className="form-select"
                       aria-label="Default select example"
@@ -390,15 +391,15 @@ export const PassportInformationForm = () => {
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select> */}
-                    {userClick && !passportCountry && <Validation />}
+                      {userClick && !passportCountry && <Validation />}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <hr />
-              {/* passport information// */}
-              {/* insured information radio// */}
+                <hr />
+                {/* passport information// */}
+                {/* insured information radio// */}
 
-              <h2 className="text_color fs-6 text-start mt-4 mb-3 pb-3">
+                {/* <h2 className="text_color fs-6 text-start mt-4 mb-3 pb-3">
                 <u>INSURED INFORMATION (In English)</u>
               </h2>
 
@@ -433,94 +434,139 @@ export const PassportInformationForm = () => {
                     (CHILD IS NOT HOLDING A VALID PASSPORT)
                   </label>
                 </div>
-              </div>
+              </div> */}
 
-              {/* insured information radio// */}
+                <h2 className="text_color fs-6 text-start mt-4 mb-3 pb-3">
+                  <u>INSURED INFORMATION (In English)</u>
+                </h2>
 
-              {/* insure information// */}
+                <div className="row mb-4 pb-2">
+                  <div className="col-12">
+                    <div className="row">
+                      <div className="col-lg-4 text-start mb-3">
+                        <div className="form-check form-check-inline">
+                          <input
+                            type="radio"
+                            className="form-check-input custom_radio"
+                            name="options"
+                            id="self"
+                            value="self"
+                            onChange={(e) => selectingchild(e)}
+                          />
+                          <span className="text_color">
+                            {" "}
+                            BUY FOR YOURSELF <br />
+                            (THIS PASSPORT HOLDER)
+                          </span>
+                        </div>
+                      </div>
+                      <div className="col-lg-7 text-start ">
+                        <div className="form-check form-check-inline">
+                          <input
+                            type="radio"
+                            className="form-check-input custom_radio"
+                            name="options"
+                            value="child"
+                            id="child"
+                            onChange={(e) => selectingchild(e)}
+                          />
+                          <span className="text_color">
+                            BUY FOR THE CHILD TRAVEL TOGETHER WITH THIS PASSPORT
+                            HOLDER <br />
+                            (CHILD IS NOT HOLDING A VALID PASSPORT)
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-              <div className="row pb-2">
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Name (as per passport)
-                      <span className="text-danger">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="insureName"
-                      className="form-control"
-                      id="insureName"
-                      placeholder="Enter Insured Name"
-                      onChange={(e) => setInsureName(e.target.value)}
-                    />
-                    {userClick && !insureName && <Validation />}
+                {/* insured information radio// */}
+
+                {/* insure information// */}
+
+                <div className="row pb-2">
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Name (as per passport)
+                        <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="insureName"
+                        className="form-control"
+                        id="insureName"
+                        placeholder="Enter Insured Name"
+                        onChange={(e) => setInsureName(e.target.value)}
+                      />
+                      {userClick && !insureName && <Validation />}
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Date of Birth (as per passport)
+                        <span className="text-danger">*</span>
+                      </label>
+                      <DatePicker
+                        selected={insureBirth}
+                        className="form-control form-control--date"
+                        placeholderText="MM/DD/YYYY"
+                        onChange={(date) => setInsureBirth(date)}
+                      />
+                      {userClick && !insureBirth && <Validation />}
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="text_color form-label">
+                        Gender (as per passport)
+                        <span className="text-danger">*</span>
+                      </label>
+                      <select
+                        name="emptyValidation"
+                        onChange={(e) => setInsureGender(e.target.value)}
+                        className="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option hidden>Select One</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                      </select>
+                      {userClick && !insureGender && <Validation />}
+                    </div>
                   </div>
                 </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Date of Birth (as per passport)
-                      <span className="text-danger">*</span>
-                    </label>
-                    <DatePicker
-                      selected={insureBirth}
-                      className="form-control form-control--date"
-                      placeholderText="DD-MM-YYYY"
-                      onChange={(date) => setInsureBirth(date)}
-                    />
-                    {userClick && !insureBirth && <Validation />}
+                {/* 3// */}
+                <div className="row pb-2">
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Estimated Arrival Date
+                        <span className="text-danger">*</span>
+                      </label>
+                      <DatePicker
+                        selected={arrivalDate}
+                        className="form-control form-control--date"
+                        placeholderText="MM/DD/YYYY"
+                        onChange={(date) => setArrivalDate(date)}
+                      />
+                      {userClick && !arrivalDate && <Validation />}
+                    </div>
                   </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="text_color form-label">
-                      Gender (as per passport)
-                      <span className="text-danger">*</span>
-                    </label>
-                    <select
-                      name="emptyValidation"
-                      onChange={(e) => setInsureGender(e.target.value)}
-                      className="form-select"
-                      aria-label="Default select example"
-                    >
-                      <option hidden>Select One</option>
-                      <option value="MALE">Male</option>
-                      <option value="FEMALE">Female</option>
-                    </select>
-                    {userClick && !insureGender && <Validation />}
-                  </div>
-                </div>
-              </div>
-              {/* 3// */}
-              <div className="row pb-2">
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Estimated Arrival Date
-                      <span className="text-danger">*</span>
-                    </label>
-                    <DatePicker
-                      selected={arrivalDate}
-                      className="form-control form-control--date"
-                      placeholderText="DD-MM-YYYY"
-                      onChange={(date) => setArrivalDate(date)}
-                    />
-                    {userClick && !arrivalDate && <Validation />}
-                  </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="text_color form-label">
-                      Journey From
-                      <span className="text-danger">*</span>
-                    </label>
-                    <ComboBox
-                      data={countrydata}
-                      option={selectedoption}
-                      selection="journey"
-                    />
-                    {/* <select
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="text_color form-label">
+                        Journey From
+                        <span className="text-danger">*</span>
+                      </label>
+                      <ComboBox
+                        data={countrydata}
+                        option={selectedoption}
+                        selection="journey"
+                      />
+                      {/* <select
                       name="journeyFrom"
                       onChange={(e) => setJourneyFrom(e.target.value)}
                       className="form-select"
@@ -531,402 +577,405 @@ export const PassportInformationForm = () => {
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select> */}
-                    {userClick && !journeyFrom && <Validation />}
+                      {userClick && !journeyFrom && <Validation />}
+                    </div>
                   </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Journey To
-                      <span className="text-danger">*</span>
-                    </label>
-                    <input
-                      className="form-control"
-                      name="journeyTo"
-                      type="text"
-                      value="Myanmar"
-                      aria-label="Disabled input example"
-                      disabled
-                      readOnly
-                    />
-                  </div>
-                </div>
-              </div>
-              {/* 3// */}
-              <div className="row pb-2">
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="text_color form-label">
-                      Coverage Plan
-                      <span className="text-danger">*</span>
-                    </label>
-                    <select
-                      name="emptyValidation"
-                      onChange={(e) => setCoveragePlan(e.target.value)}
-                      className="form-select"
-                      aria-label="Default select example"
-                    >
-                      <option defaultValue="">Select One</option>
-                      <option value="15">15 Days</option>
-                      <option value="30">30 Days</option>
-                      <option value="60">60 Days</option>
-                      <option value="90">90 Days</option>
-                      <option value="120">120 Days</option>
-                      <option value="150">150 Days</option>
-                      <option value="180">180 Days</option>
-                      <option value="210">210 Days</option>
-                      <option value="240">240 Days</option>
-                      <option value="270">270 Days</option>
-                      <option value="300">300 Days</option>
-                      <option value="330">330 Days</option>
-                      <option value="360">360 Days</option>
-                    </select>
-                    {userClick && !coveragePlan && <Validation />}
-                  </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Insured's Contact Phone Number
-                      <span className="text-danger">*</span>
-                    </label>
-                    <div className="input-group mb-3">
-                      <div style={{ width: "30%" }}>
-                        <ComboBox
-                          data={countrydata}
-                          option={selectedoption}
-                          selection="insurePhNo"
-                        />
-                      </div>
-
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Journey To
+                        <span className="text-danger">*</span>
+                      </label>
                       <input
+                        className="form-control"
+                        name="journeyTo"
                         type="text"
-                        name="insurePh"
-                        onChange={(e) => setInsurePh(e.target.value)}
-                        className="form-control form-control-phone"
-                        aria-label="Text input with segmented dropdown button"
-                      />
-                    </div>
-                    {userClick && !insurePh && <Validation />}
-                  </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Insured's Email
-                    </label>
-                    <input
-                      name="insureEmail"
-                      type="text"
-                      className="form-control"
-                      id="passportno"
-                      placeholder="Insured's Email Address"
-                      onChange={(e) => setInsureEmail(e.target.value)}
-                    />
-                    {userClick && !insureEmail && <Validation />}
-                  </div>
-                </div>
-              </div>
-              {/* 3// */}
-              <div className="row pb-2">
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Address in Myanmar (Max: 250 Char)
-                    </label>
-                    <textarea
-                      name="myanmarAdd"
-                      className="form-control"
-                      rows="4"
-                      placeholder="..."
-                      onChange={(e) => setInsureAddress(e.target.value)}
-                    />
-                    {userClick && !insureAddress && <Validation />}
-                  </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Resident Address (Max: 250 Char)
-                      <span className="text-danger">*</span>
-                    </label>
-                    <textarea
-                      name="residentAdd"
-                      className="form-control"
-                      rows="4"
-                      placeholder="..."
-                      maxLength="250"
-                      onChange={(e) => setInsureResAdd(e.target.value)}
-                    />
-                    {userClick && !insureResAdd && <Validation />}
-                  </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="text_color form-label">
-                      Resident Country
-                      <span className="text-danger">*</span>
-                    </label>
-                    <ComboBox
-                      data={countrydata}
-                      option={selectedoption}
-                      selection="insCountry"
-                    />
-                    {userClick && !insureResCountry && <Validation />}
-                  </div>
-                </div>
-              </div>
-              {/* child information// */}
-              {option == "child" && (
-                <div className="bg-body-secondary ">
-                  <div className="container-xl">
-                    <h2 className="text_color text-start pt-4 mb-3 fs-6">
-                      <u>
-                        CHILD INFORMATION (CHILD IS NOT HOLDING A VALID
-                        PASSPORT)
-                      </u>
-                    </h2>
-                    <div className="row pb-2 pt-3">
-                      <div className="col-6 col-md-4">
-                        <div className="mb-3  text-start">
-                          <label className="text_color form-label">
-                            Child Name
-                            <span className="text-danger">*</span>
-                          </label>
-                          <input
-                            name="childName"
-                            type="text"
-                            className="form-control col-6"
-                            placeholder="Enter Child Name"
-                            onChange={(e) => setChildName(e.target.value)}
-                          />
-                          {userClick && !childName && <Validation />}
-                        </div>
-                      </div>
-                      <div className="col-6 col-md-4">
-                        <div className="mb-3 text-start">
-                          <label className="text_color form-label">
-                            Date of Birth
-                            <span className="text-danger">*</span>
-                          </label>
-
-                          <DatePicker
-                            selected={childBirth}
-                            className="form-control form-control--date"
-                            placeholderText="DD-MM-YYYY"
-                            onChange={(date) => setChildBirth(date)}
-                          />
-                          {userClick && !childBirth && <Validation />}
-                        </div>
-                      </div>
-                      <div className="col-6 col-md-4">
-                        <div className="mb-3  text-start">
-                          <label className="text_color form-label">
-                            Gender
-                            <span className="text-danger">*</span>
-                          </label>
-                          <select
-                            name="childGender"
-                            onChange={(e) => setChildGender(e.target.value)}
-                            className="form-select"
-                            aria-label="Default select example"
-                          >
-                            <option hidden>Select One</option>
-                            <option value="MALE">Male</option>
-                            <option value="FEMALE">Female</option>
-                          </select>
-                          {userClick && !childGender && <Validation />}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row pb-2">
-                      <div className="col-6 col-md-4">
-                        <div className="mb-3  text-start">
-                          <label className="text_color form-label">
-                            Guardiance Name
-                            <span className="text-danger">*</span>
-                          </label>
-                          <input
-                            name="guardiance"
-                            onChange={(e) => setGuardianceName(e.target.value)}
-                            type="text"
-                            className="form-control col-6"
-                            placeholder="Enter Guardiance Name"
-                          />
-                          {userClick && !guardianceName && <Validation />}
-                        </div>
-                      </div>
-                      <div className="col-6 col-md-4">
-                        <div className="mb-3  text-start">
-                          <label className="text_color form-label">
-                            Relationship
-                            <span className="text-danger">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            name="childRelation"
-                            onChange={(e) =>
-                              setChildRelationShip(e.target.value)
-                            }
-                            className="form-control col-6"
-                            placeholder="Enter Relationship"
-                          />
-                          {userClick && !childRelationship && <Validation />}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* child information// */}
-              <hr />
-              {/* insure information// */}
-
-              {/* beneficary information// */}
-              <h2 className="fs-6 text-start mt-4 mb-3 text_color pb-2">
-                <u>BENEFICIARY INFORMATION (In English)</u>
-              </h2>
-              <div className="row pb-2">
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Name
-                      <span className="text-danger">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="beneName"
-                      onChange={(e) => setBeneName(e.target.value)}
-                      className="form-control"
-                      id="passportno"
-                      placeholder="Enter Beneficiary Name"
-                    />
-                    {userClick && !beneName && <Validation />}
-                  </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Date of Birth
-                      <span className="text-danger">*</span>
-                    </label>
-                    <DatePicker
-                      selected={beneBirth}
-                      className="form-control form-control--date"
-                      placeholderText="DD-MM-YYYY"
-                      onChange={(date) => setBeneBirth(date)}
-                    />
-                    {userClick && !beneBirth && <Validation />}
-                  </div>
-                </div>
-
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      National Identificaiton Number
-                    </label>
-                    <input
-                      name="beneIdenNum"
-                      type="text"
-                      className="form-control"
-                      id="passportno"
-                      onChange={(e) => setBeneIdenNum(e.target.value)}
-                      placeholder="Enter National Identification Number"
-                    />
-                  </div>
-                </div>
-              </div>
-              {/* 3// */}
-              <div className="row pb-2">
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Relationship
-                      <span className="text-danger">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="beneRelation"
-                      onChange={(e) => setBeneRelationship(e.target.value)}
-                      className="form-control"
-                      id="passportno"
-                      placeholder="Enter Relationship"
-                    />
-                    {userClick && !beneRelationship && <Validation />}
-                  </div>
-                </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Contact Phone Number
-                      <span className="text-danger">*</span>
-                    </label>
-                    <div className="input-group mb-3">
-                      <div style={{ width: "30%" }}>
-                        <ComboBox
-                          data={countrydata}
-                          option={selectedoption}
-                          selection="beneficiaryPhNo"
-                        />
-                      </div>
-
-                      <input
-                        type="text"
-                        name="insurePh"
-                        onChange={(e) => setBenePhone(e.target.value)}
-                        className="form-control form-control-phone"
-                        aria-label="Text input with segmented dropdown button"
+                        value="Myanmar"
+                        aria-label="Disabled input example"
+                        disabled
+                        readOnly
                       />
                     </div>
                   </div>
                 </div>
+                {/* 3// */}
+                <div className="row pb-2">
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="text_color form-label">
+                        Coverage Plan
+                        <span className="text-danger">*</span>
+                      </label>
+                      <select
+                        name="emptyValidation"
+                        onChange={(e) => setCoveragePlan(e.target.value)}
+                        className="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option defaultValue="">Select One</option>
+                        <option value="15">15 Days</option>
+                        <option value="30">30 Days</option>
+                        <option value="60">60 Days</option>
+                        <option value="90">90 Days</option>
+                        <option value="120">120 Days</option>
+                        <option value="150">150 Days</option>
+                        <option value="180">180 Days</option>
+                        <option value="210">210 Days</option>
+                        <option value="240">240 Days</option>
+                        <option value="270">270 Days</option>
+                        <option value="300">300 Days</option>
+                        <option value="330">330 Days</option>
+                        <option value="360">360 Days</option>
+                      </select>
+                      {userClick && !coveragePlan && <Validation />}
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Insured's Contact Phone Number
+                        <span className="text-danger">*</span>
+                      </label>
+                      <div className="input-group mb-3">
+                        <div style={{ width: "30%" }}>
+                          <ComboBox
+                            data={countrydata}
+                            option={selectedoption}
+                            selection="insurePhNo"
+                          />
+                        </div>
 
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">Email</label>
-                    <input
-                      type="text"
-                      name="beneEmail"
-                      onChange={(e) => setBeneEmail(e.target.value)}
-                      className="form-control"
-                      id="passportno"
-                      placeholder="Enter Email"
-                    />
-                    {userClick && !beneEmail && <Validation />}
+                        <input
+                          type="text"
+                          name="insurePh"
+                          onChange={(e) => setInsurePh(e.target.value)}
+                          className="form-control form-control-phone"
+                          aria-label="Text input with segmented dropdown button"
+                        />
+                      </div>
+                      {userClick && !insurePh && <Validation />}
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Insured's Email
+                      </label>
+                      <input
+                        name="insureEmail"
+                        type="text"
+                        className="form-control"
+                        id="passportno"
+                        placeholder="Insured's Email Address"
+                        onChange={(e) => setInsureEmail(e.target.value)}
+                      />
+                      {userClick && !insureEmail && <Validation />}
+                    </div>
                   </div>
                 </div>
-              </div>
-              {/* 3// */}
-              <div className="row">
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="form-label text_color">
-                      Resident Addresss (Max: 250 Char)
-                      <span className="text-danger">*</span>
-                    </label>
-                    <textarea
-                      name="beneResAdd"
-                      onChange={(e) => setBeneResAdd(e.target.value)}
-                      className="form-control"
-                      rows="4"
-                      placeholder="..."
-                    />
-                    {userClick && !beneResAdd && <Validation />}
+                {/* 3// */}
+                <div className="row pb-2">
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Address in Myanmar (Max: 250 Char)
+                      </label>
+                      <textarea
+                        name="myanmarAdd"
+                        className="form-control"
+                        rows="4"
+                        placeholder="..."
+                        onChange={(e) => setInsureAddress(e.target.value)}
+                      />
+                      {userClick && !insureAddress && <Validation />}
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Resident Address (Max: 250 Char)
+                        <span className="text-danger">*</span>
+                      </label>
+                      <textarea
+                        name="residentAdd"
+                        className="form-control"
+                        rows="4"
+                        placeholder="..."
+                        maxLength="250"
+                        onChange={(e) => setInsureResAdd(e.target.value)}
+                      />
+                      {userClick && !insureResAdd && <Validation />}
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="text_color form-label">
+                        Resident Country
+                        <span className="text-danger">*</span>
+                      </label>
+                      <ComboBox
+                        data={countrydata}
+                        option={selectedoption}
+                        selection="insCountry"
+                      />
+                      {userClick && !insureResCountry && <Validation />}
+                    </div>
                   </div>
                 </div>
-                <div className="col-6 col-md-4">
-                  <div className="mb-3  text-start">
-                    <label className="text_color form-label">
-                      Resident Country
-                      <span className="text-danger">*</span>
-                    </label>
-                    <ComboBox
-                      data={countrydata}
-                      option={selectedoption}
-                      selection="resCountry"
-                    />
-                    {/* <select
+                {/* child information// */}
+                {option == "child" && (
+                  <div className="bg-body-secondary ">
+                    <div className="container-xl">
+                      <h2 className="text_color text-start pt-4 mb-3 fs-6">
+                        <u>
+                          CHILD INFORMATION (CHILD IS NOT HOLDING A VALID
+                          PASSPORT)
+                        </u>
+                      </h2>
+                      <div className="row pb-2 pt-3">
+                        <div className="col-lg-4">
+                          <div className="mb-3  text-start">
+                            <label className="text_color form-label">
+                              Child Name
+                              <span className="text-danger">*</span>
+                            </label>
+                            <input
+                              name="childName"
+                              type="text"
+                              className="form-control col-6"
+                              placeholder="Enter Child Name"
+                              onChange={(e) => setChildName(e.target.value)}
+                            />
+                            {userClick && !childName && <Validation />}
+                          </div>
+                        </div>
+                        <div className="col-lg-4">
+                          <div className="mb-3 text-start">
+                            <label className="text_color form-label">
+                              Date of Birth
+                              <span className="text-danger">*</span>
+                            </label>
+
+                            <DatePicker
+                              selected={childBirth}
+                              className="form-control form-control--date"
+                              placeholderText="MM/DD/YYYY"
+                              onChange={(date) => setChildBirth(date)}
+                            />
+                            {userClick && !childBirth && <Validation />}
+                          </div>
+                        </div>
+                        <div className="col-lg-4">
+                          <div className="mb-3  text-start">
+                            <label className="text_color form-label">
+                              Gender
+                              <span className="text-danger">*</span>
+                            </label>
+                            <select
+                              name="childGender"
+                              onChange={(e) => setChildGender(e.target.value)}
+                              className="form-select"
+                              aria-label="Default select example"
+                            >
+                              <option hidden>Select One</option>
+                              <option value="MALE">Male</option>
+                              <option value="FEMALE">Female</option>
+                            </select>
+                            {userClick && !childGender && <Validation />}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row pb-2">
+                        <div className="col-lg-4">
+                          <div className="mb-3  text-start">
+                            <label className="text_color form-label">
+                              Guardiance Name
+                              <span className="text-danger">*</span>
+                            </label>
+                            <input
+                              name="guardiance"
+                              onChange={(e) =>
+                                setGuardianceName(e.target.value)
+                              }
+                              type="text"
+                              className="form-control col-6"
+                              placeholder="Enter Guardiance Name"
+                            />
+                            {userClick && !guardianceName && <Validation />}
+                          </div>
+                        </div>
+                        <div className="col-lg-4">
+                          <div className="mb-3  text-start">
+                            <label className="text_color form-label">
+                              Relationship
+                              <span className="text-danger">*</span>
+                            </label>
+                            <input
+                              type="text"
+                              name="childRelation"
+                              onChange={(e) =>
+                                setChildRelationShip(e.target.value)
+                              }
+                              className="form-control col-6"
+                              placeholder="Enter Relationship"
+                            />
+                            {userClick && !childRelationship && <Validation />}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* child information// */}
+                <hr />
+                {/* insure information// */}
+
+                {/* beneficary information// */}
+                <h2 className="fs-6 text-start mt-4 mb-3 text_color pb-2">
+                  <u>BENEFICIARY INFORMATION (In English)</u>
+                </h2>
+                <div className="row pb-2">
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Name
+                        <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="beneName"
+                        onChange={(e) => setBeneName(e.target.value)}
+                        className="form-control"
+                        id="passportno"
+                        placeholder="Enter Beneficiary Name"
+                      />
+                      {userClick && !beneName && <Validation />}
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Date of Birth
+                        <span className="text-danger">*</span>
+                      </label>
+                      <DatePicker
+                        selected={beneBirth}
+                        className="form-control form-control--date"
+                        placeholderText="MM/DD/YYYY"
+                        onChange={(date) => setBeneBirth(date)}
+                      />
+                      {userClick && !beneBirth && <Validation />}
+                    </div>
+                  </div>
+
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        National Identificaiton Number
+                      </label>
+                      <input
+                        name="beneIdenNum"
+                        type="text"
+                        className="form-control"
+                        id="passportno"
+                        onChange={(e) => setBeneIdenNum(e.target.value)}
+                        placeholder="Enter National Identification Number"
+                      />
+                    </div>
+                  </div>
+                </div>
+                {/* 3// */}
+                <div className="row pb-2">
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Relationship
+                        <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="beneRelation"
+                        onChange={(e) => setBeneRelationship(e.target.value)}
+                        className="form-control"
+                        id="passportno"
+                        placeholder="Enter Relationship"
+                      />
+                      {userClick && !beneRelationship && <Validation />}
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Contact Phone Number
+                        <span className="text-danger">*</span>
+                      </label>
+                      <div className="input-group mb-3">
+                        <div style={{ width: "30%" }}>
+                          <ComboBox
+                            data={countrydata}
+                            option={selectedoption}
+                            selection="beneficiaryPhNo"
+                          />
+                        </div>
+
+                        <input
+                          type="text"
+                          name="insurePh"
+                          onChange={(e) => setBenePhone(e.target.value)}
+                          className="form-control form-control-phone"
+                          aria-label="Text input with segmented dropdown button"
+                        />
+                      </div>
+                      {userClick && !benePhone && <Validation />}
+                    </div>
+                  </div>
+
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">Email</label>
+                      <input
+                        type="text"
+                        name="beneEmail"
+                        onChange={(e) => setBeneEmail(e.target.value)}
+                        className="form-control"
+                        id="passportno"
+                        placeholder="Enter Email"
+                      />
+                      {userClick && !beneEmail && <Validation />}
+                    </div>
+                  </div>
+                </div>
+                {/* 3// */}
+                <div className="row">
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="form-label text_color">
+                        Resident Addresss (Max: 250 Char)
+                        <span className="text-danger">*</span>
+                      </label>
+                      <textarea
+                        name="beneResAdd"
+                        onChange={(e) => setBeneResAdd(e.target.value)}
+                        className="form-control"
+                        rows="4"
+                        placeholder="..."
+                      />
+                      {userClick && !beneResAdd && <Validation />}
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <div className="mb-3  text-start">
+                      <label className="text_color form-label">
+                        Resident Country
+                        <span className="text-danger">*</span>
+                      </label>
+                      <ComboBox
+                        data={countrydata}
+                        option={selectedoption}
+                        selection="resCountry"
+                      />
+                      {/* <select
                       name="beneResCountry"
                       onChange={(e) => setBeneResCountry(e.target.value)}
                       className="form-select"
@@ -937,241 +986,361 @@ export const PassportInformationForm = () => {
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select> */}
-                    {userClick && !beneResCountry && <Validation />}
+                      {userClick && !beneResCountry && <Validation />}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* beneficary information// */}
+                {/* beneficary information// */}
 
-              {/* agent information testing// */}
+                {/* agent information testing// */}
 
-              <div className="bg-body-secondary ps-4 ">
-                <div className="pt-4 mb-4">
-                  <h2 className="fs-6 text-start pb-4 text_color">
-                    <u>
-                      This section is only used for servicing agent of Myanma
-                      Insurance
-                    </u>
-                  </h2>
-                  <div className="row">
-                    <div className="agent_container ">
-                      <div className="agent_radio_box">
-                        <input
-                          className="radio-btn"
-                          type="radio"
-                          name="services"
-                          id="selfservice"
-                          checked={agentRadio === "selfservice"}
-                          onChange={(e) => setAgentRadio(e.target.id)}
-                        />
-                        <div
-                          className={`service_box ${
-                            agentRadio == "selfservice" &&
-                            "service_box--selected"
-                          }`}
-                          onClick={() => setAgentRadio("selfservice")}
-                        >
-                          <label
-                            htmlFor="selfservice"
-                            className="text_color form-check-label"
+                <div className="bg-body-secondary ps-4 ">
+                  <div className="pt-4 mb-4">
+                    <h2 className="fs-6 text-start pb-4 text_color">
+                      <u>
+                        This section is only used for servicing agent of Myanma
+                        Insurance
+                      </u>
+                    </h2>
+                    
+                      <div className="agent_container ">
+                      <div className=" agent_main row">
+                        <div className="col-11 ">
+                          <div className="row">
+                            <div className="agent_radio_box col-lg-3 mb-3">
+                              <input
+                                type="radio"
+                                className="form-check-input custom_radio "
+                                name="services"
+                                id="selfservice"
+                                checked={agentRadio === "selfservice"}
+                                onChange={(e) => setAgentRadio(e.target.id)}
+                                onClick={() => setAgentRadio("selfservice")}
+                              />
+
+                              <div
+                                className={
+                                  agentRadio === "selfservice"
+                                    ? "service_box service_box--selected"
+                                    : "service_box"
+                                }
+                              >
+                                <span className="text_color form-check-label">
+                                  <div className="agent_image">
+                                    <img src={self} alt="agent" />
+                                  </div>
+                                  SELF-SERVICE
+                                </span>
+                              </div>
+                            </div>
+                            <div
+                              className="agent_radio_box col-lg-6 mb-3"
+                              data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop"
+                            >
+                              <input
+                                type="radio"
+                                className="form-check-input custom_radio"
+                                name="services"
+                                id="agentservice"
+                                checked={agentRadio === "agentservice"}
+                                onChange={(e) => setAgentRadio(e.target.id)}
+                                onClick={() => {
+                                  setAgentRadio("agentservice");
+                                  setShowModal(true);
+                                }}
+                              />
+                              <div
+                                className={
+                                  agentRadio === "agentservice"
+                                    ? "service_box service_box--selected"
+                                    : "service_box"
+                                }
+                              >
+                                <span className="text_color ">
+                                  <div className="agent_image ">
+                                    <img src={agent} alt="agent" />
+                                  </div>
+                                  YANGON AERODROME COMPANY LIMITED
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                        {/* <div className="agent_radio_box">
+                          <input
+                            className="radio-btn"
+                            type="radio"
+                            name="services"
+                            id="selfservice"
+                            checked={agentRadio === "selfservice"}
+                            onChange={(e) => setAgentRadio(e.target.id)}
+                          />
+                          <div
+                            className={`service_box ${
+                              agentRadio == "selfservice" &&
+                              "service_box--selected"
+                            }`}
+                            onClick={() => setAgentRadio("selfservice")}
                           >
-                            <div className="agent_image">
-                              <img src={self} alt="agent" />
-                            </div>
-                            SELF-SERVICE
-                          </label>
-                        </div>
-                      </div>
-                      <div
-                        className="agent_radio_box"
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop"
-                      >
-                        <input
-                          className="radio-btn"
-                          type="radio"
-                          name="services"
-                          id="agentservice"
-                          checked={agentRadio === "agentservice"}
-                          onChange={(e) => setAgentRadio(e.target.id)}
-                        />
-                        <div
-                          className={`service_box ${
-                            agentRadio == "agentservice" &&
-                            "service_box--selected"
-                          }`}
-                          onClick={() => {
-                            setAgentRadio("agentservice");
-                            setShowModal(true);
-                          }}
-                        >
-                          <label htmlFor="agentservice" className="text_color ">
-                            <div className="agent_image ">
-                              <img src={agent} alt="agent" />
-                            </div>
-                            YANGON AERODROME COMPANY LIMITED
-                          </label>
-                        </div>
-                      </div>
-                      {/* modal */}
-                      {showModal && (
-                        <div
-                          className="modal fade show"
-                          tabIndex="-1"
-                          style={{
-                            display: "block",
-                            backgroundColor: "rgba(0, 0, 0, 0.5)",
-                          }}
-                        >
-                          <div className="modal-dialog modal-dialog-centered">
-                            <div className="modal-content">
-                              <div className="modal-header">
-                                <h1
-                                  className="modal-title fs-5 text_color"
-                                  id="staticBackdropLabel"
-                                >
-                                  Check Agent Information
-                                </h1>
-                                <button
-                                  type="button"
-                                  className="btn-close"
-                                  onClick={handleCloseModal}
-                                  aria-label="Close"
-                                ></button>
+                            <label
+                              htmlFor="selfservice"
+                              className="text_color form-check-label"
+                            >
+                              <div className="agent_image">
+                                <img src={self} alt="agent" />
                               </div>
-                              <div className="modal-body">
-                                <div>
-                                  <div className="mb-3 text-start">
-                                    <label className="col-form-label text_color">
-                                      Agent License Number
-                                      <span className="text-danger">*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      name="emptyValidation"
-                                      className="form-control"
-                                      id="recipient-name"
-                                      value={agentLicenseNo}
-                                      onChange={(e) =>
-                                        setAgentLicenseNo(e.target.value)
-                                      }
-                                      placeholder="Enter Agent License No."
-                                    />
-                                  </div>
-                                  <div className="mb-3 text-start">
-                                    <label className="col-form-label text_color">
-                                      Password
-                                      <span className="text-danger">*</span>
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      name="emptyValidation"
-                                      id="recipient-name"
-                                      placeholder="00-0000"
-                                      onChange={(e) =>
-                                        setAgentPassword(e.target.value)
-                                      }
-                                    />
-                                    {error && (
-                                      <div style={{ color: "red" }}>
-                                        Wrong Password
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
+                              SELF-SERVICE
+                            </label>
+                          </div>
+                        </div>
+                        <div
+                          className="agent_radio_box"
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdrop"
+                        >
+                          <input
+                            className="radio-btn"
+                            type="radio"
+                            name="services"
+                            id="agentservice"
+                            checked={agentRadio === "agentservice"}
+                            onChange={(e) => setAgentRadio(e.target.id)}
+                          />
+                          <div
+                            className={`service_box ${
+                              agentRadio == "agentservice" &&
+                              "service_box--selected"
+                            }`}
+                            onClick={() => {
+                              setAgentRadio("agentservice");
+                              setShowModal(true);
+                            }}
+                          >
+                            <label
+                              htmlFor="agentservice"
+                              className="text_color "
+                            >
+                              <div className="agent_image ">
+                                <img src={agent} alt="agent" />
                               </div>
-                              <div className="row ms-1">
-                                <div className="col-6 col-md-4 text-start">
+                              YANGON AERODROME COMPANY LIMITED
+                            </label>
+                          </div>
+                        </div> */}
+                        {/* modal */}
+                        {showModal && (
+                          <div
+                            className="modal fade show"
+                            tabIndex="-1"
+                            style={{
+                              display: "block",
+                              backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            }}
+                          >
+                            <div className="modal-dialog modal-dialog-centered">
+                              <div className="modal-content">
+                                <div className="modal-header">
+                                  <h1
+                                    className="modal-title fs-5 text_color"
+                                    id="staticBackdropLabel"
+                                  >
+                                    Check Agent Information
+                                  </h1>
                                   <button
                                     type="button"
-                                    onClick={ApiHandler}
-                                    className="final-button btn pl-1 pr-1 mb-4"
-                                  >
-                                    Check Agent
-                                  </button>
+                                    className="btn-close"
+                                    onClick={handleCloseModal}
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
+                                <div className="modal-body">
+                                  <div>
+                                    <div className="mb-3 text-start">
+                                      <label className="col-form-label text_color">
+                                        Agent License Number
+                                        <span className="text-danger">*</span>
+                                      </label>
+                                      <input
+                                        type="text"
+                                        name="emptyValidation"
+                                        className="form-control"
+                                        id="recipient-name"
+                                        value={agentLicenseNo}
+                                        onChange={(e) =>
+                                          setAgentLicenseNo(e.target.value)
+                                        }
+                                        placeholder="Enter Agent License No."
+                                      />
+                                    </div>
+                                    <div className="mb-3 text-start">
+                                      <label className="col-form-label text_color">
+                                        Password
+                                        <span className="text-danger">*</span>
+                                      </label>
+                                      <input
+                                        type="text"
+                                        className="form-control"
+                                        name="emptyValidation"
+                                        id="recipient-name"
+                                        placeholder="00-0000"
+                                        onChange={(e) =>
+                                          setAgentPassword(e.target.value)
+                                        }
+                                      />
+                                      {error && (
+                                        <div style={{ color: "red" }}>
+                                          Wrong Password
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row ms-1">
+                                  <div className="col-6 col-md-4 text-start">
+                                    <button
+                                      type="button"
+                                      onClick={ApiHandler}
+                                      className="final-button btn pl-1 pr-1 mb-4"
+                                    >
+                                      Check Agent
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      )}
-                      {/* modal/ */}
-                    </div>
-                  </div>
-                  {/* agent on click */}
-                  {/* agent onclick box// */}
-                  {agentRadio == "agentservice" && (
-                    <div className="row pb-2">
-                      <div className="col-6 col-md-4">
-                        <div className="mb-3  text-start">
-                          <label className="text_color form-label">
-                            Agent License Number
-                            <span className="text-danger">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control col-6"
-                            readOnly
-                            placeholder="AGENT LICENSE NO."
-                            value={agentres.agentLicenseNo}
-                          />
-                        </div>
+                        )}
+                        {/* modal/ */}
                       </div>
-                      <div className="col-6 col-md-4">
-                        <div className="mb-3  text-start">
-                          <label className="text_color form-label">
-                            Name
-                            <span className="text-danger">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control col-6"
-                            readOnly
-                            value={agentres.agentName}
-                          />
-                        </div>
-                      </div>
-                      <div className="col-6 col-md-4 mt-2">
-                        <div className="mb-3 pt-4 text-start">
-                          <div
-                            className="agent-information"
-                            data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop"
-                          >
-                            <button
-                              className="final-button btn pl-1 pr-1"
-                              onClick={(e) => editHandler(e)}
-                            >
-                              Edit
-                            </button>
+                    
+                    {/* agent on click */}
+                    {/* agent onclick box// */}
+
+                    {agentRadio == "agentservice" && (
+                      <div className="col-11">
+                        <div className="row pb-2">
+                          <div className="col-lg-4 mr-2">
+                            <div className="mb-3  text-start">
+                              <label className="text_color form-label">
+                                Agent License Number
+                                <span className="text-danger">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control col-6"
+                                readOnly
+                                placeholder="AGENT LICENSE NO."
+                                value={agentres.agentLicenseNo}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-4 mr-2">
+                            <div className="mb-3  text-start">
+                              <label className="text_color form-label">
+                                Name
+                                <span className="text-danger">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                className="form-control col-6"
+                                readOnly
+                                value={agentres.agentName}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-4 mt-2">
+                            <div className="mb-3 pt-4 text-start">
+                              <div
+                                className="agent-information"
+                                data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop"
+                              >
+                                <button
+                                  className="final-button btn pl-1 pr-1"
+                                  onClick={(e) => editHandler(e)}
+                                >
+                                  Edit
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )}
-                  {/* agent on click */}
+                    )}
+                    {/* {agentRadio == "agentservice" && (
+                      <div className="row pb-2">
+                        <div className="col-lg-4">
+                          <div className="mb-3  text-start">
+                            <label className="text_color form-label">
+                              Agent License Number
+                              <span className="text-danger">*</span>
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control col-6"
+                              readOnly
+                              placeholder="AGENT LICENSE NO."
+                              value={agentres.agentLicenseNo}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-4">
+                          <div className="mb-3  text-start">
+                            <label className="text_color form-label">
+                              Name
+                              <span className="text-danger">*</span>
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control col-6"
+                              readOnly
+                              value={agentres.agentName}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-lg-4 mt-2">
+                          <div className="mb-3 pt-4 text-start">
+                            <div
+                              className="agent-information"
+                              data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop"
+                            >
+                              <button
+                                className="final-button btn pl-1 pr-1"
+                                onClick={(e) => editHandler(e)}
+                              >
+                                Edit
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )} */}
+                    {/* agent on click */}
+                  </div>
                 </div>
-              </div>
 
-              {/* agent information testiog// */}
-              {/* button// */}
+                {/* agent information testiog// */}
+                {/* button// */}
 
-              <div className="row">
-                <div className="col-6 col-md-4 text-start">
-                  <button
-                    className="final-button btn  pl-1 pr-1 mb-4"
-                    onClick={(e) => submitHandler(e)}
-                  >
-                    SUBMIT AND CONTINUE
-                  </button>
-                  {showpayment && <Payment temp={temp} closing={closing} />}
+                <div className="row">
+                  <div className="col-lg-4 text-start">
+                    <button
+                      className="final-button btn  pl-1 pr-1 mb-4"
+                      onClick={(e) => submitHandler(e)}
+                    >
+                      SUBMIT AND CONTINUE
+                    </button>
+                    {showpayment && <Payment temp={temp} closing={closing} />}
+                  </div>
                 </div>
-              </div>
 
-              {/* button// */}
-            </form>
+                {/* button// */}
+              </form>
+            </div>
           </div>
         </div>
       </div>

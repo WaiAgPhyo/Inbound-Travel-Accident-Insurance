@@ -29,7 +29,9 @@ const Payment = ({ temp, closing }) => {
   useEffect(() => {
     if (temp) {
       const today = new Date();
-      const parts = temp.insuredPersonDOB.split("-");
+      const parts = temp.child
+        ? temp.childDOB.split("-").map(Number)
+        : temp.insuredPersonDOB.split("-").map(Number);
       const day = parseInt(parts[0], 10);
       const month = parseInt(parts[1], 10) - 1; // Months are 0-indexed
       const year = parseInt(parts[2], 10);
@@ -39,6 +41,8 @@ const Payment = ({ temp, closing }) => {
       console.log("Calculated age:", calculatedAge);
     }
   }, [temp]);
+
+  console.log(temp);
 
   function back() {
     closing(false);
@@ -60,7 +64,9 @@ const Payment = ({ temp, closing }) => {
         <div className="payment_bloc">
           <div className="payment_card">
             <p className="category">Insured For</p>
-            <p>{temp.insuredPersonName}</p>
+            <p>
+              {temp.child ? "Buy For Child" : "Buy For This Passport Holder"}
+            </p>
           </div>
           <div className="payment_card">
             <p className="category">Net Premium</p>
@@ -72,7 +78,7 @@ const Payment = ({ temp, closing }) => {
           </div>
           <div className="payment_card">
             <p className="category">Coverage Plan</p>
-            <p>{temp.coveragePlan} Days</p>
+            <p>{temp.coveragePlan} DAYS</p>
           </div>
           <div className="payment_card">
             <p className="category">Passport Number</p>
@@ -99,7 +105,7 @@ const Payment = ({ temp, closing }) => {
                 type="radio"
                 checked={selectedpayment == "Visa"}
                 name="card"
-                id="Visa"
+                id="VISA"
                 onChange={(e) => setSelectedPayment(e.target.id)}
                 className="invisible"
               />
@@ -112,7 +118,7 @@ const Payment = ({ temp, closing }) => {
               <input
                 type="radio"
                 name="card"
-                id="Master"
+                id="MASTER"
                 checked={selectedpayment == "master"}
                 onChange={(e) => setSelectedPayment(e.target.id)}
                 className="invisible"
@@ -127,7 +133,7 @@ const Payment = ({ temp, closing }) => {
                 type="radio"
                 checked={selectedpayment == "Jcb"}
                 name="card"
-                id="Jcb"
+                id="JCB"
                 onChange={(e) => setSelectedPayment(e.target.id)}
                 className="invisible"
               />
@@ -141,7 +147,7 @@ const Payment = ({ temp, closing }) => {
                 type="radio"
                 checked={selectedpayment == "Union"}
                 name="card"
-                id="Union"
+                id="UNION"
                 onChange={(e) => setSelectedPayment(e.target.id)}
                 className="invisible"
               />

@@ -36,8 +36,8 @@ export const ConfirmForm = () => {
 
   return (
     <>
-      <div className="bg-body-secondary">
-        <div className="container text-start mt-6 bg-white shadow p-3 mb-5 bg-body-tertiary rounded">
+      <div className="bg-body-secondary" style={{ paddingBottom: "50px" }}>
+        <div className="container text-start mt-6 bg-white shadow p-3 bg-body-tertiary rounded">
           <div className="main-container">
             <h4 className="mt-4 text_color">
               PLEASE CHECK PAYMENT AND INSURED PERSON INFORMATION
@@ -108,7 +108,7 @@ export const ConfirmForm = () => {
                 <div className="row p-2 mt-4 border-bottom">
                   <div className="col fw-semibold">Insured For</div>
                   <div className="col-sm-7">
-                    {items.isChild == "true"
+                    {items.child
                       ? "Insured For This Policy Holder's Child"
                       : "Insured For This Poilcy Holder "}
                   </div>
@@ -176,7 +176,7 @@ export const ConfirmForm = () => {
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Coverage Plan</div>
-                  <div className="col-sm-7">{items.coveragePlan}</div>
+                  <div className="col-sm-7">{items.coveragePlan} Days</div>
                 </div>
                 <div className="row p-2 border-bottom">
                   <div className="col fw-semibold">Contact Phone Number</div>

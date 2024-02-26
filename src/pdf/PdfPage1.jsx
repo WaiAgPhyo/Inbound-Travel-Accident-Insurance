@@ -237,7 +237,7 @@ const PdfPage1 = ({ id }) => {
           </View>
         </View>
         <Text style={styles.content}>
-          {data?.child
+          {data?.insuredPerson.child
             ? "Buy for Child (This passport holder's child)"
             : "Buy for yourself (This passport holder)"}
         </Text>

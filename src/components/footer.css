@@ -45,6 +45,7 @@
 .department p {
   font-size: 13px;
   font-weight: bold;
+  margin-bottom: 8px;
 }
 .contactNum p {
   margin-bottom: 8px;
