@@ -2,7 +2,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
 
 body {
-  font-family: "Arial", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 /* main// */
@@ -185,8 +185,7 @@ textarea {
 }
 
 .form-control--date {
-  width: 343px;
-  background-color: #f3f3f3;
+  width: 339px;
 }
 
 .form-control-phone {
@@ -200,7 +199,37 @@ textarea {
 } */
 
 .custom_radio {
-  border: 2px solid #074DA1;
+  border: 2px solid #074da1;
   border-radius: 50%;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+  .form-control--date {
+    width: 262px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .form-control--date {
+    width: 214px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .form-control--date {
+    width: 556px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form-control--date {
+    width: 412px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .form-control--date {
+    width: 268px;
+  }
 }

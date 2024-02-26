@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import MediaQuery from "react-responsive";
 import {
+  faBars,
   faCaretRight,
   faChevronDown,
   faChevronRight,
@@ -19,6 +21,7 @@ const Header = () => {
   const [money, setMoney] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedsubcategory, setSelectedSubCategory] = useState("");
+  const [menuclick, setMenuClicked] = useState(null);
   const categoryOptions = ["General Insurance", "Life Assurance"];
   const subcategoryOptions = {
     "General Insurance": [
@@ -208,169 +211,333 @@ const Header = () => {
                 className="mail_icon"
               />
               <div className="contactinfo">
-                <a href="mailto: online-support@mminsurance.gov.mm">
-                  <span className="bold">
-                    {" "}
-                    online-support@mminsurance.gov.mm
-                  </span>
+                <a
+                  href="mailto: online-support@mminsurance.gov.mm"
+                  className="bold"
+                >
+                  online-support@mminsurance.gov.mm
                 </a>
-                <p>
-                  <span className="faint">Drop us a mail</span>
-                </p>
+                <p className="faint">Drop us a mail</p>
               </div>
             </div>
             <div className="phone">
               <FontAwesomeIcon icon={faPhoneVolume} className="phone_icon" />
-              <div className="contactinfo">
-                <p>
-                  <span className="bold">+959765428630,31</span>
-                </p>
-                <p>
-                  <span className="faint">Make a call</span>
-                </p>
+              <div className="contactinfo contactinfo--right">
+                <p className="bold">+959765428630</p>
+                <p className="faint">Make a call</p>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="navi_bar">
-        <div className="navi_bar-left">
-          <NavLink className="left_category" to={"home"}>
-            Home
-          </NavLink>
-
-          {/* About Us */}
-          <div className="left_category">
-            <NavLink
-              className={"category_btn"}
-              onClick={firstdropdown}
-              ref={aboutRef}
-            >
-              About Us <FontAwesomeIcon icon={faChevronDown} />
+        <MediaQuery minWidth={1290}>
+          <div className="navi_bar-left">
+            <NavLink className="left_category" to={"home"}>
+              Home
             </NavLink>
-            {aboutshow && (
-              <div className="dropdown">
-                <div className="dropdown_list">
-                  <NavLink className="dropdown_btn">
-                    Background History of Myanma Insurance
-                  </NavLink>
-                </div>
-                <div className="dropdown_list">
-                  <NavLink className="dropdown_btn">
-                    About Myanma Insurance
-                  </NavLink>
-                </div>
-              </div>
-            )}
-          </div>
 
-          {/* Insurance Product */}
-          <div className="left_category">
-            <NavLink
-              className={"category_btn"}
-              onClick={categorydown}
-              ref={categoryRef}
-            >
-              Insurance Products{" "}
-              <FontAwesomeIcon icon={faChevronDown} onClick={categoryclose} />
-            </NavLink>
-            {selectedCategory && (
-              <div className="dropdown">
-                {selectedCategory.map((item, index) => (
-                  <div className="dropdown_list" key={index}>
-                    <NavLink
-                      className="dropdown_btn"
-                      onClick={() => setSelectedSubCategory(item)}
-                      ref={subItemRefs[index]}
-                    >
-                      {item} <FontAwesomeIcon icon={faCaretRight} />
+            {/* About Us */}
+            <div className="left_category">
+              <NavLink
+                className={"category_btn"}
+                onClick={firstdropdown}
+                ref={aboutRef}
+              >
+                About Us <FontAwesomeIcon icon={faChevronDown} />
+              </NavLink>
+              {aboutshow && (
+                <div className="dropdown">
+                  <div className="dropdown_list">
+                    <NavLink className="dropdown_btn">
+                      Background History of Myanma Insurance
                     </NavLink>
                   </div>
-                ))}
-              </div>
-            )}
-            {selectedsubcategory && (
-              <div className="dropdown dropdown--sub">
-                {subcategoryOptions[selectedsubcategory].map((item, index) => (
-                  <div className="dropdown_list" key={index}>
-                    <NavLink className="dropdown_btn">{item.topic}</NavLink>
+                  <div className="dropdown_list">
+                    <NavLink className="dropdown_btn">
+                      About Myanma Insurance
+                    </NavLink>
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
-          {/* Customer Hub */}
-          <div className="left_category">
-            <NavLink
-              className={"category_btn"}
-              onClick={customerDrop}
-              ref={customerRef}
-            >
-              Customer Hub{" "}
-              <FontAwesomeIcon icon={faChevronDown} onClick={customerclose} />
-            </NavLink>
-            {customershow && (
-              <div className="dropdown dropdown--long">
-                <div className="dropdown_list">
-                  <NavLink className="dropdown_btn">
-                    Hospital Admission and Medical Claim Submission(Outbound
-                    Travel Insurance)
-                  </NavLink>
                 </div>
-                <div className="dropdown_list">
+              )}
+            </div>
+
+            {/* Insurance Product */}
+            <div className="left_category">
+              <NavLink
+                className={"category_btn"}
+                onClick={categorydown}
+                ref={categoryRef}
+              >
+                Insurance Products{" "}
+                <FontAwesomeIcon icon={faChevronDown} onClick={categoryclose} />
+              </NavLink>
+              {selectedCategory && (
+                <div className="dropdown">
+                  {selectedCategory.map((item, index) => (
+                    <div className="dropdown_list" key={index}>
+                      <NavLink
+                        className="dropdown_btn"
+                        onClick={() => setSelectedSubCategory(item)}
+                        ref={subItemRefs[index]}
+                      >
+                        {item} <FontAwesomeIcon icon={faCaretRight} />
+                      </NavLink>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {selectedsubcategory && (
+                <div className="dropdown dropdown--sub">
+                  {subcategoryOptions[selectedsubcategory].map(
+                    (item, index) => (
+                      <div className="dropdown_list" key={index}>
+                        <NavLink className="dropdown_btn">{item.topic}</NavLink>
+                      </div>
+                    )
+                  )}
+                </div>
+              )}
+            </div>
+            {/* Customer Hub */}
+            <div className="left_category">
+              <NavLink
+                className={"category_btn"}
+                onClick={customerDrop}
+                ref={customerRef}
+              >
+                Customer Hub{" "}
+                <FontAwesomeIcon icon={faChevronDown} onClick={customerclose} />
+              </NavLink>
+              {customershow && (
+                <div className="dropdown dropdown--long">
+                  <div className="dropdown_list">
+                    <NavLink className="dropdown_btn">
+                      Hospital Admission and Medical Claim Submission(Outbound
+                      Travel Insurance)
+                    </NavLink>
+                  </div>
+                  <div className="dropdown_list">
+                    <NavLink
+                      className="dropdown_btn"
+                      onClick={() => setSelectedCustomer("Documents Center")}
+                      ref={subRef}
+                    >
+                      Documents Center <FontAwesomeIcon icon={faCaretRight} />
+                    </NavLink>
+                  </div>
+                  <div className="dropdown_list">
+                    <NavLink className="dropdown_btn">FAQ</NavLink>
+                  </div>
+                </div>
+              )}
+              {selectedcustomer && (
+                <div className="dropdown dropdown--sub2">
+                  {customerOptions[selectedcustomer].map((item, index) => (
+                    <div className="dropdown_list" key={index}>
+                      <NavLink className="dropdown_btn">{item.topic}</NavLink>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* News & Media */}
+            <div className="left_category">
+              <NavLink
+                className={"category_btn"}
+                onClick={lastdropdown}
+                ref={mediaRef}
+              >
+                News & Media
+                <FontAwesomeIcon icon={faChevronDown} />
+              </NavLink>
+              {mediashow && (
+                <div className="dropdown">
+                  <div className="dropdown_list">
+                    <NavLink className="dropdown_btn">News</NavLink>
+                  </div>
+                  <div className="dropdown_list">
+                    <NavLink className="dropdown_btn">Video</NavLink>
+                  </div>
+                  <div className="dropdown_list">
+                    <NavLink className="dropdown_btn">Annoucement</NavLink>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <NavLink className="left_category" to={"contact"}>
+              Contact Us
+            </NavLink>
+          </div>
+        </MediaQuery>
+
+        {/* responsive */}
+
+        <MediaQuery maxWidth={1290}>
+          <div style={{ position: "relative" }}>
+            <FontAwesomeIcon
+              icon={faBars}
+              className="menu_icon"
+              onClick={() => setMenuClicked((condition) => !condition)}
+            />
+            {menuclick && (
+              <div className="navi_bar-left menu_nav">
+                <NavLink className="left_category" to={"home"}>
+                  Home
+                </NavLink>
+
+                {/* About Us */}
+                <div className="left_category">
                   <NavLink
-                    className="dropdown_btn"
-                    onClick={() => setSelectedCustomer("Documents Center")}
-                    ref={subRef}
+                    className={"category_btn"}
+                    onClick={firstdropdown}
+                    ref={aboutRef}
                   >
-                    Documents Center <FontAwesomeIcon icon={faCaretRight} />
+                    About Us <FontAwesomeIcon icon={faChevronDown} />
                   </NavLink>
+                  {aboutshow && (
+                    <div className="dropdown dropdown-menu">
+                      <div className="dropdown_list">
+                        <NavLink className="dropdown_btn">
+                          Background History of Myanma Insurance
+                        </NavLink>
+                      </div>
+                      <div className="dropdown_list">
+                        <NavLink className="dropdown_btn">
+                          About Myanma Insurance
+                        </NavLink>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div className="dropdown_list">
-                  <NavLink className="dropdown_btn">FAQ</NavLink>
+
+                {/* Insurance Product */}
+                <div className="left_category">
+                  <NavLink
+                    className={"category_btn"}
+                    onClick={categorydown}
+                    ref={categoryRef}
+                  >
+                    Insurance Products{" "}
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      onClick={categoryclose}
+                    />
+                  </NavLink>
+                  {selectedCategory && (
+                    <div className="dropdown dropdown-menu">
+                      {selectedCategory.map((item, index) => (
+                        <div className="dropdown_list" key={index}>
+                          <NavLink
+                            className="dropdown_btn"
+                            onClick={() => setSelectedSubCategory(item)}
+                            ref={subItemRefs[index]}
+                          >
+                            {item} <FontAwesomeIcon icon={faCaretRight} />
+                          </NavLink>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {selectedsubcategory && (
+                    <div className="dropdown dropdown--sub-menu">
+                      {subcategoryOptions[selectedsubcategory].map(
+                        (item, index) => (
+                          <div className="dropdown_list" key={index}>
+                            <NavLink className="dropdown_btn">
+                              {item.topic}
+                            </NavLink>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  )}
                 </div>
-              </div>
-            )}
-            {selectedcustomer && (
-              <div className="dropdown dropdown--sub2">
-                {customerOptions[selectedcustomer].map((item, index) => (
-                  <div className="dropdown_list" key={index}>
-                    <NavLink className="dropdown_btn">{item.topic}</NavLink>
-                  </div>
-                ))}
+                {/* Customer Hub */}
+                <div className="left_category">
+                  <NavLink
+                    className={"category_btn"}
+                    onClick={customerDrop}
+                    ref={customerRef}
+                  >
+                    Customer Hub{" "}
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      onClick={customerclose}
+                    />
+                  </NavLink>
+                  {customershow && (
+                    <div className="dropdown dropdown--long dropdown-menu">
+                      <div className="dropdown_list">
+                        <NavLink className="dropdown_btn">
+                          Hospital Admission and Medical Claim
+                          Submission(Outbound Travel Insurance)
+                        </NavLink>
+                      </div>
+                      <div className="dropdown_list">
+                        <NavLink
+                          className="dropdown_btn"
+                          onClick={() =>
+                            setSelectedCustomer("Documents Center")
+                          }
+                          ref={subRef}
+                        >
+                          Documents Center{" "}
+                          <FontAwesomeIcon icon={faCaretRight} />
+                        </NavLink>
+                      </div>
+                      <div className="dropdown_list">
+                        <NavLink className="dropdown_btn">FAQ</NavLink>
+                      </div>
+                    </div>
+                  )}
+                  {selectedcustomer && (
+                    <div className="dropdown dropdown--sub2-menu ">
+                      {customerOptions[selectedcustomer].map((item, index) => (
+                        <div className="dropdown_list" key={index}>
+                          <NavLink className="dropdown_btn">
+                            {item.topic}
+                          </NavLink>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* News & Media */}
+                <div className="left_category">
+                  <NavLink
+                    className={"category_btn"}
+                    onClick={lastdropdown}
+                    ref={mediaRef}
+                  >
+                    News & Media
+                    <FontAwesomeIcon icon={faChevronDown} />
+                  </NavLink>
+                  {mediashow && (
+                    <div className="dropdown dropdown-menu">
+                      <div className="dropdown_list">
+                        <NavLink className="dropdown_btn">News</NavLink>
+                      </div>
+                      <div className="dropdown_list">
+                        <NavLink className="dropdown_btn">Video</NavLink>
+                      </div>
+                      <div className="dropdown_list">
+                        <NavLink className="dropdown_btn">Annoucement</NavLink>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <NavLink className="left_category" to={"contact"}>
+                  Contact Us
+                </NavLink>
               </div>
             )}
           </div>
-
-          {/* News & Media */}
-          <div className="left_category">
-            <NavLink
-              className={"category_btn"}
-              onClick={lastdropdown}
-              ref={mediaRef}
-            >
-              News & Media
-              <FontAwesomeIcon icon={faChevronDown} />
-            </NavLink>
-            {mediashow && (
-              <div className="dropdown">
-                <div className="dropdown_list">
-                  <NavLink className="dropdown_btn">News</NavLink>
-                </div>
-                <div className="dropdown_list">
-                  <NavLink className="dropdown_btn">Video</NavLink>
-                </div>
-                <div className="dropdown_list">
-                  <NavLink className="dropdown_btn">Annoucement</NavLink>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <NavLink className="left_category" to={"contact"}>
-            Contact Us
-          </NavLink>
-        </div>
+        </MediaQuery>
         <div className="navi_bar-right">
           <div className="navigation">
             <NavLink className="navigation_btn">Premium Calculator</NavLink>

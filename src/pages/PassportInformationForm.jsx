@@ -330,7 +330,7 @@ export const PassportInformationForm = () => {
         </h1>
         <div className="container text-center mt-4 bg-white shadow p-3 mb-5 bg-body-tertiary rounded">
           <div className="main-container">
-            <div className="col-lg-12" col-12>
+            <div className="col-lg-12" col-12="true">
               {/* passport information// */}
               <h2 className="text_color fs-6 text-start mt-4 mb-3">
                 <u>PASSPORT INFORMATION(In English)</u>
@@ -503,21 +503,30 @@ export const PassportInformationForm = () => {
                       {userClick && !insureName && <Validation />}
                     </div>
                   </div>
+
                   <div className="col-lg-4">
-                    <div className="mb-3  text-start">
+                    <div className="mb-3 text-start">
                       <label className="form-label text_color">
                         Date of Birth (as per passport)
                         <span className="text-danger">*</span>
                       </label>
-                      <DatePicker
-                        selected={insureBirth}
-                        className="form-control form-control--date"
-                        placeholderText="MM/DD/YYYY"
-                        onChange={(date) => setInsureBirth(date)}
-                      />
+
+                      <div style={{ width: "100%" }}>
+                        {" "}
+                        {/* Apply inline style to ensure 100% width */}
+                        <DatePicker
+                          selected={insureBirth}
+                          className="form-control form-control--date"
+                          placeholderText="MM/DD/YYYY"
+                          onChange={(date) => setInsureBirth(date)}
+                          // Ensure to pass any other necessary props
+                        />
+                      </div>
+
                       {userClick && !insureBirth && <Validation />}
                     </div>
                   </div>
+
                   <div className="col-lg-4">
                     <div className="mb-3  text-start">
                       <label className="text_color form-label">
@@ -661,6 +670,7 @@ export const PassportInformationForm = () => {
                       <label className="form-label text_color">
                         Insured's Email
                       </label>
+                      <span className="text-danger">*</span>
                       <input
                         name="insureEmail"
                         type="text"
@@ -680,6 +690,7 @@ export const PassportInformationForm = () => {
                       <label className="form-label text_color">
                         Address in Myanmar (Max: 250 Char)
                       </label>
+                      <span className="text-danger">*</span>
                       <textarea
                         name="myanmarAdd"
                         className="form-control"
@@ -874,6 +885,7 @@ export const PassportInformationForm = () => {
                       <label className="form-label text_color">
                         National Identificaiton Number
                       </label>
+                      <span className="text-danger">*</span>
                       <input
                         name="beneIdenNum"
                         type="text"
@@ -934,6 +946,7 @@ export const PassportInformationForm = () => {
                   <div className="col-lg-4">
                     <div className="mb-3  text-start">
                       <label className="form-label text_color">Email</label>
+                      <span className="text-danger">*</span>
                       <input
                         type="text"
                         name="beneEmail"
@@ -1003,8 +1016,8 @@ export const PassportInformationForm = () => {
                         Insurance
                       </u>
                     </h2>
-                    
-                      <div className="agent_container ">
+
+                    <div className="agent_container ">
                       <div className=" agent_main row">
                         <div className="col-11 ">
                           <div className="row">
@@ -1069,7 +1082,7 @@ export const PassportInformationForm = () => {
                           </div>
                         </div>
                       </div>
-                        {/* <div className="agent_radio_box">
+                      {/* <div className="agent_radio_box">
                           <input
                             className="radio-btn"
                             type="radio"
@@ -1130,92 +1143,92 @@ export const PassportInformationForm = () => {
                             </label>
                           </div>
                         </div> */}
-                        {/* modal */}
-                        {showModal && (
-                          <div
-                            className="modal fade show"
-                            tabIndex="-1"
-                            style={{
-                              display: "block",
-                              backgroundColor: "rgba(0, 0, 0, 0.5)",
-                            }}
-                          >
-                            <div className="modal-dialog modal-dialog-centered">
-                              <div className="modal-content">
-                                <div className="modal-header">
-                                  <h1
-                                    className="modal-title fs-5 text_color"
-                                    id="staticBackdropLabel"
-                                  >
-                                    Check Agent Information
-                                  </h1>
+                      {/* modal */}
+                      {showModal && (
+                        <div
+                          className="modal fade show"
+                          tabIndex="-1"
+                          style={{
+                            display: "block",
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                          }}
+                        >
+                          <div className="modal-dialog modal-dialog-centered">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h1
+                                  className="modal-title fs-5 text_color"
+                                  id="staticBackdropLabel"
+                                >
+                                  Check Agent Information
+                                </h1>
+                                <button
+                                  type="button"
+                                  className="btn-close"
+                                  onClick={handleCloseModal}
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div className="modal-body">
+                                <div>
+                                  <div className="mb-3 text-start">
+                                    <label className="col-form-label text_color">
+                                      Agent License Number
+                                      <span className="text-danger">*</span>
+                                    </label>
+                                    <input
+                                      type="text"
+                                      name="emptyValidation"
+                                      className="form-control"
+                                      id="recipient-name"
+                                      value={agentLicenseNo}
+                                      onChange={(e) =>
+                                        setAgentLicenseNo(e.target.value)
+                                      }
+                                      placeholder="Enter Agent License No."
+                                    />
+                                  </div>
+                                  <div className="mb-3 text-start">
+                                    <label className="col-form-label text_color">
+                                      Password
+                                      <span className="text-danger">*</span>
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      name="emptyValidation"
+                                      id="recipient-name"
+                                      placeholder="00-0000"
+                                      onChange={(e) =>
+                                        setAgentPassword(e.target.value)
+                                      }
+                                    />
+                                    {error && (
+                                      <div style={{ color: "red" }}>
+                                        Wrong Password
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="row ms-1">
+                                <div className="col-6 col-md-4 text-start">
                                   <button
                                     type="button"
-                                    className="btn-close"
-                                    onClick={handleCloseModal}
-                                    aria-label="Close"
-                                  ></button>
-                                </div>
-                                <div className="modal-body">
-                                  <div>
-                                    <div className="mb-3 text-start">
-                                      <label className="col-form-label text_color">
-                                        Agent License Number
-                                        <span className="text-danger">*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        name="emptyValidation"
-                                        className="form-control"
-                                        id="recipient-name"
-                                        value={agentLicenseNo}
-                                        onChange={(e) =>
-                                          setAgentLicenseNo(e.target.value)
-                                        }
-                                        placeholder="Enter Agent License No."
-                                      />
-                                    </div>
-                                    <div className="mb-3 text-start">
-                                      <label className="col-form-label text_color">
-                                        Password
-                                        <span className="text-danger">*</span>
-                                      </label>
-                                      <input
-                                        type="text"
-                                        className="form-control"
-                                        name="emptyValidation"
-                                        id="recipient-name"
-                                        placeholder="00-0000"
-                                        onChange={(e) =>
-                                          setAgentPassword(e.target.value)
-                                        }
-                                      />
-                                      {error && (
-                                        <div style={{ color: "red" }}>
-                                          Wrong Password
-                                        </div>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row ms-1">
-                                  <div className="col-6 col-md-4 text-start">
-                                    <button
-                                      type="button"
-                                      onClick={ApiHandler}
-                                      className="final-button btn pl-1 pr-1 mb-4"
-                                    >
-                                      Check Agent
-                                    </button>
-                                  </div>
+                                    onClick={ApiHandler}
+                                    className="final-button btn pl-1 pr-1 mb-4"
+                                  >
+                                    Check Agent
+                                  </button>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        )}
-                        {/* modal/ */}
-                      </div>
-                    
+                        </div>
+                      )}
+                      {/* modal/ */}
+                    </div>
+
                     {/* agent on click */}
                     {/* agent onclick box// */}
 

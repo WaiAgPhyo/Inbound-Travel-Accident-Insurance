@@ -37,7 +37,7 @@ const Footer = () => {
         </div>
 
         <div className="department contactNum">
-          <h4>Fire, Engineering and Miscellaneous Insurance Department</h4>
+          <h4 className="fire">Fire, Engineering and Miscellaneous Insurance Department</h4>
           <p>251764, 384874, 384867</p>
         </div>
 
@@ -54,12 +54,10 @@ const Footer = () => {
 
       <footer>
         <div className="footer-address">
-          <div>
             <p>
               © 2024 Myanma Insurance. <br />
               All Rights Reserved by Myanma Insurance
             </p>
-          </div>
           <div className="footer-logo">
             <img src={logoImg} alt="LogoImage" />
           </div>

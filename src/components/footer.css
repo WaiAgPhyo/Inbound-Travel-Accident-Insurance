@@ -90,3 +90,40 @@ footer {
   align-items: center;
   color: #ffffff;
 }
+
+@media screen and (max-width: 1000px) {
+  .contactNum .fire {
+    margin-bottom: 2px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .department {
+    width: 42%;
+  }
+  .contactNum .fire {
+    margin-bottom: 8px;
+  }
+  .contactNum {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer-address {
+    text-align: center;
+    flex-direction: column;
+  }
+  .footer-logo {
+    align-items: center;
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .department {
+    width: 100%;
+  }
+}
