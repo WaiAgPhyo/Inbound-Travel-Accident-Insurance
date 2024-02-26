@@ -121,8 +121,8 @@ public class InboundProposalServiceImpl implements InboundProposalService {
     }
 
     @Override
-    public InboundProposal findByCertificateId(String certificateId) {
-        return inboundProposalRepo.findByCertificateID(certificateId);
+    public InboundProposal findByCertificateNo(String certificateNo) {
+        return inboundProposalRepo.findByCertificateNo(certificateNo);
     }
 
     private int calculateAge(InboundProposalDTO inboundProposalDTO){

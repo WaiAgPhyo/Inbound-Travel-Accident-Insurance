@@ -37,9 +37,9 @@ public class InboundProposalController {
         return createResponse(inboundProposal,HttpStatus.OK);
     }
 
-    @GetMapping("/findByCertificateId")
-    public ResponseEntity<HttpResponse<InboundProposal>> findByCertificateId(@RequestParam("id") String certificateId){
-        InboundProposal inboundProposal = inboundProposalService.findByCertificateId(certificateId);
+    @GetMapping("/findByCertificateNo")
+    public ResponseEntity<HttpResponse<InboundProposal>> findByCertificateNo(@RequestParam("id") String certificateNo){
+        InboundProposal inboundProposal = inboundProposalService.findByCertificateNo(certificateNo);
         return createResponse(inboundProposal,HttpStatus.OK);
     }
 

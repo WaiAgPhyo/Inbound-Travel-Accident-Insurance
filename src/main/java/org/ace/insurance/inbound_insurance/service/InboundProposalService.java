@@ -11,6 +11,6 @@ public interface InboundProposalService {
     InboundProposal create(InboundProposalDTO inboundProposalDTO);
     List<InboundProposal> searchEnquiry(String passportNo, String issuedCountry);
 
-    InboundProposal findByCertificateId(String certificateId);
+    InboundProposal findByCertificateNo(String certificateNo);
 
 }

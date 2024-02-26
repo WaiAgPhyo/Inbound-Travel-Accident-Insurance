@@ -26,7 +26,7 @@ public class InboundProposal {
     @Id
     @GeneratedValue(generator = "certificate-id-generator")
     @GenericGenerator(name = "certificate-id-generator",strategy = "org.ace.insurance.inbound_insurance.customIDGenerator.CertificateIDGenerator")
-    private String certificateID;
+    private String certificateNo;
     private String journeyFrom;
     private String journeyTo;
     @JsonFormat(pattern = "dd-MM-yyyy")
